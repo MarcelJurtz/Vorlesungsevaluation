@@ -44,6 +44,12 @@ function toggleTextBox(item) {
 		return(mysqli_connect("localhost","root","password","veva"));
 	}
 
+  function logout() {
+    session_start();
+    session_destroy();
+    header('Location: index.php');
+  }
+
 
   // Includes
   include "functions-chapter.inc.php";
