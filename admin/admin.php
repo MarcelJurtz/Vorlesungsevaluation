@@ -8,6 +8,7 @@
 <body>
 <?php
 	include '../functions.inc.php';
+	include_once("../constants.inc.php");
 	session_start();
 
 	if(isset($_POST['cmdLoginAdmin'])) {
@@ -17,12 +18,17 @@
 		if(!$dbConn) {
 			echo '<h1>Verbindung fehlgeschlagen</h1>';
 		}
-		$sql = "SELECT AName FROM administrator WHERE AKennwort = '".$pw."';";
+		$sql = "SELECT " . ADMINISTRATOR_AName . ", " . ADMINISTRATOR_AKennwort . " FROM administrator WHERE AKennwort = '".$pw."';";
 
 		$result = mysqli_query($dbConn, $sql);
 		$adminName = mysqli_fetch_assoc($result);
 
-		$_SESSION['adminName'] = $adminName['AName'];
+		$_SESSION['adminName'] = $adminName[ADMINISTRATOR_AName];
+
+		if($adminName[ADMINISTRATOR_AKennwort] != $pw) {
+			// Falsches Passwort
+			header("Location: ./login.html");
+		}
 	} else if (!isset($_SESSION['adminName'])){
 		header("Location: ./login.html");
 	}
@@ -58,6 +64,7 @@
 	echo'					<li><a href="lecture_modify.php">Vorlesung bearbeiten</a></li>';
 	echo'				</ul>';
 	echo'				<li><a href="statistics.php">Statistiken</a></li>';
+	echo'				<li><a href="settings.php">Einstellungen</a></li>';
 	echo'				<li><a href="../logout.php">Abmelden</a></li>';
 	echo'			</ul>';
 	echo'		</div>';

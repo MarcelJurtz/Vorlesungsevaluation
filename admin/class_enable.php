@@ -46,6 +46,7 @@
 	echo'					<li><a href="lecture_modify.php">Vorlesung bearbeiten</a></li>';
 	echo'				</ul>';
 	echo'				<li><a href="statistics.php">Statistiken</a></li>';
+	echo'				<li><a href="settings.php">Einstellungen</a></li>';
 	echo'				<li><a href="../logout.php">Abmelden</a></li>';
 	echo'			</ul>';
 	echo'		</div>';
