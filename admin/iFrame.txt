@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="cWrapper">
+			<div id="cMenu">
+				<ul id="lMenu">
+					<li>Kurs</li>
+					<ul class="lSubMenu">
+						<li><a href="class_create.php">Kurs anlegen</a></li>
+						<li><a href="class_delete.php">Kurs löschen</a></li>
+					</ul>
+					<li>Fragen</li>
+					<ul class="lSubMenu">
+						<li><a href="question_create.php">Frage anlegen</a></li>
+						<li><a href="question_delete.php">Frage löschen</a></li>
+						<li><a href="question_modify.php">Frage bearbeiten</a></li>
+					</ul>
+					<li>Fragebögen</li>
+					<ul class="lSubMenu">
+						<li><a href="survey_create.php">Fragebogen anlegen</a></li>
+						<li><a href="survey_delete.php">Fragebogen löschen</a></li>
+						<li><a href="survey_create.php">Fragebogen bearbeiten</a></li>
+						<li><a href="survey_delete.php">Fragebogen freigeben</a></li>
+					</ul>
+					<li>Statistiken</li>
+				</ul>
+			</div>
+			<div id="cFrame">
+				<iframe name="frameContent" src="overview.html"></iframe>
+			</div>
+		</div>
+	</body>
+</html>

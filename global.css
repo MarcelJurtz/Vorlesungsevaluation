@@ -1,0 +1,43 @@
+* {
+	font-family: 'Helvetica', 'Sans-Serif';
+	color: #161616;
+}
+
+.backgroundMain {
+	background: url(./images/background.png) no-repeat;
+}
+
+.textbox, .submit {
+	border: 1px solid #000000;
+	border-radius: 5px;
+	font-size: 20px;
+	background: transparent;
+}
+.submit:hover {
+	background: #fafafa;
+}
+
+iframe {
+	border: none;
+	width: 100%;
+}
+
+#cWrapper {
+	
+}
+
+#cMenu {
+	width: 19%;
+	float:left;
+	border-right: 1px solid #161616;
+}
+
+#cFrame {
+	width: 80%;
+	float:left;
+	padding-left: 10px;
+}
+
+.break {
+	clear: both;
+}

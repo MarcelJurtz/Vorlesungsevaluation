@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta lang="DE">
+		<meta charset="UTF-8">
+		<title>Login Vorlesungsevaluation</title>
+		<link href="stylesheet.css" type="text/css" rel="stylesheet">
+		<link href="../global.css" type="text/css" rel="stylesheet">
+		<script src="https://use.fontawesome.com/a027443663.js"></script>
+	</head>
+	<body class="backgroundMain">
+		<script>
+		 <!-- TODO: Sauberere Lösung einbauen -->
+			alert("Sie wurden abgemeldet. Bitte melden Sie sich erneut an.");
+		</script>
+		<form action="admin.php" name="admin_login" method="POST">
+			<table class="reg">
+				<tr>
+					<th>
+					</th>
+					<th>
+						Administrator
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<i class="fa fa-key fa-2x" aria-hidden="true" ></i>
+					</td>
+					<td>
+						<input type="password" name="txtAdminPassword" class="textbox">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input type="submit" name="cmdLoginAdmin" value="Absenden" class="submit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
