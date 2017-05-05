@@ -22,7 +22,7 @@ Folgende Services werden benötigt:
 * MySQL
 * PhpMyAdmin
 
-Zu Testzwecken kann diese Vorgehensweise gut mit XAMPP erledigt werden.  
+Zu Testzwecken kann dies gut mit XAMPP erledigt werden.  
 https://www.apachefriends.org/de/index.html
 
 
@@ -41,10 +41,11 @@ Sobald der Inhalt übertragen wurde, ist die Administrationsseite unter ````loca
 und die Anwenderseite über ```localhost:port/student``` erreichbar. Bei Verwendung von lediglich ```localhost:port```
 werden Sie auf die Studentenseite weitergeleitet.
 
+<div class="page-break"></div>
 
 ## Anwendung
 
-Nach erfolgreicher Anmeldung erhalten Sie eine Menüansicht mit den verschiedenen Funktionalitäten. Im Folgenden werden diese kurz Beschrieben:
+Nach erfolgreicher Anmeldung erhalten Sie eine Menüansicht mit den verschiedenen Funktionalitäten. Im Folgenden werden diese kurz beschrieben:
 
 * ```Übersicht```
   * Startseite / Landing-Page
@@ -69,9 +70,11 @@ Nach erfolgreicher Anmeldung erhalten Sie eine Menüansicht mit den verschiedene
 * ```Abmelden```
   * Logout und Leiten auf die Startseite (Student).
 
+<div class="page-break"></div>
+
 ## Entwicklernotizen
 
-Dieser Abschnitt beschreibt die Verteilung der Dateien, um Anpassungen zu erleichtern.
+Dieser Abschnitt beschreibt die Verteilung der Dateien, um zukünftige Anpassungen zu erleichtern.
 
 Ordner:
 * ```admin```: Enthält alle Seiten des Administrationsbereichs (Funktionen sind ausgelagert)
