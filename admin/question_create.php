@@ -77,6 +77,8 @@
 				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
 			</form>';
 
+			echo'<br /><br /><a href="question_create.php">Zurück</a>';
+
 		// Frage Speichern nach Betätigen der Schaltfläche
 		// SpeicherButton
 	} else if(isset($_POST['cmdSaveQuestion'])){
@@ -87,6 +89,8 @@
 
 		saveQuestion($FrTyp);
 
+		echo'<br /><br /><a href="question_create.php">Zurück</a>';
+
 		// Sonst: Fragen-Eingabeansicht
 	} else {
 		echo "<h2>Neue Frage für Kapitel '" . $_POST['cbChapterToModify'] . "' der Vorlesung '". $_POST['cbLectureToModify'] ."'</h2>";
@@ -94,9 +98,9 @@
 		$_SESSION['chapterToAddQuestion'] = $_POST['cbChapterToModify'];
 
 		addQuestionContainer();
-	}
 
-	echo'<br /><br /><a href="question_create.php">Zurück</a>';
+		echo'<br /><br /><a href="question_create.php">Zurück</a>';
+	}
 
 	echo'		</div>';
 	echo'		<br class="clear" />';

@@ -63,6 +63,8 @@
 				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
 			</form>';
 
+		echo'<br /><br /><a href="question_delete.php">Zurück</a>';
+
 	} else if (isset($_POST['cmdSelectChapter'])) {
 
 		// Kapitel gewählt -> Frage wählen
@@ -75,10 +77,13 @@
 				<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
 			</form>';
 
+		echo'<br /><br /><a href="question_delete.php">Zurück</a>';
+
 	} else if (isset($_POST['cmdSelectQuestion'])) {
 
 		// Frage gewählt -> Frage löschen
 		deleteQuestion($_SESSION['chapterIDtoDelete'], $_POST['cbQuestionQuestionDelete']);
+		echo'<br /><br /><a href="question_delete.php">Zurück</a>';
 
 	} else {
 
