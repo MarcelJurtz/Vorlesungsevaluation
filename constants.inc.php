@@ -1,6 +1,8 @@
 <?php
 // Datenbank-Bezeichnungen
 define("ADMINISTRATOR","administrator");
+define("ADMINISTRATOR_AKennwort","AKennwort");
+define("ADMINISTRATOR_AName","AName");
 
 define("ANTWORT","antwort");
 define("ANTWORT_AWTEXT", "AwText");
@@ -49,6 +51,7 @@ define("VORLESUNG","vorlesung");
 define("VORLESUNG_VOID","VoID");
 define("VORLESUNG_VOBEZEICHNUNG","VoBezeichnung");
 
+// Eigene Konstanten
 
 define("REGFREIGABE_TRUE",1);
 define("REGFREIGABE_FALSE",0);
@@ -58,4 +61,6 @@ define("SHORT_FALSE", 0);
 
 define("STRING_TRUE","true");
 define("STRING_FALSE","false");
+
+define("ADMIN_DEFAULT_USERNAME","root");
 ?>
