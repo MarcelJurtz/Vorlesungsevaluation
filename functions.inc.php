@@ -52,6 +52,7 @@ function toggleTextBox(item) {
 
 
   // Includes
+  include "functions-admin.inc.php";
   include "functions-chapter.inc.php";
   include "functions-class.inc.php";
   include "functions-lecture.inc.php";
