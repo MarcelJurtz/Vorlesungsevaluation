@@ -135,3 +135,15 @@ CREATE TABLE beantwortet (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  ALTER TABLE beantwortet ADD KEY `FrID` (FrID), ADD KEY `AwID` (AwID);
+
+ CREATE TABLE `frageinfragebogen` (
+   fbID mediumint(9) NOT NULL,
+   frBezeichnung varchar(50) NOT NULL,
+   PRIMARY KEY(fbID, frBezeichnung),
+   FOREIGN KEY(fbID) REFERENCES fragebogen(FbId),
+   FOREIGN KEY(frBezeichnung) REFERENCES frage(FrBezeichnung)
+
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ ALTER TABLE `frageinfragebogen`
+   ADD KEY `frBezeichnung` (`frBezeichnung`);
