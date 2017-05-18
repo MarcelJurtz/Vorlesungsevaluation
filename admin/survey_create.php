@@ -51,7 +51,106 @@
 	echo'		</div>';
 	echo'		<div id="cFrame">';
 	echo'			<h1>Fragebogen anlegen - Administrator</h1>';
-	echo'			';
+
+	// Start: Auswahl Vorlesung
+	// !Vorlesung und !Kapitel und !Speicherbutton
+	if(!isset($_POST['cmdSelectLecture']) && !isset($_POST['cmdSelectChapter']) && !isset($_POST['cmdSaveSurvey']))
+	{
+		echo'
+			<form action="survey_create.php" method="POST">
+			<select name="cbLectureToAddSurvey" size=1>';
+			echo getAllLectures();
+			echo '</select>
+				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
+			</form>';
+
+	// Auswahl Kapitel
+	// !Kapitel und Vorlesung
+	} else if(isset($_POST['cmdSelectLecture']) && !isset($_POST['cmdSelectChapter']) && !isset($_POST['cmdSaveSurvey'])) {
+
+		$_SESSION['lectureToAddSurvey'] = $_POST['cbLectureToAddSurvey'];
+
+		echo'
+			<form action="survey_create.php" method="POST">
+			<select name="cbChapterToAddSurvey" size=1>';
+		echo getAllChaptersOfLecture($_POST['cbLectureToAddSurvey']);
+		$lecture = $_POST['cbLectureToAddSurvey'];
+		echo '</select>
+				<input type="hidden" name="cbLectureToAddSurvey" value="'.$lecture.'" />
+				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
+			</form>';
+
+			echo'<br /><br /><a href="survey_create.php">Zurück</a>';
+
+		// Frage Speichern nach Betätigen der Schaltfläche
+		// SpeicherButton
+	} else if(isset($_POST['cmdSelectChapter'])){
+
+		$_SESSION['chapterToAddSurvey'] = $_POST['cbChapterToAddSurvey'];
+
+		// Ausgabe aller Fragen mit Checkboxen des Kapitels
+		// fr1txt fr1chk
+		$questions = explode ( "-" , getAllQuestionsOfChapter($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey'], false));
+		$iterator = 0;
+
+		echo '<form action="survey_create.php" method="POST">';
+
+		echo 'Bezeichnung des Fragebogens: <input type="text" name="txtFbName" /><br />';
+
+		while(true) {
+			if(!isset($questions[$iterator])) {
+				break;
+			}
+
+			$chkName = "chk$iterator";
+			$txtName = "txt$iterator";
+			$txtContent = "$questions[$iterator]";
+			echo '<input type="checkbox" name="' . $chkName . '" />';
+			echo '<input type="text" name="' . $txtName . '" value="' . $txtContent . '" readonly /><br />';
+			// echo " $txtContent<br/>";
+
+			$iterator++;
+		}
+
+		echo '<input type="submit" name="cmdSaveSurvey" value="Fragebogen speichern" />';
+		echo '</form>';
+
+		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
+	} else if (isset($_POST['cmdSaveSurvey']) && isset($_POST['txtFbName'])) {
+
+		$iterator = 0;
+		$existenceChecked = false;
+		$fbCreated = false;
+		if(!$_POST['chk0']) {
+			echo "Es wurden keine Fragen ausgewählt.";
+		} else {
+
+			$surveyAlreadyExisting = false;
+
+			// Fragebogen prüfen / erstellen
+			if(!fbExisting($_POST['txtFbName'])) {
+				createFb($_POST['txtFbName'], $_SESSION['lectureToAddSurvey'], $_SESSION['chapterToAddSurvey']);
+			} else {
+				$surveyAlreadyExisting = true;
+			}
+
+			while(true) {
+				if(!isset($_POST["chk$iterator"]) || $surveyAlreadyExisting) {
+					break;
+				}
+
+				$q = $_POST["txt$iterator"];
+				saveQuestionToFb($_POST['txtFbName'], $q);
+				$iterator++;
+			}
+		}
+
+		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
+	} else {
+		echo "Es wurde keine Bezeichnung festgelegt.";
+		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
+	}
+
 	echo'		</div>';
 	echo'		<br class="clear" />';
 	echo'	</div>';

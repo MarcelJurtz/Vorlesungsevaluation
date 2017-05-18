@@ -30,8 +30,8 @@ function deleteQuestion($chapterID,$questionText) {
 
 // Rückgabe aller Fragen eines Kapitels
 // Zur Verwendung in ComboBoxen
-// Muster: <option>Bezeichnung</option>
-function getAllQuestionsOfChapter($lectureDescription,$chapterDescription) {
+// Muster: <option>Bezeichnung</option> als Standard, sonst Verwendung des dritten Parameters
+function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $returnOptionTags = true) {
   include_once("constants.inc.php");
   $conn = getDBConnection();
 
@@ -46,9 +46,18 @@ function getAllQuestionsOfChapter($lectureDescription,$chapterDescription) {
     $returnString = '';
     while($entry = mysqli_fetch_assoc($rows))
     {
-       $returnString .= "<option>" . $entry[FRAGE_FrBezeichnung] . "</option>";
+      if($returnOptionTags) {
+        $returnString .= "<option>" . $entry[FRAGE_FrBezeichnung] . "</option>";
+      } else {
+        $returnString .= $entry[FRAGE_FrBezeichnung] .= "-";
+      }
     }
     mysqli_close($conn);
+    // Letzten - Abstandshalter vom String entfernen
+    // Später aufteilung in Array
+    if(!$returnOptionTags) {
+      $returnString = substr($returnString, 0, strlen($returnString)-1);
+    }
     return $returnString;
   }
 }

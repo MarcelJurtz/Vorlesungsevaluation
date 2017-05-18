@@ -27,6 +27,9 @@ define("FRAGENTYP_MULTIPLE_CHOICE","mchoice");
 define("FRAGENTYP_TEXTFRAGE","text");
 
 define("FRAGEBOGEN","fragebogen");
+define("FRAGEBOGEN_FbBezeichnung","FbBezeichnung");
+define("FRAGEBOGEN_Kapitel","KaID");
+define("FRAGEBOGEN_FbID","FbId");
 
 define("FRAGEPOOL","fragepool");
 define("FRAGEPOOL_FpID","FpID");
@@ -50,6 +53,10 @@ define("STUDENT_BENUTZERNAME","StName");
 define("VORLESUNG","vorlesung");
 define("VORLESUNG_VOID","VoID");
 define("VORLESUNG_VOBEZEICHNUNG","VoBezeichnung");
+
+define("FR_IN_FB","FrageInFragebogen");
+define("FR_IN_FB_FBID","fbID");
+define("FR_IN_FB_FRBEZ","frBezeichnung");
 
 // Eigene Konstanten
 
