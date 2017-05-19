@@ -92,4 +92,37 @@
     mysqli_close($conn);
     return $id;
   }
+
+  function enableSurvey($survey, $class) {
+    $conn = getDBConnection();
+    $class = getClassIdFromCbString($class);
+    $class = mysqli_real_escape_string($conn,$class);
+    $surveyID = getSurveyID($survey);
+
+    $query = "INSERT INTO " . FBFREIGABE . " VALUES('$class',$surveyID);";
+    if(mysqli_query($conn,$query)) {
+      echo "Fragebogen '$survey' erfolgreich für Kurs '$class' freigegeben!";
+    } else {
+      echo "Die Freigabe des Fragebogens '$survey' besteht bereits für Kurs '$class'.";
+    }
+    mysqli_close($conn);
+  }
+
+  // Rückgabe aller freigegebenen Fragebögen
+  // Format: Kurs - Fragebogen
+  function getEnabledSurveys() {
+    $conn = getDBConnection();
+
+    $surveys = array();
+
+    $query = "SELECT " . FBFREIGABE_KUID . ", " . FRAGEBOGEN_FbBezeichnung . " FROM " . FBFREIGABE . " FF, " . FRAGEBOGEN . " FB WHERE FB.".FRAGEBOGEN_FbID . " = FF." . FBFREIGABE_FBID;
+    $result = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($result))
+    {
+      $surveys[] = $entry[FBFREIGABE_KUID] . " - " . $entry[FRAGEBOGEN_FbBezeichnung];
+    }
+
+    mysqli_close($conn);
+    return $surveys;
+  }
 ?>

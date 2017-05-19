@@ -15,6 +15,8 @@ define("BEANTWORTET","beantwortet");
 define("FBAGBABE","fbabgabe");
 
 define("FBFREIGABE","fbfreigabe");
+define("FBFREIGABE_FBID","FbId");
+define("FBFREIGABE_KUID","KuID");
 
 define("FRAGE","frage");
 define("FRAGE_FrTyp","FrTyp");
