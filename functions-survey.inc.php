@@ -42,4 +42,54 @@
     }
     mysqli_close($conn);
   }
+
+  function getAllSurveys() {
+    $conn = getDBConnection();
+    $query = "SELECT " . FRAGEBOGEN_FbBezeichnung . " FROM " . FRAGEBOGEN . ";";
+
+    $surveys = array();
+
+    $rows = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($rows))
+    {
+      $surveys[] = $entry[FRAGEBOGEN_FbBezeichnung];
+    }
+
+    mysqli_close($conn);
+    return $surveys;
+  }
+
+  function deleteSurvey($surveyName) {
+    $conn = getDBConnection();
+    $id = getSurveyID($surveyName);
+    if($id > -1) {
+      // -1 ist standardwert, fehler bei DB-Abfrage
+      // FrageInFragebogen löschen
+      $queryFr = "DELETE FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FBID . " = $id;";
+      $queryFb = "DELETE FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbID . " = $id;";
+      if(mysqli_query($conn,$queryFr) && mysqli_query($conn,$queryFb)) {
+        echo "Fragebogen erfolgreich gelöscht.";
+      } else {
+        echo "Fehler beim Löschen des Fragebogens.";
+        // TODO: Wiederherstellung?
+      }
+    } else {
+      echo "Ungültige Auswahl.";
+    }
+  }
+
+  function getSurveyID($surveyName) {
+    $conn = getDBConnection();
+    $surveyName = mysqli_real_escape_string($conn,$surveyName);
+    $query = "SELECT " . FRAGEBOGEN_FbID . " FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbBezeichnung . " = '$surveyName';";
+    $id = -1;
+    $result = mysqli_query($conn,$query);
+    if ($result) {
+      $row = mysqli_fetch_assoc($result);
+      $id = $row[FRAGEBOGEN_FbID];
+    }
+
+    mysqli_close($conn);
+    return $id;
+  }
 ?>

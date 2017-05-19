@@ -51,7 +51,29 @@
 	echo'		</div>';
 	echo'		<div id="cFrame">';
 	echo'			<h1>Fragebogen löschen - Administrator</h1>';
-	echo'			';
+
+	if(isset($_POST['cmdDeleteSurvey'])) {
+		deleteSurvey($_POST['cbSurveys']);
+		echo'<br /><br /><a href="survey_delete.php">Zurück</a>';
+	} else {
+
+		$surveys = getAllSurveys();
+		if(count($surveys) > 0) {
+			echo '<form action="survey_delete.php" method="POST">';
+			echo 'Fragebogen auswählen: ';
+			echo '<select name="cbSurveys">';
+			for($i = 0; $i < count($surveys); $i++) {
+				echo "<option>$surveys[$i]</option>";
+			}
+			echo '</select>';
+			echo '<br />';
+			echo '<input type="submit" value="Löschen" name="cmdDeleteSurvey" />';
+			echo '</form>';
+		} else {
+			echo 'Keine Fragebögen vorhanden!';
+		}
+	}
+
 	echo'		</div>';
 	echo'		<br class="clear" />';
 	echo'	</div>';
