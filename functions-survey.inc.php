@@ -125,4 +125,36 @@
     mysqli_close($conn);
     return $surveys;
   }
+
+  function getSurveyChapterID($survey) {
+    $conn = getDBConnection();
+    $chapterID = -1;
+    $survey = mysqli_real_escape_string($conn,$survey);
+
+    $query = "SELECT " . FRAGEBOGEN_Kapitel . " FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbBezeichnung . " = '$survey';";
+
+    $result = mysqli_query($conn,$query);
+    if ($result) {
+      $row = mysqli_fetch_assoc($result);
+      $chapterID = $row[FRAGEBOGEN_Kapitel];
+    }
+
+    mysqli_close($conn);
+    return $chapterID;
+  }
+
+  function getSurveyQuestions($survey) {
+    $conn = getDBConnection();
+    $questions = array();
+    $surveyID = getSurveyID($survey);
+
+    $query = "SELECT " . FR_IN_FB_FRBEZ . " FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FBID . " = '$surveyID';";
+    $result = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($result))
+    {
+      $questions[] = $entry[FR_IN_FB_FRBEZ];
+    }
+    mysqli_close($conn);
+    return $questions;
+  }
 ?>

@@ -62,6 +62,23 @@ function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $retu
   }
 }
 
+function getAllQuestionsOfChapterArray($chapterID) {
+  $conn = getDBConnection();
+  $chapterID = mysqli_real_escape_string($conn,$chapterID);
+
+  $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
+  $rows = mysqli_query($conn, $query);
+  if($rows) {
+    $questions = array();
+    while($entry = mysqli_fetch_assoc($rows))
+    {
+      $questions[] = $entry[FRAGE_FrBezeichnung];
+    }
+    mysqli_close($conn);
+    return $questions;
+  }
+}
+
 // Aufbau der Frageboxen
 function addQuestionContainer() {
   echo '<form action="question_create.php" method="POST">';
