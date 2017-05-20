@@ -52,12 +52,32 @@
 	echo'		<div id="cFrame">';
 	echo'			<h1>Fragebogen bearbeiten - Administrator</h1>';
 
+
+	if(isset($_POST['cmdSaveSurveyModifications'])) {
+		//saveQuestionToFbV2()
+		$_SESSION['surveyToModify'];
+		deleteSurveyQuestions($_SESSION['surveyToModify']);
+		$i = 0;
+		while(true) {
+			if(isset($_POST['txt'.$i])) {
+				if(isset($_POST['chk'.$i])) {
+					// Frage wieder hinzufügen
+					saveQuestionToFbV2($_SESSION['surveyToModify'],$_POST['txt'.$i]);
+				}
+				$i++;
+			} else {
+				break;
+			}
+		}
+		echo'<br /><br /><a href="survey_modify.php">Zurück</a>';
+	}
 	// Auflistung aller Fragen des Kapitels, markierte sind bereits in Fragebogen enthalten
-	if(isset($_POST['cmdModifySurvey'])) {
+	else if(isset($_POST['cmdModifySurvey'])) {
 		echo '<form action="survey_modify.php" method="POST">';
 
 		$questionsInChapter = getAllQuestionsOfChapterArray(getSurveyChapterID($_POST['cbSurveys']));
 		$questionsInSurvey = getSurveyQuestions($_POST['cbSurveys']);
+		$_SESSION['surveyToModify'] = $_POST['cbSurveys'];
 
 		for($i = 0; $i < count($questionsInChapter); $i++) {
 			$questionInSurvey = false;
@@ -73,11 +93,11 @@
 				echo '<input type="checkbox" name="chk'.$i.'" />';
 			}
 
-			echo $questionsInChapter[$i];
+			echo '<input type="text" name="txt'.$i.'" readonly value="'.$questionsInChapter[$i].'" />';
 			echo '<br />';
 		}
 
-		echo '<input type="submit" name="cmdSaveSurveyModifications" value="Speichern" />';
+		echo '<br /><input type="submit" name="cmdSaveSurveyModifications" value="Speichern" />';
 		echo '</form>';
 
 		echo'<br /><br /><a href="survey_modify.php">Zurück</a>';
@@ -92,7 +112,7 @@
 				echo "<option>$surveys[$i]</option>";
 			}
 			echo '</select>';
-			echo '<br />';
+			echo '<br /><br />';
 			echo '<input type="submit" value="Bearbeiten" name="cmdModifySurvey" />';
 			echo '</form>';
 		} else {

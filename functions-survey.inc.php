@@ -23,6 +23,7 @@
     mysqli_close($conn);
   }
 
+  // TODO: Überarbeiten $fb wird nicht benötigt
   function saveQuestionToFb($fb, $question) {
     // Eintrag für FB erstellen, wenn nicht vorhanden
     $conn = getDBConnection();
@@ -32,6 +33,41 @@
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     $fbID = $row['MAXIMUM'];
+
+    $query = "INSERT INTO " . FR_IN_FB . " VALUES($fbID, '" . $question . "');";
+
+    if(mysqli_query($conn,$query)) {
+      echo "Frage '$question' erfolgreich zum Fragebogen hinzugefügt.<br />";
+    } else {
+      // TODO
+    }
+    mysqli_close($conn);
+  }
+
+  function deleteSurveyQuestions($fb) {
+    $conn = getDBConnection();
+
+    $fb = mysqli_real_escape_string($conn,$fb);
+    $fbID = getSurveyID($fb);
+    $query = "DELETE FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FBID . " = '$fbID';";
+    if(mysqli_query($conn,$query)) {
+      echo "Fragebogen erfolgreich zurückgesetzt.<br />";
+    } else {
+      echo "Fehler beim Zurücksetzen des Fragebogens.<br />";
+    }
+
+    mysqli_close($conn);
+  }
+
+  function saveQuestionToFbV2($fb, $question) {
+    // Eintrag für FB erstellen, wenn nicht vorhanden
+    $conn = getDBConnection();
+
+    // Fragen einfügen
+    $fb = mysqli_real_escape_string($conn,$fb);
+    $question = mysqli_real_escape_string($conn,$question);
+
+    $fbID = getSurveyID($fb);
 
     $query = "INSERT INTO " . FR_IN_FB . " VALUES($fbID, '" . $question . "');";
 
