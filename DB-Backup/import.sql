@@ -90,7 +90,7 @@ ALTER TABLE student ADD KEY `KuBezeichnung` (KuBezeichnung), ADD KEY `StName` (S
 
 CREATE TABLE fragebogen (
   FbId mediumint(9) AUTO_INCREMENT PRIMARY KEY,
-  FbBezeichnung varchar(100) DEFAULT NULL,
+  FbBezeichnung varchar(100) NOT NULL UNIQUE,
   KaID smallint(6),
   FOREIGN KEY(KaID) REFERENCES kapitel(KaID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
