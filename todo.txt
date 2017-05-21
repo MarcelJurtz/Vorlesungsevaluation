@@ -1,0 +1,1 @@
+* Check db verfügbarkeit beim start
