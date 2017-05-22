@@ -13,6 +13,8 @@ define("ANTWORT_AwID", "AwID");
 define("BEANTWORTET","beantwortet");
 
 define("FBAGBABE","fbabgabe");
+define("FBABGABE_STUD","StName");
+define("FBAGBABE_FBID","FbID");
 
 define("FBFREIGABE","fbfreigabe");
 define("FBFREIGABE_FBID","FbId");
