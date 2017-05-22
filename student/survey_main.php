@@ -19,7 +19,15 @@
 
   printSidebarMenuBegin();
 
-  // Student
+
+	printClassTitle();
+
+  // Neue Fragebögen
+
+  // Angefangene Fragebögen
+
+  // Abgeschlossene Fragebögen
+
 
   printSidebarMenuEnd();
 ?>

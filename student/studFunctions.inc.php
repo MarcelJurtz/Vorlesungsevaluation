@@ -13,6 +13,7 @@ function logout() {
 
 // includes
 include "functions-login.inc.php";
+include "functions-class.inc.php";
 
 require_once("../constants.inc.php");
 

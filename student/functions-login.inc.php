@@ -39,6 +39,13 @@ function GetSessionUsername() {
   return $_SESSION['username'];
 }
 
+// Ausgabe: Fragebögen für Kurs WI214
+function printClassTitle() {
+  echo "<h1> Fragebögen für Kurs " . GetClassFromStudent(GetSessionUsername()) . "</h1>";
+}
+
+
+// Part 1 der Menüleiste
 function printSidebarMenuBegin() {
   echo'<div id="cWrapper">';
   echo'		<div id="cMenu">';
@@ -51,6 +58,7 @@ function printSidebarMenuBegin() {
   echo'		<div id="cFrame">';
 }
 
+// Part 2 der Menüleiste
 function printSidebarMenuEnd() {
   echo'		</div>';
 }
