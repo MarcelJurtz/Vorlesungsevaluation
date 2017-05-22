@@ -57,7 +57,6 @@ function toggleTextBox(item) {
   include "functions-class.inc.php";
   include "functions-lecture.inc.php";
   include "functions-question.inc.php";
-  include "functions-student.inc.php";
   include "functions-survey.inc.php";
   require_once("constants.inc.php");
 ?>
