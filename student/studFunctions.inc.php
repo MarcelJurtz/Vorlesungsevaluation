@@ -16,6 +16,8 @@ include "functions-login.inc.php";
 include "functions-class.inc.php";
 include "functions-survey.inc.php";
 
+include "survey.php";
+
 require_once("../constants.inc.php");
 
 ?>

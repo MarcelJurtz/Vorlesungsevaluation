@@ -42,4 +42,60 @@
     mysqli_close($conn);
     return $surveys;
   }
+
+  // Prüfung, ob Nutzer zur Bearbeitung eines Fragebogens berechtigt ist
+  // Kurs muss hierzu freigegeben sein
+  function ValidateUserSurveyEdit($student,$survey) {
+    $class = GetClassFromStudent($student);
+    $surveys = GetClassSurveys($class);
+    return in_array($survey,$surveys);
+  }
+
+
+  // TODO getSurveyID und getSurveyQuestions werden auch von Admin gebraucht -> Zusammenlegen?
+
+  function getSurveyID($surveyName) {
+    $conn = getDBConnection();
+    $surveyName = mysqli_real_escape_string($conn,$surveyName);
+    $query = "SELECT " . FRAGEBOGEN_FbID . " FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbBezeichnung . " = '$surveyName';";
+    $id = -1;
+    $result = mysqli_query($conn,$query);
+    if ($result) {
+      $row = mysqli_fetch_assoc($result);
+      $id = $row[FRAGEBOGEN_FbID];
+    }
+
+    mysqli_close($conn);
+    return $id;
+  }
+
+  // Bearbeiten einer Umfrage
+  function EditSurvey() {
+
+    $surveyName = $_SESSION['currentSurveyName'];
+
+    if(!ValidateUserSurveyEdit(GetSessionUsername(),$surveyName)) {
+      echo "Keine Berechtigung zur Bearbeitung des Fragebogens '".$surveyName."'";
+    } else {
+      $conn = getDBConnection();
+
+      // Frage laden
+      // TODO Achtung beim Speichern! Keine Reihenfolge, Text-Vergleich notwendig
+
+      if(!isset($_SESSION['currentSurveyIndex'])) $_SESSION['currentSurveyIndex'] = 0;
+
+      // Frage X / Y
+      echo "Frage " . $_SESSION['currentSurveyIndex'];
+      $survey = new survey($surveyName);
+      //echo " / " . $survey->GetQuestionCount();
+      echo " / " . $survey->arrLength;
+
+      echo "<h3>" . $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetName() . "</h3>";
+      echo $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetText();
+      echo "<br />";
+      echo "Typ: " . $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetType();
+
+      mysqli_close($conn);
+    }
+  }
 ?>

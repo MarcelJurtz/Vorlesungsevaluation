@@ -24,6 +24,7 @@ define("FRAGE","frage");
 define("FRAGE_FrTyp","FrTyp");
 define("FRAGE_FrID", "FrID");
 define("FRAGE_FrBezeichnung","FrBezeichnung");
+define("FRAGE_FrText","FrText");
 define("FRAGE_FPID", "FpID");
 
 // Achtung! Zusätzlich definiert in JS in functions.inc.php
