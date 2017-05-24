@@ -5,7 +5,6 @@ class survey {
   // TODO benötigt? private $kaID;
   private $fbName;
   private $questions;
-  public $arrLength;
 
   public function __construct($fbName) {
     $conn = getDBConnection();
@@ -30,13 +29,11 @@ class survey {
       // $questions[] = $entry[FR_IN_FB_FRBEZ];
       // echo "Lade Frage " . $entry[FR_IN_FB_FRBEZ] . " (survey.php 30)<br />";
       $this->questions[] = new question($entry[FR_IN_FB_FRBEZ]);
-      $this->arrLength++;
     }
     mysqli_close($conn);
   }
 
   public function GetQuestionCount() {
-    //return $this->arrLength;
     return count($this->questions);
   }
 
@@ -70,7 +67,7 @@ class question {
   private function SetQuestionDetails() {
     $conn = getDBConnection();
 
-    $query = "SELECT " . FRAGE_FrID . ", " . FRAGE_FrTyp . ", " . FRAGE_FrText . " FROM " . FRAGE . " WHERE " . FRAGE_FrBezeichnung . " = '$this->name'";
+    $query = "SELECT " . FRAGE_FrID . ", " . FRAGE_FrTyp . ", " . FRAGE_FrText . " FROM " . FRAGE . " WHERE " . FRAGE_FrBezeichnung . " = '$this->name' ORDER BY " . FRAGE_FrID;
     $details = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
     $this->id = $details[FRAGE_FrID];
@@ -82,6 +79,22 @@ class question {
     //echo "<br />Text: " . $this->text;
 
     mysqli_close($conn);
+  }
+
+  public function GetQuesionAnswers() {
+    $conn = getDBConnection();
+
+    $answers = array();
+
+    $query = "SELECT " . ANTWORT_AWTEXT . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $this->id";
+    $result = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($result))
+    {
+      $answers[] = $entry[ANTWORT_AWTEXT];
+    }
+
+    mysqli_close($conn);
+    return $answers;
   }
 
   public function GetName() {

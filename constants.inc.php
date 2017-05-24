@@ -27,10 +27,6 @@ define("FRAGE_FrBezeichnung","FrBezeichnung");
 define("FRAGE_FrText","FrText");
 define("FRAGE_FPID", "FpID");
 
-// Achtung! Zusätzlich definiert in JS in functions.inc.php
-define("FRAGENTYP_MULTIPLE_CHOICE","mchoice");
-define("FRAGENTYP_TEXTFRAGE","text");
-
 define("FRAGEBOGEN","fragebogen");
 define("FRAGEBOGEN_FbBezeichnung","FbBezeichnung");
 define("FRAGEBOGEN_Kapitel","KaID");
@@ -75,4 +71,12 @@ define("STRING_TRUE","true");
 define("STRING_FALSE","false");
 
 define("ADMIN_DEFAULT_USERNAME","root");
+
+// Achtung! Zusätzlich definiert in JS in functions.inc.php
+define("FRAGENTYP_MULTIPLE_CHOICE","mchoice");
+define("FRAGENTYP_TEXTFRAGE","text");
+
+// Prüfen:
+define("FRAGENTYP_MULTIPLE_CHOICE_DB","mchoic");
+define("FRAGENTYP_TEXTFRAGE_DB","text");
 ?>

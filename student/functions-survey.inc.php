@@ -87,13 +87,27 @@
       // Frage X / Y
       echo "Frage " . $_SESSION['currentSurveyIndex'];
       $survey = new survey($surveyName);
-      //echo " / " . $survey->GetQuestionCount();
-      echo " / " . $survey->arrLength;
+      echo " / " . $survey->GetQuestionCount();
 
-      echo "<h3>" . $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetName() . "</h3>";
-      echo $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetText();
-      echo "<br />";
-      echo "Typ: " . $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1)->GetType();
+      $currentQuestion = $survey->GetQuestionAt($_SESSION['currentSurveyIndex']-1);
+
+      // Bezeichnung
+      echo "<h3>" . $currentQuestion->GetName() . "</h3>";
+
+      // Text
+      echo $currentQuestion->GetText();
+      echo "<br /><br />";
+
+      // Antwortmöglichkeiten bei Multiple Choice
+      if($currentQuestion->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
+        $answers = $currentQuestion->GetQuesionAnswers();
+        for($i = 0; $i < count($answers); $i++) {
+          echo '<input type="checkbox" name="chk'.$i.'"/>' . $answers[$i] . '<br />';
+        }
+      } else if ($currentQuestion->GetType() == FRAGENTYP_TEXTFRAGE_DB) {
+      } else {
+        echo "TYPE ERROR: ".$currentQuestion->GetType();
+      }
 
       mysqli_close($conn);
     }
