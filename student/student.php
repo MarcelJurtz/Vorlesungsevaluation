@@ -19,7 +19,7 @@
 
   printSidebarMenuBegin();
 
-  // Student
+  echo GetInfotext();
 
   printSidebarMenuEnd();
 ?>

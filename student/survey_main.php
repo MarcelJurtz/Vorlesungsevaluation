@@ -61,7 +61,6 @@
 
 		echo '</form>';
 
-
   printSidebarMenuEnd();
 ?>
 </body>

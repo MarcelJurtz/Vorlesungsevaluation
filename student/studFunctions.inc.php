@@ -15,6 +15,7 @@ function logout() {
 include "functions-login.inc.php";
 include "functions-class.inc.php";
 include "functions-survey.inc.php";
+include "functions-info.inc.php";
 
 include "survey.php";
 
