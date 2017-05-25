@@ -17,9 +17,9 @@ define("BEANTWORTET_AWID","AwID");
 define("BEANTWORTET_AWTEXT","StAntwort");
 define("BEANTWORTET_FBID","FbID");
 
-define("FBAGBABE","fbabgabe");
+define("FBABGABE","fbabgabe");
 define("FBABGABE_STUD","StName");
-define("FBAGBABE_FBID","FbID");
+define("FBABGABE_FBID","FbID");
 
 define("FBFREIGABE","fbfreigabe");
 define("FBFREIGABE_FBID","FbId");
