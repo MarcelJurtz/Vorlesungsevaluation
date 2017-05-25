@@ -28,7 +28,7 @@
   	// Neue Fragebögen
 
 		echo '<h2>Neue Fragebögen</h2>';
-		$surveys = GetClassSurveys(GetClassFromStudent(GetSessionUsername()));
+		$surveys = GetNewSurveys(GetClassFromStudent(GetSessionUsername()));
 		if(count($surveys) > 0) {
 			echo '<select name="cbSurveysNew">';
 			for($i = 0; $i < count($surveys); $i++) {
@@ -43,7 +43,17 @@
 		// Angefangene Fragebögen
 
 		echo '<h2>Angefangene Fragebögen</h2>';
-
+		$surveys = GetEditedSurveys(GetClassFromStudent(GetSessionUsername()));
+		if(count($surveys) > 0) {
+			echo '<select name="cbSurveysEdited">';
+			for($i = 0; $i < count($surveys); $i++) {
+				echo '<option>' . $surveys[$i] . '</option>';
+			}
+			echo '</select>';
+			echo '<input type="submit" name="cmdEditSurveyEdited" value="Bearbeiten" />';
+		} else {
+			echo 'Keine freigegebenen Fragebögen vorhanden!';
+		}
 
 		// Abgeschlossene Fragebögen
 

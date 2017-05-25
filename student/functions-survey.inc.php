@@ -1,10 +1,51 @@
 <?php
-  function GetClassSurveys($class) {
+  function GetNewSurveys($class) {
     $conn = getDBConnection();
     $class = mysqli_real_escape_string($conn,$class);
 
     $surveys = array();
-    $query = "SELECT " . FRAGEBOGEN_FbBezeichnung . " FROM " . FRAGEBOGEN . " fb, " . FBFREIGABE . " ff WHERE fb.".FRAGEBOGEN_FbID . " = ff.".FBFREIGABE_FBID . " AND ff." . FBFREIGABE_KUID . " = '$class'";
+
+    // Rückgabe aller freigegebenen Fragebögen, die noch keinen Eintrag in "bearbeitet" haben
+    $query = "SELECT " . FRAGEBOGEN_FbBezeichnung .
+              " FROM " . FRAGEBOGEN . " fb, " . FBFREIGABE . " ff".
+              " WHERE fb.".FRAGEBOGEN_FbID . " = ff.".FBFREIGABE_FBID .
+              " AND ff." . FBFREIGABE_KUID . " = '$class'".
+              " AND fb.".FRAGEBOGEN_FbID . " NOT IN (
+                SELECT DISTINCT " . BEANTWORTET_FBID . " FROM " . BEANTWORTET ."
+                )";
+
+    if(!(mysqli_num_rows(mysqli_query($conn,$query)) > 0)) {
+      return $surveys;
+    }
+
+    $result = mysqli_query($conn, $query);
+    while($row = mysqli_fetch_assoc($result)) {
+      $surveys[] = $row[FRAGEBOGEN_FbBezeichnung];
+    }
+
+    mysqli_close($conn);
+    return $surveys;
+  }
+
+  function GetEditedSurveys($class) {
+    $conn = getDBConnection();
+    $class = mysqli_real_escape_string($conn,$class);
+
+    $surveys = array();
+
+    // Rückgabe aller freigegebenen Fragebögen, die noch keinen Eintrag in "bearbeitet" haben
+    $query = "SELECT " . FRAGEBOGEN_FbBezeichnung .
+              " FROM " . FRAGEBOGEN . " fb, " . FBFREIGABE . " ff".
+              " WHERE fb.".FRAGEBOGEN_FbID . " = ff.".FBFREIGABE_FBID .
+              " AND ff." . FBFREIGABE_KUID . " = '$class'".
+              " AND fb.".FRAGEBOGEN_FbID . " IN (
+                SELECT DISTINCT " . BEANTWORTET_FBID .
+                " FROM " . BEANTWORTET ."
+                ) AND fb.".FRAGEBOGEN_FbID . " NOT IN (
+                  SELECT " . FBABGABE_FBID .
+                  " FROM " . FBABGABE .
+                  " WHERE " . FBABGABE_STUD . " = '" . GetSessionUsername() . "'
+                  )";
 
     if(!(mysqli_num_rows(mysqli_query($conn,$query)) > 0)) {
       return $surveys;
@@ -26,8 +67,8 @@
 
     $surveys = array();
     $query = "SELECT " . FRAGEBOGEN_FbBezeichnung
-                  . " FROM " . FRAGEBOGEN . " fb, " . FBAGBABE . " fa"
-                  . " WHERE fb.".FRAGEBOGEN_FbID . " = fa." . FBAGBABE_FBID
+                  . " FROM " . FRAGEBOGEN . " fb, " . FBABGABE . " fa"
+                  . " WHERE fb.".FRAGEBOGEN_FbID . " = fa." . FBABGABE_FBID
                   . " AND fa." . FBABGABE_STUD . " = '$student'";
 
     if(!(mysqli_num_rows(mysqli_query($conn,$query)) > 0)) {
