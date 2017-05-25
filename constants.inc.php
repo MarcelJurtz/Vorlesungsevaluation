@@ -11,6 +11,11 @@ define("ANTWORT_AwWahrheit", "AwWahrheit");
 define("ANTWORT_AwID", "AwID");
 
 define("BEANTWORTET","beantwortet");
+define("BEANTWORTET_STUD","StName");
+define("BEANTWORTET_FRID","FrID");
+define("BEANTWORTET_AWID","AwID");
+define("BEANTWORTET_AWTEXT","StAntwort");
+define("BEANTWORTET_FBID","FbID");
 
 define("FBAGBABE","fbabgabe");
 define("FBABGABE_STUD","StName");
