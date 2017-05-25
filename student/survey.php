@@ -44,6 +44,10 @@ class survey {
   public function GetQuestionAt($index) {
     return $this->questions[$index];
   }
+
+  public function GetID() {
+    return $this->fbID;
+  }
 }
 
 
@@ -107,6 +111,10 @@ class question {
 
   public function GetType() {
     return $this->type;
+  }
+
+  public function GetID() {
+    return $this->id;
   }
 }
 

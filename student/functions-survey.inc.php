@@ -102,9 +102,50 @@
       if($currentQuestion->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
         $answers = $currentQuestion->GetQuesionAnswers();
         for($i = 0; $i < count($answers); $i++) {
-          echo '<input type="checkbox" name="chk'.$i.'"/>' . $answers[$i] . '<br />';
+
+          // Prüfe Existenz einer Antwort
+          $answer = "";
+          $query = "SELECT " . BEANTWORTET_AWTEXT .
+                    " FROM " . BEANTWORTET .
+                    " WHERE " . BEANTWORTET_STUD . " = '".GetSessionUsername() .
+                    "' AND " . BEANTWORTET_FRID . " = " . $currentQuestion->GetID() .
+                    " AND " . BEANTWORTET_AWID . " = $i" .
+                    " AND " . BEANTWORTET_FBID . " = " . $survey->GetID();
+
+          $getAnswer = mysqli_fetch_assoc(mysqli_query($conn,$query));
+          $answer = $getAnswer[BEANTWORTET_AWTEXT];
+
+          if($answer == SHORT_TRUE) {
+            echo '<input type="checkbox" name="chkAnswer'.$i.'" checked/>' . $answers[$i] . '<br />';
+          } else {
+            echo '<input type="checkbox" name="chkAnswer'.$i.'"/>' . $answers[$i] . '<br />';
+          }
+
+
         }
+        $_SESSION['lastQuestionType'] = FRAGENTYP_MULTIPLE_CHOICE_DB;
+        $_SESSION['lastQuestionID'] = $currentQuestion->GetID();
+
+      // Antwortmöglichkeiten bei Textfragen
       } else if ($currentQuestion->GetType() == FRAGENTYP_TEXTFRAGE_DB) {
+
+        // Prüfe Existenz einer Antwort
+        $answer = "";
+        $query = "SELECT " . BEANTWORTET_AWTEXT .
+                  " FROM " . BEANTWORTET .
+                  " WHERE " . BEANTWORTET_STUD . " = '".GetSessionUsername() .
+                  "' AND " . BEANTWORTET_FRID . " = " . $currentQuestion->GetID() .
+                  " AND " . BEANTWORTET_AWID . " = 0" .
+                  " AND " . BEANTWORTET_FBID . " = " . $survey->GetID();
+
+        $getAnswer = mysqli_fetch_assoc(mysqli_query($conn,$query));
+        $answer = $getAnswer[BEANTWORTET_AWTEXT];
+
+        echo '<textarea name="txtAnswerInput" rows="5" cols="60">' . $answer . '</textarea>';
+
+        // Sessionvariablen zum Speichern von Eingaben nach Drücken des Weiter-Buttons
+        $_SESSION['lastQuestionType'] = FRAGENTYP_TEXTFRAGE_DB;
+        $_SESSION['lastQuestionID'] = $currentQuestion->GetID();
       } else {
         echo "TYPE ERROR: ".$currentQuestion->GetType();
       }
