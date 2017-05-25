@@ -128,10 +128,12 @@ CREATE TABLE beantwortet (
   FrID int(11) NOT NULL,
   AwID tinyint(4) unsigned NOT NULL,
   StAntwort varchar(500) DEFAULT NULL,
+  FbID mediumint(9) NOT NULL,
   PRIMARY KEY(StName,FrID,AwID),
   FOREIGN KEY(FrID) REFERENCES frage(FrID),
   FOREIGN KEY(AwID) REFERENCES antwort(AwID),
-  FOREIGN KEY(StName) REFERENCES student(StName)
+  FOREIGN KEY(StName) REFERENCES student(StName),
+  FOREIGN KEY(FbID) REFERENCES fragebogen(FbId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  ALTER TABLE beantwortet ADD KEY `FrID` (FrID), ADD KEY `AwID` (AwID);
