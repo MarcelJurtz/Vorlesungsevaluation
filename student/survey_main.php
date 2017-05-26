@@ -30,7 +30,7 @@
 		echo '<h2>Neue Fragebögen</h2>';
 		$surveys = GetNewSurveys(GetClassFromStudent(GetSessionUsername()));
 		if(count($surveys) > 0) {
-			echo '<select name="cbSurveysNew">';
+			echo '<select name="cbSurveysToEdit">';
 			for($i = 0; $i < count($surveys); $i++) {
 				echo '<option>' . $surveys[$i] . '</option>';
 			}
@@ -45,7 +45,7 @@
 		echo '<h2>Angefangene Fragebögen</h2>';
 		$surveys = GetEditedSurveys(GetClassFromStudent(GetSessionUsername()));
 		if(count($surveys) > 0) {
-			echo '<select name="cbSurveysEdited">';
+			echo '<select name="cbSurveysToEdit">';
 			for($i = 0; $i < count($surveys); $i++) {
 				echo '<option>' . $surveys[$i] . '</option>';
 			}

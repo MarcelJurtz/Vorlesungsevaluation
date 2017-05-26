@@ -19,8 +19,27 @@
 
   printSidebarMenuBegin();
 
+	if(isset($_POST['cmdSurveySubmit'])) {
+		$conn = getDBConnection();
+
+		$survey = new survey($_SESSION['currentSurveyName']);
+		$id = $survey->GetID();
+		$query = "INSERT INTO " . FBABGABE . " VALUES('".GetSessionUsername()."',$id)";
+		if(!mysqli_query($conn,$query)) {
+			echo "Fehler beim Abgeben des Fragebogens.";
+		} else {
+			echo "Fragebogen erfolgreich abgegeben.";
+		}
+
+		mysqli_close($conn);
+	}
+
 	// Bearbeitung eines neuen Fragebogens: Auswahl, nächstes oder letztes
-	if(isset($_POST['cmdEditSurveyNew']) || isset($_POST['cmdSurveyNewPrevious']) || isset($_POST['cmdSurveyNewNext'])) {
+	else if(isset($_POST['cmdEditSurveyNew']) || isset($_POST['cmdSurveyNewPrevious']) || isset($_POST['cmdSurveyNewNext']) || isset($_POST['cmdEditSurveyEdited'])) {
+
+
+		// true bei letzter Frage
+		$currentQuestionIsMax = false;
 
 		// Button "VORWÄRTS"
 
@@ -29,8 +48,10 @@
 
 			// Maximum
 			$survey = new survey($_SESSION['currentSurveyName']);
-			if($_SESSION['currentSurveyIndex'] > $survey->GetQuestionCount())
+			if($_SESSION['currentSurveyIndex'] >= $survey->GetQuestionCount()) {
 				$_SESSION['currentSurveyIndex'] = $survey->GetQuestionCount();
+				$currentQuestionIsMax = true;
+			}
 
 			// Letzte Frage speichern
 			if($_SESSION['lastQuestionType'] == FRAGENTYP_MULTIPLE_CHOICE_DB) {
@@ -54,8 +75,39 @@
 
 					$query = "REPLACE INTO " . BEANTWORTET . " VALUES ('$stud',$id,$i,'$truth', ".$survey->GetID().");";
 
+					/* Alternative REPLACE INTO
+					$query = "SELECT COUNT(*) as CT FROM " . BEANTWORTET .
+										" WHERE " . BEANTWORTET_STUD . " = '$stud'" .
+										" AND " . BEANTWORTET_FBID . " = " . $survey->GetID() .
+										" AND " . BEANTWORTET_AWID . " = $i" .
+										" AND " . BEANTWORTET_FRID . " = $id";
+					echo "Selecting from beantwortet: " . $query . "<br /><br />";
+
+					$getCount = mysqli_fetch_assoc(mysqli_query($conn, $query));
+					$count = $getCount['CT'];
+
+					echo "Beantwortet gefunden: " . $count . "<br /><br />";
+
+					$saveQuestionQuery = "";
+
+					if($count == 1) {
+						// Eintrag vorhanden -> Update
+						$saveQuestionQuery = "UPDATE " . BEANTWORTET .
+											" SET " . BEANTWORTET_AWTEXT . " = '$truth'" .
+											" WHERE " . BEANTWORTET_STUD . " = '$stud'" .
+											" AND " . BEANTWORTET_FBID . " = " . $survey->GetID() .
+											" AND " . BEANTWORTET_AWID . " = $i" .
+											" AND " . BEANTWORTET_FRID . " = $id";
+						echo "Updatequery: $saveQuestionQuery";
+					} else {
+						// Kein Eintrag vorhanden -> Insert
+						$saveQuestionQuery = "INSERT INTO " . BEANTWORTET . " VALUES ('$stud',$id,$i,'$truth', ".$survey->GetID().");";
+						echo "InsertQuery: " . $saveQuestionQuery . "<br /><br />";
+					}
+					*/
+
 					if(!mysqli_query($conn,$query)) {
-						echo "Fehler beim Speichern der Antwort.";
+						echo "Fehler beim Speichern der Antwort. <br /><br />";
 					}
 				}
 
@@ -92,7 +144,7 @@
 				$_SESSION['currentSurveyIndex'] = 1;
 		} else {
 			$_SESSION['currentSurveyIndex'] = 1;
-			$_SESSION['currentSurveyName'] = $_POST['cbSurveysNew'];
+			$_SESSION['currentSurveyName'] = $_POST['cbSurveysToEdit'];
 		}
 
 		echo '<form action="survey_edit.php" method="POST">';
@@ -101,7 +153,14 @@
 
 		echo '<br /><br />';
 		echo '<input type="submit" name="cmdSurveyNewPrevious" value="Zurück"/>';
-		echo '<input type="submit" name="cmdSurveyNewNext" value="Weiter"/>';
+
+		if($currentQuestionIsMax) {
+			echo '<input type="submit" name="cmdSurveyNewNext" value="Speichern"/><br />';
+			echo '<input type="submit" name="cmdSurveySubmit" value="Fragebogen abgeben"/>';
+		} else {
+			echo '<input type="submit" name="cmdSurveyNewNext" value="Weiter"/>';
+		}
+
 		echo '</form>';
 	} else {
 
