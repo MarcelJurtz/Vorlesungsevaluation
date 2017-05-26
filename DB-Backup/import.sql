@@ -126,10 +126,10 @@ ALTER TABLE fbfreigabe ADD KEY `FbID` (FbID);
 CREATE TABLE beantwortet (
   StName varchar(25) NOT NULL,
   FrID int(11) NOT NULL,
-  AwID tinyint(4) unsigned NOT NULL,
+  AwID tinyint(4),
   StAntwort varchar(500) DEFAULT NULL,
   FbID mediumint(9) NOT NULL,
-  PRIMARY KEY(StName,FrID,AwID),
+  PRIMARY KEY(StName,FrID,AwID,FbID),
   FOREIGN KEY(FrID) REFERENCES frage(FrID),
   FOREIGN KEY(AwID) REFERENCES antwort(AwID),
   FOREIGN KEY(StName) REFERENCES student(StName),
