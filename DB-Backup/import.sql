@@ -35,7 +35,7 @@ ALTER TABLE kapitel ADD KEY `VoID` (VoID);
 
 CREATE TABLE fragepool (
   FpID smallint(6) AUTO_INCREMENT PRIMARY KEY,
-  KaID smallint(6) DEFAULT NULL,
+  KaID smallint(6),
   FOREIGN KEY (KaID) REFERENCES kapitel(KaID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -47,7 +47,7 @@ CREATE TABLE frage (
   FrID int(11) NOT NULL AUTO_INCREMENT,
   FrBezeichnung varchar(50) UNIQUE NOT NULL,
   FrText varchar(1000) DEFAULT NULL,
-  FpID smallint(6) NOT NULL,
+  FpID smallint(6),
   FrTyp char(6) DEFAULT NULL,
   PRIMARY KEY(FrID,FpID),
   FOREIGN KEY (FpID) REFERENCES fragepool(FpID)
@@ -58,7 +58,7 @@ ALTER TABLE frage ADD KEY `FpID` (FpID);
 
 
 CREATE TABLE antwort (
-  FrID int(11) NOT NULL,
+  FrID int(11),
   AwText varchar(500) DEFAULT NULL,
   AwWahrheit tinyint(1) unsigned DEFAULT NULL,
   AwID tinyint(4) unsigned NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE kurs (
 
 CREATE TABLE student (
   StName varchar(25) PRIMARY KEY,
-  KuBezeichnung char(5) NOT NULL,
+  KuBezeichnung char(5),
   FOREIGN KEY(KuBezeichnung) REFERENCES kurs(KuID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -100,8 +100,8 @@ ALTER TABLE fragebogen ADD KEY `KaID` (KaID);
 
 
 CREATE TABLE fbabgabe (
-  StName varchar(25) NOT NULL,
-  FbID mediumint(9) NOT NULL,
+  StName varchar(25),
+  FbID mediumint(9),
   PRIMARY KEY(StName, FbID),
   FOREIGN KEY(StName) REFERENCES student(StName),
   FOREIGN KEY(FbID) REFERENCES fragebogen(FbId)
@@ -112,8 +112,8 @@ ALTER TABLE fbabgabe ADD KEY `FbID` (FbID);
 
 
 CREATE TABLE fbfreigabe (
-  KuID char(5) NOT NULL,
-  FbID mediumint(9) NOT NULL,
+  KuID char(5),
+  FbID mediumint(9),
   PRIMARY KEY(KuID,FbID),
   FOREIGN KEY(FbID) REFERENCES fragebogen(FbId),
   FOREIGN KEY(KuID) REFERENCES kurs(KuID)
@@ -124,11 +124,11 @@ ALTER TABLE fbfreigabe ADD KEY `FbID` (FbID);
 
 
 CREATE TABLE beantwortet (
-  StName varchar(25) NOT NULL,
-  FrID int(11) NOT NULL,
+  StName varchar(25),
+  FrID int(11),
   AwID tinyint(4),
   StAntwort varchar(500) DEFAULT NULL,
-  FbID mediumint(9) NOT NULL,
+  FbID mediumint(9),
   PRIMARY KEY(StName,FrID,AwID,FbID),
   FOREIGN KEY(FrID) REFERENCES frage(FrID),
   FOREIGN KEY(AwID) REFERENCES antwort(AwID),
@@ -138,14 +138,14 @@ CREATE TABLE beantwortet (
 
  ALTER TABLE beantwortet ADD KEY `FrID` (FrID), ADD KEY `AwID` (AwID);
 
- CREATE TABLE `frageinfragebogen` (
-   fbID mediumint(9) NOT NULL,
-   frBezeichnung varchar(50) NOT NULL,
+ CREATE TABLE frageinfragebogen (
+   fbID mediumint(9),
+   frBezeichnung varchar(50),
    PRIMARY KEY(fbID, frBezeichnung),
    FOREIGN KEY(fbID) REFERENCES fragebogen(FbId),
    FOREIGN KEY(frBezeichnung) REFERENCES frage(FrBezeichnung)
 
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
- ALTER TABLE `frageinfragebogen`
-   ADD KEY `frBezeichnung` (`frBezeichnung`);
+ ALTER TABLE frageinfragebogen
+   ADD KEY `frBezeichnung` (frBezeichnung);
