@@ -8,7 +8,6 @@
 <body>
 <?php
 	include 'adminFunctions.inc.php';
-	session_start();
 
 	if(isset($_POST['cmdLoginAdmin'])) {
 		$dbConn = getDBConnection();
