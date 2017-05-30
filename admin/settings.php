@@ -7,8 +7,7 @@
 </head>
 <body>
   <?php
-  	include '../functions.inc.php';
-  	include_once("../constants.inc.php");
+  	include 'adminFunctions.inc.php';
   	session_start();
 
   	if(!isset($_SESSION['adminName'])) {

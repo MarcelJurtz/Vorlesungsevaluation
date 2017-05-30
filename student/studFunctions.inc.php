@@ -1,24 +1,20 @@
 <?php
+
 session_start();
 
-function getDBConnection() {
-  return(mysqli_connect("localhost","root","password","veva"));
-}
-
-function logout() {
-  session_start();
-  session_destroy();
-  header('Location: index.html');
-}
-
 // includes
-include "functions-login.inc.php";
-include "functions-class.inc.php";
-include "functions-survey.inc.php";
-include "functions-info.inc.php";
+include "../functions/studentFunctions/functions-login.inc.php";
+include "../functions/studentFunctions/functions-class.inc.php";
+include "../functions/studentFunctions/functions-survey.inc.php";
+include "../functions/studentFunctions/functions-info.inc.php";
 
-include "survey.php";
+include "../functions/studentFunctions/survey.php";
 
-require_once("../constants.inc.php");
+include "../functions/db.inc.php";
+include "../functions/logout.inc.php";
+
+include "../functions/mixed.inc.php";
+
+require_once("../functions/constants.inc.php");
 
 ?>

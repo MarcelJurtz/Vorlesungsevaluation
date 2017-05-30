@@ -40,23 +40,18 @@ function toggleTextBox(item) {
 
 </script>
 <?php
-	function getDBConnection() {
-		return(mysqli_connect("localhost","root","password","veva"));
-	}
-
-  function logout() {
-    session_start();
-    session_destroy();
-    header('Location: index.php');
-  }
-
-
   // Includes
-  include "functions-admin.inc.php";
-  include "functions-chapter.inc.php";
-  include "functions-class.inc.php";
-  include "functions-lecture.inc.php";
-  include "functions-question.inc.php";
-  include "functions-survey.inc.php";
-  require_once("constants.inc.php");
+  include "../functions/adminFunctions/functions-admin.inc.php";
+  include "../functions/adminFunctions/functions-chapter.inc.php";
+  include "../functions/adminFunctions/functions-class.inc.php";
+  include "../functions/adminFunctions/functions-lecture.inc.php";
+  include "../functions/adminFunctions/functions-question.inc.php";
+  include "../functions/adminFunctions/functions-survey.inc.php";
+  
+  include "../functions/db.inc.php";
+  include "../functions/logout.inc.php";
+  
+  include "../functions/mixed.inc.php";
+  
+  require_once("../functions/constants.inc.php");
 ?>

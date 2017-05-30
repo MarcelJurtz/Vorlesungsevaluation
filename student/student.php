@@ -14,14 +14,12 @@
   if(!ValidateUsername(GetSessionUsername())) {
    logout();
  } else {
-
- }
-
   printSidebarMenuBegin();
 
   echo GetInfotext();
 
   printSidebarMenuEnd();
+   }
 ?>
 </body>
 </html>
