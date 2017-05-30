@@ -40,6 +40,9 @@ function toggleTextBox(item) {
 
 </script>
 <?php
+
+  session_start();
+
   // Includes
   include "../functions/adminFunctions/functions-admin.inc.php";
   include "../functions/adminFunctions/functions-chapter.inc.php";

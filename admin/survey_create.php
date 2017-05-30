@@ -8,7 +8,6 @@
 <body>
 <?php
 	include 'adminFunctions.inc.php';
-	session_start();
 
 	if(!isset($_SESSION['adminName'])) {
 		header("Location: ./login.html");
@@ -134,14 +133,15 @@
 			} else {
 				$surveyAlreadyExisting = true;
 			}
-
-			while(true) {
-				if(!isset($_POST["chk$iterator"]) || $surveyAlreadyExisting) {
-					break;
+			
+			while(!$surveyAlreadyExisting) {
+			
+				if(!isset($_POST["txt$iterator"])) break;
+	
+				if(isset($_POST["chk$iterator"])) {
+					$q = $_POST["txt$iterator"];
+					saveQuestionToFb($_POST['txtFbName'], $q);
 				}
-
-				$q = $_POST["txt$iterator"];
-				saveQuestionToFb($_POST['txtFbName'], $q);
 				$iterator++;
 			}
 		}
