@@ -54,15 +54,18 @@
 
 	if(!isset($_POST['cmdEnableClassRegistration']) && !isset($_POST['cmdDisableClassRegistration'])) {
 		// Combobox aller nicht-freigegebenen Kurse zur Freigabe
-		echo'
-			<h2>Kurs zur Registrierung freigeben</h2>
-			<form action="class_enable.php" method="POST">
-			<select name="cbClassToEnable" size=1>';
-		echo getAllClasses(true,REGFREIGABE_FALSE);
-		echo '</select>
-				<input type="submit" name="cmdEnableClassRegistration" value="Freischalten">
-			</form>';
-
+		echo'<h2>Kurs zur Registrierung freigeben</h2>';
+		if(getAlLClasses(true,REGFREIGABE_FALSE) != "") {
+			echo '<form action="class_enable.php" method="POST">
+					<select name="cbClassToEnable" size=1>';
+			echo getAllClasses(true,REGFREIGABE_FALSE);
+			echo '</select>
+					<input type="submit" name="cmdEnableClassRegistration" value="Freischalten">
+				</form>';
+		} else {
+			echo "Keine Kurse zur Freigabe verfügbar!";
+		}
+		
 			echo '
 			<h2>Kursfreigabe aufheben</h2>
 			<form action="class_enable.php" method="POST">';
