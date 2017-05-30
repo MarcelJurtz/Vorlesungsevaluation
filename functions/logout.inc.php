@@ -1,7 +1,7 @@
 <?php
-function logout() {
+function logoutAdmin() {
     session_start();
     session_destroy();
-    header('Location: index.html');
+    header('Location: index.php');
   }
 ?>
