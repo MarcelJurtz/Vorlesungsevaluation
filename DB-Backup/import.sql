@@ -126,7 +126,7 @@ ALTER TABLE fbfreigabe ADD KEY `FbID` (FbID);
 CREATE TABLE beantwortet (
   StName varchar(25),
   FrID int(11),
-  AwID tinyint(4),
+  AwID tinyint(4) unsigned,
   StAntwort varchar(500) DEFAULT NULL,
   FbID mediumint(9),
   PRIMARY KEY(StName,FrID,AwID,FbID),
@@ -136,7 +136,7 @@ CREATE TABLE beantwortet (
   FOREIGN KEY(FbID) REFERENCES fragebogen(FbId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
- ALTER TABLE beantwortet ADD KEY `FrID` (FrID), ADD KEY `AwID` (AwID);
+ ALTER TABLE beantwortet ADD KEY FrID (FrID), ADD KEY `AwID` (AwID);
 
  CREATE TABLE frageinfragebogen (
    fbID mediumint(9),
