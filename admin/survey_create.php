@@ -90,7 +90,8 @@
 
 		// Ausgabe aller Fragen mit Checkboxen des Kapitels
 		// fr1txt fr1chk
-		$questions = explode ( "-" , getAllQuestionsOfChapter($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey'], false));
+		//$questions = explode ( "-" , getAllQuestionsOfChapter($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey'], false));
+		$questions = getAllQuestionsOfChapterArray(getChapterId($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey']));
 		$iterator = 0;
 
 		echo '<form action="survey_create.php" method="POST">';
@@ -121,7 +122,7 @@
 		$iterator = 0;
 		$existenceChecked = false;
 		$fbCreated = false;
-		if(!$_POST['chk0']) {
+		if(!isset($_POST['chk0'])) {
 			echo "Es wurden keine Fragen ausgewählt.";
 		} else {
 

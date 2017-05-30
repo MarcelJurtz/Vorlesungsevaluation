@@ -3,7 +3,6 @@
 
 // Rückgabe der eindeutigen KapitelID
 function getChapterId($lectureDescription, $chapterDescription) {
- include_once("constants.inc.php");
  $conn = getDBConnection();
 
  $query = "SELECT " . KAPITEL_KAID
