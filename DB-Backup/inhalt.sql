@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 -- Daten für Tabelle `vorlesung`
 --
 
-INSERT INTO `vorlesung` (`VoID`, `VoBezeichnung`) VALUES (1, 'Logik und Algebra');
+INSERT INTO vorlesung (VoID, VoBezeichnung) VALUES (1, 'Logik und Algebra');
 
 
 
@@ -27,7 +27,7 @@ INSERT INTO `vorlesung` (`VoID`, `VoBezeichnung`) VALUES (1, 'Logik und Algebra'
 -- Daten für Tabelle `kapitel`
 --
 
-INSERT INTO `kapitel` (`KaID`, `KaBezeichnung`, `VoID`) VALUES (1, 'Mengenlehre', 1);
+INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES (1, 'Mengenlehre', 1);
 
 
 
