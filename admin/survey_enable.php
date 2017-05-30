@@ -85,15 +85,20 @@
 
 		// Liste aller freigegebenen Fragebögen
 		echo '<h2>Freigegebene Fragebögen:</h2>';
-		echo '<ul>';
-
+		
 		$enabledSurveys = getEnabledSurveys();
-		sort($enabledSurveys);
-		for($i = 0; $i < count($enabledSurveys); $i++) {
-			echo '<li>' . $enabledSurveys[$i] . '</li>';
-		}
+		if(count($enabledSurveys) > 0) {
+			echo '<ul>';
 
-		echo '</ul>';
+			sort($enabledSurveys);
+			for($i = 0; $i < count($enabledSurveys); $i++) {
+				echo '<li>' . $enabledSurveys[$i] . '</li>';
+			}
+
+			echo '</ul>';
+		} else {
+			echo 'Keine freigegebenen Fragebögen vorhanden!';
+		}
 	}
 
 	echo'		</div>';
