@@ -20,7 +20,6 @@ function getChapterId($lectureDescription, $chapterDescription) {
 // Zur Verwendung in ComboBoxen
 // Muster: <option>Bezeichnung</option>
 function getAllChaptersOfLecture($lectureDescription) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
@@ -38,7 +37,6 @@ function getAllChaptersOfLecture($lectureDescription) {
 
 // Vorlesungskapitel hinzufügen
 function addLectureChapter($lectureDescription, $chapterDescription) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);

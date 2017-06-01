@@ -4,7 +4,6 @@
 
 // Liste aller Vorlesungen als Array
 function getAllLectures() {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
   // Muster der Zeichenketten: KuID - KuBezeichnung
   $query = "SELECT " . VORLESUNG_VOBEZEICHNUNG . " FROM " . VORLESUNG . ";";
@@ -21,7 +20,6 @@ function getAllLectures() {
 // Vorlesung anlegen
 // TODO: RENAME TO LECTURE
 function createLecture($description) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
   $description = mysqli_real_escape_string($conn,$description);
   $lectureExisting = false;
@@ -49,7 +47,6 @@ function createLecture($description) {
 
 // Vorlesung umbenennen
 function renameLecture($lectureDescriptionOld, $lectureDescriptionNew) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
   $lectureDescriptionOld = mysqli_real_escape_string($conn,$lectureDescriptionOld);
   $lectureDescriptionNew = mysqli_real_escape_string($conn,$lectureDescriptionNew);
@@ -67,7 +64,6 @@ function renameLecture($lectureDescriptionOld, $lectureDescriptionNew) {
 // Vorlesung anhand des Namens löschen
 function deleteLecture($lectureDescription) {
   // TODO: Löschen deaktivieren, wenn bereits beantwortet
-  include_once("constants.inc.php");
   $conn = getDBConnection();
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
   $query = "DELETE FROM " . VORLESUNG . " WHERE " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescription';";

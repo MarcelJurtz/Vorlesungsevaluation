@@ -3,7 +3,6 @@
 
 // Löschen von Fragen und dazugehörigen Antworten
 function deleteQuestion($chapterID,$questionText) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   $chapterID = mysqli_real_escape_string($conn,$chapterID);
@@ -32,7 +31,6 @@ function deleteQuestion($chapterID,$questionText) {
 // Zur Verwendung in ComboBoxen
 // Muster: <option>Bezeichnung</option> als Standard, sonst Verwendung des dritten Parameters
 function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $returnOptionTags = true) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   $chapterID = getChapterId($lectureDescription, $chapterDescription);
@@ -131,7 +129,6 @@ function addQuestionContainer() {
 // Frage Speichern
 // Fragetyp ist entweder Multiple Choice oder Textfrage
 function saveQuestion($questionType) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   if($questionType == FRAGENTYP_TEXTFRAGE) {
@@ -211,7 +208,6 @@ function saveQuestion($questionType) {
 }
 
 function getQuestionPoolId($chapterID) {
-  include_once("constants.inc.php");
   $conn = getDBConnection();
 
   $query = "SELECT " . FRAGEPOOL_FpID . " FROM " . FRAGEPOOL . " WHERE " . FRAGEPOOL_KaID . " = $chapterID";
