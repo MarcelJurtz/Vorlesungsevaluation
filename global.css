@@ -3,10 +3,6 @@
 	color: #161616;
 }
 
-.backgroundMain {
-	background: url(./images/background.png) no-repeat;
-}
-
 .textbox, .submit {
 	border: 1px solid #000000;
 	border-radius: 5px;
