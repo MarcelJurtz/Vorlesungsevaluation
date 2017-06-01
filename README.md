@@ -22,10 +22,6 @@ Siehe [Kurzanleitung.md](Kurzanleitung.md).
 [Chart.js](http://www.chartjs.org/) wird für die Darstellung von Diagrammen zur Auswertung verwendet.  
 Die eingebundene Skript-Datei liegt unter ```functions/js/Chart.bundle.min.js```.
 
-## Issues
-
-Umzug von GitLab auf GitHub am 31.05.2017. Commits vor diesem Datum, die Referenzen auf Issues haben, beziehen sich auf geschlossene Issues aus GitLab.
-
 ## Lizenz
 
 [MIT](LICENSE)
