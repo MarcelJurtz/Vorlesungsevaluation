@@ -2,9 +2,13 @@
 function changePassword($oldPassword, $newPassword, $newPasswordConfirmed) {
   $conn = getDBConnection();
 
-  $oldPassword = md5(mysqli_real_escape_string($conn,$oldPassword));
-  $newPassword = md5(mysqli_real_escape_string($conn,$newPassword));
-  $newPasswordConfirmed = md5(mysqli_real_escape_string($conn,$newPasswordConfirmed));
+  //$oldPassword = md5(mysqli_real_escape_string($conn,$oldPassword));
+  //$newPassword = md5(mysqli_real_escape_string($conn,$newPassword));
+  //$newPasswordConfirmed = md5(mysqli_real_escape_string($conn,$newPasswordConfirmed));
+
+  $oldPassword = hash('sha256', mysqli_real_escape_string($conn,$oldPassword));
+  $newPassword = hash('sha256', mysqli_real_escape_string($conn,$newPassword));
+  $newPasswordConfirmed = hash('sha256', mysqli_real_escape_string($conn,$newPasswordConfirmed));
 
   if($oldPassword == NULL || $oldPassword == '' ||
       $newPasswordConfirmed == NULL || $newPasswordConfirmed == '' ||

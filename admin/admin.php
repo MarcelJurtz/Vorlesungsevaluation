@@ -11,12 +11,14 @@
 
 	if(isset($_POST['cmdLoginAdmin'])) {
 		$dbConn = getDBConnection();
-		$pw = md5(mysqli_real_escape_string($dbConn, $_POST['txtAdminPassword']));
+		//$pw = md5(mysqli_real_escape_string($dbConn, $_POST['txtAdminPassword']));
+		$pw = hash('sha256', mysqli_real_escape_string($dbConn, $_POST['txtAdminPassword']));
 
 		if(!$dbConn) {
 			echo '<h1>Verbindung fehlgeschlagen</h1>';
 		}
 		$sql = "SELECT " . ADMINISTRATOR_AName . ", " . ADMINISTRATOR_AKennwort . " FROM administrator WHERE AKennwort = '".$pw."';";
+
 
 		$result = mysqli_query($dbConn, $sql);
 		$adminName = mysqli_fetch_assoc($result);
