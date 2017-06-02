@@ -5,7 +5,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE administrator (
   AName varchar(25) NOT NULL PRIMARY KEY,
-  AKennwort char(32) DEFAULT NULL
+  AKennwort char(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Default Values: PW "DHBW"
