@@ -1,5 +1,8 @@
 <?php
-// Datenbank-Bezeichnungen
+/*************************************************/
+/*                   DATENBANK                   */
+/*************************************************/
+
 define("ADMINISTRATOR","administrator");
 define("ADMINISTRATOR_AKennwort","AKennwort");
 define("ADMINISTRATOR_AName","AName");
@@ -64,7 +67,35 @@ define("FR_IN_FB","FrageInFragebogen");
 define("FR_IN_FB_FBID","fbID");
 define("FR_IN_FB_FRBEZ","frBezeichnung");
 
-// Eigene Konstanten
+
+/*************************************************/
+/*                  MENÜSTRUKTUR                 */
+/*************************************************/
+
+define("MENU_OVERVIEW","Übersicht");
+define("MENU_CLASS_CREATE","Kurs anlegen");
+define("MENU_CLASS_DELETE","Kurs löschen");
+define("MENU_CLASS_ENABLE","Kursfreigabe verwalten");
+define("MENU_QUESTION_CREATE","Frage anlegen");
+define("MENU_QUESTION_DELETE","Frage löschen");
+define("MENU_QUESTION_MODIFY","Frage bearbeiten");
+define("MENU_SURVEY_CREATE","Fragebogen anlegen");
+define("MENU_SURVEY_DELETE","Fragebogen löschen");
+define("MENU_SURVEY_MODIFY","Fragebogen bearbeiten");
+define("MENU_SURVEY_ENABLE","Fragebogen freigeben");
+define("MENU_LECTURE_CREATE","Vorlesung anlegen");
+define("MENU_LECTURE_DELETE","Vorlesung löschen");
+define("MENU_LECTURE_MODIFY","Vorlesung bearbeiten");
+define("MENU_STATISTICS","Statistiken");
+define("MENU_SETTINGS","Einstellungen");
+define("MENU_LOGOUT","Abmelden");
+
+
+
+
+/*************************************************/
+/*                    DIVERSE                    */
+/*************************************************/
 
 define("REGFREIGABE_TRUE",1);
 define("REGFREIGABE_FALSE",0);
