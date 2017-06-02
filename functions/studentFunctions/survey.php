@@ -85,7 +85,7 @@ class question {
     mysqli_close($conn);
   }
 
-  public function GetQuesionAnswers() {
+  public function GetQuestionAnswers() {
     $conn = getDBConnection();
 
     $answers = array();
@@ -95,6 +95,23 @@ class question {
     while($entry = mysqli_fetch_assoc($result))
     {
       $answers[] = $entry[ANTWORT_AWTEXT];
+    }
+
+    mysqli_close($conn);
+    return $answers;
+  }
+
+  public function GetQuestionAnswersWithTruths() {
+    $conn = getDBConnection();
+
+    $answers = array();
+
+    $query = "SELECT " . ANTWORT_AWTEXT . "," . ANTWORT_AwWahrheit . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $this->id";
+    $result = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($result))
+    {
+      //$answers[] = $entry[ANTWORT_AWTEXT];
+      $answers[] = array($entry[ANTWORT_AWTEXT] => $entry[ANTWORT_AwWahrheit]);
     }
 
     mysqli_close($conn);
