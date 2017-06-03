@@ -193,4 +193,87 @@
     mysqli_close($conn);
     return $questions;
   }
+
+
+  // Anzahl aller Studenten eines Kurses, die einen Fragebogen abgegeben haben
+  function getSubmittedStudents($surveyID, $classID) {
+    $conn = getDBConnection();
+
+    $surveyID = mysqli_real_escape_string($conn,$surveyID);
+    $classID = mysqli_real_escape_string($conn,$classID);
+
+    $query = "SELECT count(*) as count".
+                  " FROM " . STUDENT . " stud, " . FBABGABE . " abgb".
+                  " WHERE stud." . STUDENT_BENUTZERNAME . " = abgb." . FBABGABE_STUD .
+                  " AND stud." . STUDENT_KUID . " = '" . $classID . "'" .
+                  " AND abgb." . FBABGABE_FBID . " = " . $surveyID;
+
+    $result = mysqli_fetch_assoc(mysqli_query($conn, $query));
+    if(!$result) {
+      mysqli_close($conn);
+      return null;
+    } else {
+      mysqli_close($conn);
+      return $result['count'];
+    }
+  }
+
+  // Anzahl aller Studenten eines Kurses
+  function getTotalStudents($surveyID, $classID) {
+    $conn = getDBConnection();
+
+    $surveyID = mysqli_real_escape_string($conn,$surveyID);
+    $classID = mysqli_real_escape_string($conn,$classID);
+
+    $query = "SELECT count(*) as count".
+                  " FROM " . STUDENT . " stud ".
+                  " WHERE stud." . STUDENT_KUID . " = '" . $classID . "';";
+
+    $result = mysqli_fetch_assoc(mysqli_query($conn, $query));
+    if(!$result) {
+      mysqli_close($conn);
+      return null;
+    } else {
+      mysqli_close($conn);
+      return $result['count'];
+    }
+  }
+
+  // Rückgabe der Anzahl von Beantwortungen
+  // Muster: [[00,01,02,03],[10,11,12,13],[20,21,22,23],[30,31,32,33]] -> Array für jede Frage mit Subarray für jede Antwort
+  function GetAmountOfVotes($questionName, $surveyName) {
+    $conn = getDBConnection();
+    $surveyID = mysqli_real_escape_string($conn,$surveyName);
+    $surveyID = getSurveyID($surveyID);
+
+    $votes = array();
+
+    $question = new question($questionName);
+    $qid = $question->GetID();
+    $answers = $question->GetQuestionAnswers();
+
+    /*
+    $query = "SELECT COUNT(DISTINCT " . BEANTWORTET_AWID . ") as count, " . BEANTWORTET_AWID .
+                    " FROM " . BEANTWORTET .
+                    " WHERE " . BEANTWORTET_FBID . " = $surveyID" .
+                    " AND " . BEANTWORTET_FRID . " = $qid" .
+                    " AND " . BEANTWORTET_AWTEXT . " = " . SHORT_TRUE . " GROUP BY " . BEANTWORTET_AWID . ";";
+
+    */
+
+    $query = "SELECT SUM(CASE WHEN " . BEANTWORTET_AWTEXT . " > 0 THEN 1 ELSE 0 END) as sum, " . BEANTWORTET_AWID .
+                  " FROM " . BEANTWORTET .
+                  " WHERE " . BEANTWORTET_FBID . " = $surveyID " .
+                  " AND " . BEANTWORTET_FRID . " = $qid GROUP BY " . BEANTWORTET_AWID .
+                  " ORDER BY " . BEANTWORTET_AWID . ";";
+
+
+    $rows = mysqli_query($conn,$query);
+
+    while($entry = mysqli_fetch_assoc($rows)) {
+      $votes[] = $entry['sum'];
+    }
+
+    return $votes;
+  }
 ?>

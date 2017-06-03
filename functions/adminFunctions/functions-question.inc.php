@@ -61,7 +61,7 @@ function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $retu
 }
 
 // Rückgabe aller Fragen als Array
-// zweiter Parameter kann als 'trur' übergeben werden
+// zweiter Parameter kann als 'true' übergeben werden
 // um nur Fragen zurückzugeben, die noch in keinem Fragebogen enthalten sind
 function getAllQuestions($chapterID, $unusedOnly = false) {
   $conn = getDBConnection();

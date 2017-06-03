@@ -115,4 +115,15 @@ define("FRAGENTYP_TEXTFRAGE","text");
 // Prüfen:
 define("FRAGENTYP_MULTIPLE_CHOICE_DB","mchoic");
 define("FRAGENTYP_TEXTFRAGE_DB","text");
+
+/*************************************************/
+/*                FARBEN STATISTIK               */
+/*************************************************/
+
+define("COLOR_TRUE","rgba(0,0,255,0.2)");
+define("COLOR_TRUE_BORDER","rgba(0,0,255,0.8)");
+define("COLOR_FALSE","rgba(255,0,0,0.2)");
+define("COLOR_FALSE_BORDER","rgba(255,0,0,0.8)");
+
+
 ?>

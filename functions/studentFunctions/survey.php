@@ -33,6 +33,10 @@ class survey {
     mysqli_close($conn);
   }
 
+  public function GetQuestions() {
+    return $this->questions;
+  }
+
   public function GetQuestionCount() {
     return count($this->questions);
   }
