@@ -31,7 +31,8 @@ INSERT INTO vorlesung (VoID, VoBezeichnung) VALUES (1, 'Logik und Algebra');
 INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 (1, 'Mengenlehre', 1),
 (2, 'Relationen', 1),
-(3, 'Relationenalgebra', 1);
+(3, 'Relationenalgebra', 1),
+(4, 'Abbildungen', 1);
 
 
 --
@@ -41,7 +42,8 @@ INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 INSERT INTO fragepool (FpID, KaID) VALUES
 (1, 1),
 (2, 2),
-(3, 3);
+(3, 3),
+(4, 4);
 
 
 
@@ -84,8 +86,17 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 (24, 'Relationenalgebra 5', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spieler (Name, Vorname) haben noch nie gespielt?', 3, 'text'),
 (25, 'Relationenalgebra 6', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spieler (Name, Vorname) haben schon mindestenz eine Karte bekommen?', 3, 'text');
 
-
-
+-- Abbildungen
+INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
+(26, 'Linksvollständigkeit 1', 'Sei R ⊆ N X M. Wann ist R linksvollständig?', 4, 'mchoic'),
+(27, 'Rechtseindeutigkeit 1', 'Sei R ⊆ N X M. Wann ist R rechtseindeutig?', 4, 'mchoic'),
+(28, 'Injektivität 1', 'Gegeben ist die Funktion f definiert durch f: ℤ -> ℤ mit f(x) = 1 + x. Ist die Funktion injektiv?', 4, 'mchoic'),
+(29, 'Surjektivität 1', 'Gegeben ist die Funktion f definiert durch f: ℤ -> ℤ mit f(x) = 1 + x. Ist die Funktion surjektiv?', 4, 'mchoic'),
+(30, 'Surjektivität 2', 'Gegeben ist die Funktion f definiert durch f: ℕ -> ℤ mit f(x) = 1 + x. Ist die Funktion surjektiv?', 4, 'mchoic'),
+(31, 'Surjektivität 3', 'Gegeben ist die Funktion f definiert durch f: R -> R mit f(x) = 1 + x*x. Ist die Funktion surjektiv?', 4, 'mchoic'),
+(32, 'Injektivität 2', 'Gegeben ist die Funktion f definiert durch f: R -> R mit f(x) = 1 + x*x. Ist die Funktion injektiv?', 4, 'mchoic'),
+(33, 'Injektivität 3', 'Sei f eine Abbildung von Matrikelnummer auf Schuhgröße. Ist f injektiv?', 4, 'mchoic'),
+(34, 'Surjektivität 4', 'Sei f eine Abbildung von Matrikelnummer auf Schuhgröße. Ist f surjektiv?', 4, 'mchoic');
 
 --
 -- Daten für Tabelle `antwort`
@@ -174,6 +185,31 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (23, 'π PK_Vname(ϭ V.Ort= S.Geb-Ort (ρV(Verein)  ⋈ ρS(Spieler) ))', 0, 0),
 (24, 'π PK_SpNr(π PK_SpNr(Spieler) - π PK_SpNr((Einsatz)  ⋈ (Spieler)))', 0, 0),
 (25, 'π Name, Vorname (ϭ E.Karte > 0 (ρE(Einsatz)  ⋈ ρS(Spieler)))', 0, 0);
+
+-- Abbildungen
+INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
+(26, 'Wenn jedes Element von M in mindestens einem Paar in R vorkommt', 0, 0),
+(26, 'Wenn jedes Element von N in mindestens einem Paar in R vorkommt', 1, 1),
+(26, 'Kein Paar ein gleiches Element von N enthält', 0, 2),
+(26, 'Kein Paar ein gleiches Element von M enthält', 0, 3),
+(27, 'Wenn jedes Element von M in mindestens einem Paar in R vorkommt', 0, 0),
+(27, 'Wenn jedes Element von N in mindestens einem Paar in R vorkommt', 0, 1),
+(27, 'Kein Paar ein gleiches Element von N enthält', 1, 2),
+(27, 'Kein Paar ein gleiches Element von M enthält', 0, 3),
+(28, 'Ja', 1, 0),
+(28, 'Nein', 0, 1),
+(29, 'Ja', 1, 0),
+(29, 'Nein', 0, 1),
+(30, 'Ja', 0, 0),
+(30, 'Nein', 1, 1),
+(31, 'Ja', 1, 0),
+(31, 'Nein', 0, 1),
+(32, 'Ja', 0, 0),
+(32, 'Nein', 1, 1),
+(33, 'Ja', 0, 0),
+(33, 'Nein', 1, 1),
+(34, 'Ja', 0, 0),
+(35, 'Nein', 1, 1);
 
 COMMIT;
 
