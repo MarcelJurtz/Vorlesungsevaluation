@@ -3,14 +3,32 @@
 	color: #161616;
 }
 
+body, html {
+	margin: 0;
+	height: 100%;
+}
+
 .textbox, .submit {
 	border: 1px solid #000000;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-size: 20px;
 	background: transparent;
 }
 .submit:hover {
 	background: #fafafa;
+}
+
+.reg {
+		text-align: left;
+		padding-left: 35%;
+		padding-top: 15%;
+}
+
+div.reg {
+	width: 30%;
+	margin: 15% auto;
+	padding: 0;
+	text-align: center;
 }
 
 iframe {
@@ -19,18 +37,24 @@ iframe {
 }
 
 #cWrapper {
-
+	height: 100%;
 }
 
 #cMenu {
-	width: 19%;
+	width: 20%;
 	float:left;
-	border-right: 1px solid #161616;
+	/*border-right: 1px solid #161616;*/
 }
 
 #cFrame {
 	width: 80%;
+	min-height: 100%;
 	float:left;
+	border-left: 2px solid #E2001A;
+	margin-left: -2px;
+}
+
+#cFrame > * {
 	padding-left: 10px;
 }
 
@@ -76,4 +100,33 @@ table.review {
 
 .fullwidth {
 	width: 100%;
+}
+
+
+/* HEADER */
+
+h1 {
+	background-color: #E2001A;
+	color: #FFFFFF;
+	margin: 0;
+	margin-bottom: 10px;
+	padding: 20px 0 20px 15px;
+}
+
+input[type="submit"] {
+	background-color: #E2001A;
+	color: #FFFFFF;
+	font-weight: bold;
+	border: none;
+	margin: 0 5px 0 5px;
+	padding: 5px 10px 5px 10px;
+}
+
+input[type="submit"]:hover {
+	background-color: #b80015;
+}
+
+.noSpace {
+	padding: 0;
+	margin: 0;
 }

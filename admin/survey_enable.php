@@ -53,7 +53,6 @@
 			echo '</table>';
 
 			echo '<br />';
-			echo '<br />';
 			echo '<input type="submit" value="Freigeben" name="cmdEnableSurvey" />';
 			echo '</form>';
 		} else {

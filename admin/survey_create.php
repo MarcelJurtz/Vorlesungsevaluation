@@ -24,9 +24,10 @@
 	{
 		echo'
 			<form action="survey_create.php" method="POST">
-			<select name="cbLectureToAddSurvey" size=1>';
+			Vorlesung auswählen: <select name="cbLectureToAddSurvey" size=1>';
 			echo getAllLectures();
 			echo '</select>
+				<br /><br />
 				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
 			</form>';
 
@@ -38,10 +39,11 @@
 
 		echo'
 			<form action="survey_create.php" method="POST">
-			<select name="cbChapterToAddSurvey" size=1>';
+			Kapitel auswählen: <select name="cbChapterToAddSurvey" size=1>';
 		echo getAllChaptersOfLecture($_POST['cbLectureToAddSurvey']);
 		$lecture = $_POST['cbLectureToAddSurvey'];
 		echo '</select>
+				<br /><br />
 				<input type="hidden" name="cbLectureToAddSurvey" value="'.$lecture.'" />
 				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
 			</form>';

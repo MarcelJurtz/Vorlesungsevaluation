@@ -4,36 +4,15 @@
 		<meta lang="DE">
 		<meta charset="UTF-8">
 		<title>Login Vorlesungsevaluation</title>
-		<link href="stylesheet.css" type="text/css" rel="stylesheet">
 		<link href="../global.css" type="text/css" rel="stylesheet">
-		<script src="https://use.fontawesome.com/a027443663.js"></script>
 	</head>
 	<body>
 		<form action="admin.php" name="admin_login" method="POST">
-			<table class="reg">
-				<tr>
-					<th>
-					</th>
-					<th>
-						Administrator
-					</th>
-				</tr>
-				<tr>
-					<td>
-						<i class="fa fa-key fa-2x" aria-hidden="true" ></i>
-					</td>
-					<td>
-						<input type="password" name="txtAdminPassword" class="textbox">
-					</td>
-				</tr>
-				<tr>
-					<td>
-					</td>
-					<td>
-						<input type="submit" name="cmdLoginAdmin" value="Absenden" class="submit">
-					</td>
-				</tr>
-			</table>
+			<div class="reg">
+				<h2 class="noSpace">Administrator</h2><br />
+				<input type="password" name="txtAdminPassword" class="textbox"><br /><br />
+				<input type="submit" name="cmdLoginAdmin" value="Absenden" class="submit">
+			</div>
 		</form>
 	</body>
 </html>
