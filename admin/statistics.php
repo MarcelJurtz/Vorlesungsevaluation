@@ -64,6 +64,7 @@
 
 			}
 		}
+		echo'<br /><br /><a href="statistics.php">Zurück</a>';
 
 
 	}	else if(isset($_POST['cmdSelectClass'])) {
@@ -82,6 +83,7 @@
 			echo '<input type="submit" name="cmdSelectSurvey" value="Bestätigen" />';
 		} else {
 			echo 'Keine Fragebögen verfügbar.';
+			echo'<br /><br /><a href="statistics.php">Zurück</a>';
 		}
 
 

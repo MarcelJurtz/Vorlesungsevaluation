@@ -1,5 +1,6 @@
 function DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorderColors) {
 	var ctx = document.getElementById(canvasID).getContext('2d');
+
 	var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -13,6 +14,15 @@ function DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorde
     },
     options: {
         scales: {
+					xAxes: [{
+            ticks: {
+               callback: function(t) {
+                  var maxLabelLength = 25;
+                  if (t.length > maxLabelLength) return t.substr(0, maxLabelLength) + '...';
+                  else return t;
+               }
+            }
+         }],
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
@@ -25,13 +35,13 @@ function DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorde
 		legend: {
         display: false
     },
-    tooltips: {
-        callbacks: {
-           label: function(tooltipItem) {
-                  return tooltipItem.yLabel;
-           }
-        }
-    }
+		tooltips: {
+         callbacks: {
+            title: function(t, d) {
+               return d.labels[t[0].index];
+            }
+         }
+      }
     }
 });
 }
