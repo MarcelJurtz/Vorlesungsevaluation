@@ -52,7 +52,7 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 (4, 'Mengenlehre - Durchschnitt 2', 'Sei X={a,b,c} und Y={d,e,f}. Was ergibt der Durschschnitt von X und Y(X ∩ Y)?', 1, 'mchoic'),
 (5, 'Mengenlehre - Differenz 2', 'Sei X={a,b,c,d} und Y={c,d,e,f}. Was ergibt die symmetrische Differenz von X und Y (X ∆ Y)?', 1, 'mchoic'),
 (6, 'Mengenlehre - Potenzmenge 1', 'Sei X={a,b}. Was ist die Potenzmenge von X?', 1, 'mchoic'),
-(7, 'MÃ¤chtigkeit', 'Sei R={{1,2,{}},{3,4}}. Wie groß ist die Mächtigkeit von R (|R|)?', 1, 'text'),
+(7, 'Mächtigkeit', 'Sei R={{1,2,{}},{3,4}}. Wie groß ist die Mächtigkeit von R (|R|)?', 1, 'text'),
 (8, 'Mengenlehre - Definition', 'Was ist eine Menge?', 1, 'mchoic');
 
 
@@ -71,8 +71,8 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (2, '{a,b,c}', 0, 2),
 (2, '{}', 0, 3),
 (3, '{a,b,e,f}', 0, 0),
-(3, '{c,d}', 0, 1),
-(3, '{e,f}', 1, 2),
+(3, '{c,d}', 1, 1),
+(3, '{e,f}', 0, 2),
 (3, '{}', 0, 3),
 (4, '{a,b,c,d,e,f}', 0, 0),
 (4, '{c,d}', 0, 1),
