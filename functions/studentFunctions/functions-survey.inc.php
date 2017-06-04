@@ -143,7 +143,7 @@
 
       // Antwortmöglichkeiten bei Multiple Choice
       if($currentQuestion->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
-        $answers = $currentQuestion->GetQuesionAnswers();
+        $answers = $currentQuestion->GetQuestionAnswers();
         for($i = 0; $i < count($answers); $i++) {
 
           // Prüfe Existenz einer Antwort
