@@ -11,7 +11,7 @@ CREATE TABLE administrator (
 -- Default Values: PW "DHBW"
 -- Change this under 'Einstellungen'
 INSERT INTO administrator(AName, AKennwort) VALUES
-('root', 'ef764729df8c93a3b6648e229434c2ce');
+('root', 'f1832e16967543b629caa8623c879168cbd977782df8ca93b31b3d9e2767d7cd');
 
 
 
