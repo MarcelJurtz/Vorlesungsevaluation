@@ -52,7 +52,7 @@
 			echo '</select>';
 			echo '<input type="submit" name="cmdEditSurveyEdited" value="Bearbeiten" />';
 		} else {
-			echo 'Keine freigegebenen Fragebögen vorhanden!';
+			echo 'Keine angefangenen Fragebögen vorhanden!';
 		}
 
 		// Abgeschlossene Fragebögen

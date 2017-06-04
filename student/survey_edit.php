@@ -17,7 +17,7 @@
 
  }
 
-  printSidebarMenuBegin();
+  printSidebarMenuBegin("survey");
 
 	if(isset($_POST['cmdSurveySubmit'])) {
 		$conn = getDBConnection();
@@ -183,7 +183,7 @@
 
 					$sol = $question->GetQuestionAnswersWithTruths();
 					echo array_search('1', $sol);
-					echo '<table>
+					echo '<table class="review">
 									<thead>
 									<tr>
 										<td>

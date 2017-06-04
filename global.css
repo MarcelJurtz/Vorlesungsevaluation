@@ -45,23 +45,23 @@ canvas {
 }
 
 /* Tabelle zur Auswertung von Multiple Choice Fragen auf Studentenseite */
-table {
+table.review {
 	text-align: center;
 	border-collapse: collapse;
 }
 
-thead {
+.review thead {
 	font-weight: bold;
 }
 
-thead tr {
+.review thead tr {
 	border-bottom: 1px solid #000000;
 }
 
-thead td {
+.review thead td {
 	padding: 0 10pt 0 10pt;
 }
 
-tr:nth-child(even) {
+.review tr:nth-child(even) {
     background-color: #CCCCCC;
 }

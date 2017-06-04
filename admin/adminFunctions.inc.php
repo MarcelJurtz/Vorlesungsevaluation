@@ -50,10 +50,10 @@ function toggleTextBox(item) {
   include "../functions/adminFunctions/functions-lecture.inc.php";
   include "../functions/adminFunctions/functions-question.inc.php";
   include "../functions/adminFunctions/functions-survey.inc.php";
+  include "../functions/adminFunctions/functions-menu.inc.php";
 
   include "../functions/db.inc.php";
   include "../functions/logout.inc.php";
-  include "../functions/functions-menu.inc.php";
 
   include "../functions/mixed.inc.php";
   include "../functions/studentFunctions/survey.php";
