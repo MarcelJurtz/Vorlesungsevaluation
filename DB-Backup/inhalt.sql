@@ -30,7 +30,8 @@ INSERT INTO vorlesung (VoID, VoBezeichnung) VALUES (1, 'Logik und Algebra');
 
 INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 (1, 'Mengenlehre', 1),
-(2, 'Relationen', 1);;
+(2, 'Relationen', 1),
+(3, 'Relationenalgebra', 1);
 
 
 --
@@ -39,7 +40,8 @@ INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 
 INSERT INTO fragepool (FpID, KaID) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(3, 3);
 
 
 
@@ -72,6 +74,17 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 (17, 'Totale Ordnungen 1', 'Welche der folgenden Relationen sind totale Ordnungen?', 2, 'mchoic'),
 (18, 'Totale Ordnungen 2', 'Welche der folgenden Relationen ist eine totale Ordnung auf die Menge M = {1, 2, 3}', 2, 'mchoic'),
 (19, 'Zerlegungen 1', 'Sei R = {a, b, c, d, e, f}. Welches der folgenden Relationen Z ist eine Zerlegung von R?', 2, 'mchoic');
+
+-- Relationenalgebra
+INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
+(20, 'Relationenalgebra 1', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Vereine befinden sich in Kiel?<br/>', 3, 'text'),
+(21, 'Relationenalgebra 2', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spiele am 11. Spieltag hatten weniger als 50000 Zuschauer?', 3, 'text'),
+(22, 'Relationenalgebra 3', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spiele sind mit dem Resultat 2:1 ausgegangen?', 3, 'text'),
+(23, 'Relationenalgebra 4', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. In welchen Vereinen spielen Spieler, deren Geburtsort gleich dem Vereinsort ist?', 3, 'text'),
+(24, 'Relationenalgebra 5', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spieler (Name, Vorname) haben noch nie gespielt?', 3, 'text'),
+(25, 'Relationenalgebra 6', 'Gegeben sei das folgende Schema zur Verwaltung von Fußballvereinen: (PK_... := Primärschlüssel; FK_... := Fremdschlüssel)<br/>\r\n<br/>\r\nVerein (PK_Vname, Ort, Präsident)<br/>\r\nSpiel (PK_FK_Heim, PK_FK_Gast, Resultat, Zuschauer, Termin, Spieltag, FK_Heim-TrNr, FK_Gast-TrNr)<br/>\r\nSpieler (PK_SpNr, Name, Vorname, FK_Verein, Alter, Gehalt, Geburtsort)<br/>\r\nTrainer (PK_TrNr, Name, Vorname, FK_Verein, Gehalt)<br/>\r\nEinsatz ( PK_FK_Heim, PK_FK_Gast, PK_FK_SpNr, von, bis, Tore, Karte)<br/>\r\n<br/>\r\nFormulieren Sie folgende Anfrage mithilfe der Relationenalgebra. Welche Spieler (Name, Vorname) haben schon mindestenz eine Karte bekommen?', 3, 'text');
+
+
 
 
 --
@@ -153,6 +166,14 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (19, 'Z = {{a, b, c}, {e}, {f, d, b}}', 0, 1),
 (19, 'Z = {{a, c, e}, {f}, {d}}', 0, 2);
 
+-- Relationenalgebra
+INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
+(20, 'π PK_Vname(ϭ Ort= ''Kiel'' (Verein))', 0, 0),
+(21, 'π PK_FK_Heim, PK_FK_Gast( ϭ Spieltag = 11 ∧ Zuschauer < 50000 (Spiel))', 0, 0),
+(22, 'π PK_FK_Heim, PK_FK_Gast( ϭ Resultat = 2:1 (Spiel))', 0, 0),
+(23, 'π PK_Vname(ϭ V.Ort= S.Geb-Ort (ρV(Verein)  ⋈ ρS(Spieler) ))', 0, 0),
+(24, 'π PK_SpNr(π PK_SpNr(Spieler) - π PK_SpNr((Einsatz)  ⋈ (Spieler)))', 0, 0),
+(25, 'π Name, Vorname (ϭ E.Karte > 0 (ρE(Einsatz)  ⋈ ρS(Spieler)))', 0, 0);
 
 COMMIT;
 
