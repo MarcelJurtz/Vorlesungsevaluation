@@ -23,7 +23,6 @@ INSERT INTO vorlesung (VoID, VoBezeichnung) VALUES (1, 'Logik und Algebra');
 
 
 
-
 --
 -- Daten für Tabelle `kapitel`
 --
@@ -34,6 +33,7 @@ INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 (3, 'Relationenalgebra', 1),
 (4, 'Abbildungen', 1),
 (5, 'Boolesche Algebra', 1);
+
 
 
 --
@@ -52,7 +52,6 @@ INSERT INTO fragepool (FpID, KaID) VALUES
 --
 -- Daten für Tabelle `frage`
 --
-
 
 -- Mengenlehre
 INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
@@ -109,8 +108,6 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 
 
 
-
-
 --
 -- Daten für Tabelle `antwort`
 --
@@ -146,7 +143,6 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (8, 'Menge der Torschützen bei einem Fußballspiel', 0, 1),
 (8, 'Menge aller Natürlichen Zahlen', 1, 2),
 (8, 'Menge der getrunkenen Maßkrüge beim Rutenfest', 0, 3);
-
 
 -- Relationen
 INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
@@ -234,6 +230,7 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (38, 'a*b', 0, 2),
 (38, '¬a*b', 0, 3),
 (38, 'a*¬b', 1, 4);
+
 
 
 COMMIT;
