@@ -65,6 +65,7 @@
 				echo '<option>' . $surveys[$i] . '</option>';
 			}
 			echo '</select>';
+			echo '<input type="submit" name="cmdViewSurveysCompleted" value="Musterlösung anzeigen"/>';
 		} else {
 			echo 'Keine abgeschlossenen Fragebögen vorhanden!';
 		}

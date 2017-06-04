@@ -196,4 +196,59 @@
       mysqli_close($conn);
     }
   }
+
+function GetOwnSolution($surveyID, $questionID, $studName) {
+  $conn = getDBConnection();
+
+  $surveyID = mysqli_real_escape_string($conn, $surveyID);
+  $questionID = mysqli_real_escape_string($conn, $questionID);
+  $studName = mysqli_real_escape_string($conn, $studName);
+
+  $query = "SELECT " . BEANTWORTET_AWID . ", " . BEANTWORTET_AWTEXT .
+              " FROM " . BEANTWORTET .
+              " WHERE " . BEANTWORTET_FBID . " = $surveyID" .
+              " AND " . BEANTWORTET_STUD . " = '$studName'" .
+              " AND " . BEANTWORTET_FRID . " = $questionID";
+
+  $solution = array();
+  $rows = mysqli_query($conn,$query);
+
+  while($entry = mysqli_fetch_assoc($rows)) {
+    $solution[] = array($entry[BEANTWORTET_AWID] => $entry[BEANTWORTET_AWTEXT]);
+  }
+  mysqli_close($conn);
+  return $solution;
+}
+
+function GetTextQuestionSolution($questionID) {
+  $conn = getDBConnection();
+
+  $questionID = mysqli_real_escape_string($conn, $questionID);
+
+  $query = "SELECT " . ANTWORT_AWTEXT . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = " . $questionID;
+
+  $getSolution = mysqli_fetch_assoc(mysqli_query($conn,$query));
+  $solution = $getSolution[ANTWORT_AWTEXT];
+
+  mysqli_close($conn);
+  return $solution;
+}
+
+function GetMCQuestionAnswer($fbID, $questionID, $answerID) {
+  $conn = getDBConnection();
+
+  $questionID = mysqli_real_escape_string($conn, $questionID);
+
+  $query = "SELECT " . BEANTWORTET_AWTEXT .
+              " FROM " . BEANTWORTET .
+              " WHERE " . BEANTWORTET_FRID . " = " . $questionID .
+              " AND " . BEANTWORTET_AWID . " = $answerID" .
+              " AND " . BEANTWORTET_FBID . " = $fbID";
+
+  $getSolution = mysqli_fetch_assoc(mysqli_query($conn,$query));
+  $solution = $getSolution[BEANTWORTET_AWTEXT];
+
+  mysqli_close($conn);
+  return $solution;
+}
 ?>

@@ -162,8 +162,69 @@
 		}
 
 		echo '</form>';
-	} else {
+	} else if(isset($_POST['cmdViewSurveysCompleted'])){
+		$conn = getDBConnection();
 
+		$surveyName = mysqli_real_escape_string($conn,$_POST['cbSurveysCompleted']);
+		$survey = new survey($surveyName);
+
+		for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
+
+			$question = $survey->GetQuestionAt($i);
+
+			$ownSolution = GetOwnSolution($survey->GetID(), $question->GetID(),GetSessionUsername());
+			$type = "(Multiple Choice)";
+			if($question->GetType() == FRAGENTYP_TEXTFRAGE_DB) $type = "(Textfrage)";
+
+			echo '<h2>'.$question->GetName()." ".$type.'</h2>';
+			echo '<p><b>Fragetext:</b><br /><br />'.$question->GetText().'</p>';
+			echo '<p>';
+			if($question->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
+
+					$sol = $question->GetQuestionAnswersWithTruths();
+					echo array_search('1', $sol);
+					echo '<table>
+									<thead>
+									<tr>
+										<td>
+											Antwort
+										</td>
+										<td>
+											Musterlösung
+										</td>
+										<td>
+											Eigene Lösung
+										</td>
+										</tr>
+									</thead>
+									<tbody>';
+					foreach($sol as $k => $v) {
+						$text = $question->GetAnswerText($k);
+
+						// Lösung
+						$result = "";
+						if(implode("",$v) == SHORT_TRUE) $result = "X";
+
+						// Student
+						$solution = "";
+						if(GetMCQuestionAnswer($survey->GetID(), $question->GetID(),$k) == SHORT_TRUE) $solution = "X";
+
+						echo '<tr><td>'.$text.'</td><td>'.$result.'</td><td>'.$solution.'</td></tr>';
+					}
+					echo '</tbody></table>';
+
+			} else {
+				foreach($ownSolution as $k => $v) {
+  				echo "<b>Ihre Lösung:</b><br /><br />" . implode("",$v) . '</p>';
+				}
+
+				echo '<p><b>Musterlösung:</b><br /><br />';
+				echo GetTextQuestionSolution($question->GetID());
+				echo '</p>';
+			}
+		}
+
+		mysqli_close($conn);
 	}
 
   printSidebarMenuEnd();

@@ -114,12 +114,23 @@ class question {
     $result = mysqli_query($conn,$query);
     while($entry = mysqli_fetch_assoc($result))
     {
-      //$answers[] = $entry[ANTWORT_AWTEXT];
       $answers[] = array($entry[ANTWORT_AWTEXT] => $entry[ANTWORT_AwWahrheit]);
     }
 
     mysqli_close($conn);
+
     return $answers;
+  }
+
+  public function GetAnswerText($awid) {
+    $conn = getDBConnection();
+
+    $query = "SELECT " . ANTWORT_AWTEXT . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = " . $this->id . " AND " . ANTWORT_AwID . " = $awid";
+    $getSolution = mysqli_fetch_assoc(mysqli_query($conn,$query));
+    $solution = $getSolution[ANTWORT_AWTEXT];
+
+    mysqli_close($conn);
+    return $solution;
   }
 
   public function GetName() {
