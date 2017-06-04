@@ -41,7 +41,7 @@
 				echo '<input type="checkbox" name="chkToDisable[]" value="' . getClassIdFromCbString($enabledClasses[$i]) . '">' . $enabledClasses[$i] . '</option>';
 				echo '<br />';
 			}
-			echo '<input type="submit" name="cmdDisableClassRegistration" value="Freigabe der markierten Kurse widerrufen" />';
+			echo '<br /><input type="submit" name="cmdDisableClassRegistration" value="Freigabe der markierten Kurse widerrufen" />';
 			echo '</form>';
 
 	} elseif(isset($_POST['cmdEnableClassRegistration'])) {

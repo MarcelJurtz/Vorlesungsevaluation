@@ -62,7 +62,7 @@
 
 		echo '<form action="survey_create.php" method="POST">';
 
-		echo 'Bezeichnung des Fragebogens: <input type="text" name="txtFbName" /><br />';
+		echo 'Bezeichnung des Fragebogens:<input type="text" name="txtFbName" /><br /><br />Enthaltene Fragen: <br />';
 
 		while(true) {
 			if(!isset($questions[$iterator])) {
@@ -73,13 +73,13 @@
 			$txtName = "txt$iterator";
 			$txtContent = "$questions[$iterator]";
 			echo '<input type="checkbox" name="' . $chkName . '" />';
-			echo '<input type="text" name="' . $txtName . '" value="' . $txtContent . '" readonly /><br />';
+			echo '<input type="text" name="' . $txtName . '" value="' . $txtContent . '" readonly class="invisibleBorder"/><br />';
 			// echo " $txtContent<br/>";
 
 			$iterator++;
 		}
 
-		echo '<input type="submit" name="cmdSaveSurvey" value="Fragebogen speichern" />';
+		echo '<br /><input type="submit" name="cmdSaveSurvey" value="Fragebogen speichern" />';
 		echo '</form>';
 
 		echo'<br /><br /><a href="survey_create.php">Zurück</a>';

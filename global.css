@@ -65,3 +65,15 @@ table.review {
 .review tr:nth-child(even) {
     background-color: #CCCCCC;
 }
+
+
+/* Unsichtbare Rahmen um Textboxen */
+.invisibleBorder {
+	 outline: none;
+	 border: none;
+	 width: 500px;
+}
+
+.fullwidth {
+	width: 100%;
+}

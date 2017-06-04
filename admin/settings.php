@@ -25,9 +25,33 @@
 
     } else {
       echo '<form action="settings.php" method="POST">
-        Altes Passwort: <input type="password" name="txtPassword" /><br />
-        Neues Passwort:<input type="password" name="txtPasswordNew" /><br />
-        Neues Passwort bestätigen<input type="password" name="txtPasswordConfirm" /><br />
+							<table>
+								<tr>
+									<td>
+										Altes Passwort:
+									</td>
+									<td>
+										<input type="password" name="txtPassword" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Neues Passwort:
+									</td>
+									<td>
+										<input type="password" name="txtPasswordNew" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Neues Passwort bestätigen:
+									</td>
+									<td>
+										<input type="password" name="txtPasswordConfirm" />
+									</td>
+								</tr>
+							</table>
+         <br />
         <input type="submit" name="cmdSubmitNewPassword" value="Passwort ändern"/>
       </form>';
     }

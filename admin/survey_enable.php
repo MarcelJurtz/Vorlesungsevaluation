@@ -27,21 +27,32 @@
 		if(count($surveys) > 0) {
 			echo '<form action="survey_enable.php" method="POST">';
 
-			// Fragebogen
-			echo 'Fragebogen auswählen: ';
-			echo '<select name="cbSurveys">';
-			for($i = 0; $i < count($surveys); $i++) {
-				echo "<option>$surveys[$i]</option>";
-			}
-			echo '</select>';
+			echo '<table>';
+				echo '<tr>';
+					echo '<td>';
+						echo 'Fragebogen: ';
+					echo '</td>';
+					echo '<td>';
+						echo '<select name="cbSurveys" class="fullwidth">';
+						for($i = 0; $i < count($surveys); $i++) {
+							echo "<option>$surveys[$i]</option>";
+						}
+					echo '</select>';
+					echo '</td>';
+				echo '</tr>';
+				echo '<tr>';
+					echo '<td>';
+						echo 'Kurs: ';
+					echo '</td>';
+					echo '<td>';
+						echo '<select name="cbClasses" class="fullwidth">';
+							echo getAllClasses();
+						echo '</select>';
+					echo '</td>';
+				echo '</tr>';
+			echo '</table>';
+
 			echo '<br />';
-
-			// Kurs
-			echo 'Kurs auswählen: ';
-			echo '<select name="cbClasses">';
-			echo getAllClasses();
-			echo '</select>';
-
 			echo '<br />';
 			echo '<input type="submit" value="Freigeben" name="cmdEnableSurvey" />';
 			echo '</form>';

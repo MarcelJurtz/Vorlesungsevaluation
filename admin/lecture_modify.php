@@ -23,10 +23,27 @@
 		echo'
 			<h2>Vorlesung umbenennen</h2>
 			<form action="lecture_modify.php" method="POST">
-			Alte Bezeichnung: <select name="cbLectureToDelete" size=1>';
-		echo getAllLectures();
-		echo '</select>
-				Neue Bezeichnung: <input type="text" name="txtLectureNewDescription" />
+				<table>
+					<tr>
+						<td>
+							Alte Bezeichnung:
+						</td>
+						<td>
+							<select name="cbLectureToDelete" size=1 class="fullwidth">';
+								echo getAllLectures();
+							echo '</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Neue Bezeichnung:
+						</td>
+						<td>
+							<input type="text" name="txtLectureNewDescription" class="fullwidth"/>
+						</td>
+					</tr>
+				</table>
+				<br />
 				<input type="submit" name="cmdModifyLecture" value="Ändern">
 			</form>';
 
@@ -34,12 +51,29 @@
 		echo'
 			<h2>Kapitel zur Vorlesung hinzufügen</h2>
 			<form action="lecture_modify.php" method="POST">
-			<select name="cbLectureToAddChapter" size=1>';
-		echo getAllLectures();
-		echo '</select>
-				Kapitelbezeichnung: <input type="text" name="txtChapterNewDescription" />
-				<input type="submit" name="cmdAddChapter" value="Speichern">
-			</form>';
+			<table>
+				<tr>
+					<td>
+						Vorlesung:
+					</td>
+					<td>
+						<select name="cbLectureToAddChapter" size=1 class="fullwidth">';
+							echo getAllLectures();
+						echo '</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Kapitelbezeichnung:
+					</td>
+					<td>
+						<input type="text" name="txtChapterNewDescription" class="fullwidth" />
+					</td>
+				</tr>
+			</table>
+			<br />
+			<input type="submit" name="cmdAddChapter" value="Speichern">
+		</form>';
 
 	} elseif(isset($_POST['cmdModifyLecture'])) {
 		renameLecture($_POST['cbLectureToDelete'],$_POST['txtLectureNewDescription']);

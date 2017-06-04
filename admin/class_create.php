@@ -21,8 +21,25 @@
 	if(!isset($_POST['cmdSubmitClass'])) {
 		echo'
 			<form action="class_create.php" method="POST">
-				Kürzel: <input type="text" name="txtClassShort">
-				Beschreibung: <input type="text" name="txtClassDescription">
+				<table>
+					<tr>
+						<td>
+							Kürzel:
+						</td>
+						<td>
+							<input type="text" name="txtClassShort">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Beschreibung:
+						</td>
+						<td>
+							<input type="text" name="txtClassDescription">
+						</td>
+					</tr>
+				</table>
+				<br/>
 				<input type="submit" name="cmdSubmitClass" value="Speichern">
 			</form>
 		';

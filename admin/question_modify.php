@@ -48,7 +48,6 @@
 		echo '</select>';
 
 		$_SESSION['cbChapterQuestionModify'] = $_POST['cbChapterQuestionModify'];
-		//echo '</select>
 			echo '<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
 		</form>';
 

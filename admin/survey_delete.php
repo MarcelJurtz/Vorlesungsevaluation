@@ -32,7 +32,7 @@
 				echo "<option>$surveys[$i]</option>";
 			}
 			echo '</select>';
-			echo '<br />';
+			echo '<br /><br />';
 			echo '<input type="submit" value="Löschen" name="cmdDeleteSurvey" />';
 			echo '</form>';
 		} else {
