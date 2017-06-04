@@ -32,7 +32,8 @@ INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 (1, 'Mengenlehre', 1),
 (2, 'Relationen', 1),
 (3, 'Relationenalgebra', 1),
-(4, 'Abbildungen', 1);
+(4, 'Abbildungen', 1),
+(5, 'Boolesche Algebra', 1);
 
 
 --
@@ -43,7 +44,8 @@ INSERT INTO fragepool (FpID, KaID) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
-(4, 4);
+(4, 4),
+(5, 5);
 
 
 
@@ -97,6 +99,17 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 (32, 'Injektivität 2', 'Gegeben ist die Funktion f definiert durch f: R -> R mit f(x) = 1 + x*x. Ist die Funktion injektiv?', 4, 'mchoic'),
 (33, 'Injektivität 3', 'Sei f eine Abbildung von Matrikelnummer auf Schuhgröße. Ist f injektiv?', 4, 'mchoic'),
 (34, 'Surjektivität 4', 'Sei f eine Abbildung von Matrikelnummer auf Schuhgröße. Ist f surjektiv?', 4, 'mchoic');
+
+-- Boolesche Algebra
+INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
+(35, 'Disjunktive Normalform 1', 'Nennen Sie die disjunktive Normalform von (a + b)*(c + d).', 5, 'text'),
+(36, 'Konjunktive Normalform 1', 'Nennen Sie die konjunktive Normalform von a + b*c.', 5, 'text'),
+(37, 'Implikation 1', 'Lösen Sie in dem Booleschen Ausdruck (a + b) -> ¬(a + b) die Implikation auf.', 5, 'text'),
+(38, 'Äquivalenz 1', 'Welcher Ausdruck ist äquivalent zu a*(¬(a*b))', 5, 'mchoic');
+
+
+
+
 
 --
 -- Daten für Tabelle `antwort`
@@ -210,6 +223,18 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (33, 'Nein', 1, 1),
 (34, 'Ja', 0, 0),
 (35, 'Nein', 1, 1);
+
+-- Boolesche Algebra
+INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
+(35, 'a*c + a *d + b*c + b*d', 0, 0),
+(36, '(¬a + b)*(¬a + ¬ c)', 0, 0),
+(37, '¬(a + b) + ¬(a*b)', 0, 0),
+(38, 'b', 0, 0),
+(38, '¬b', 0, 1),
+(38, 'a*b', 0, 2),
+(38, '¬a*b', 0, 3),
+(38, 'a*¬b', 1, 4);
+
 
 COMMIT;
 
