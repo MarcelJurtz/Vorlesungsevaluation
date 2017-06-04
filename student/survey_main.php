@@ -17,7 +17,7 @@
 
  }
 
-  printSidebarMenuBegin();
+  printSidebarMenuBegin("survey");
 
 
 

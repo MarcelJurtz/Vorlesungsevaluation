@@ -14,7 +14,7 @@
   if(!ValidateUsername(GetSessionUsername())) {
    logout();
  } else {
-  printSidebarMenuBegin();
+  printSidebarMenuBegin("overview");
 
   echo GetInfotext();
 

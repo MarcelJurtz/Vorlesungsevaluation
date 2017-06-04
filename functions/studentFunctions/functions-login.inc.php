@@ -46,12 +46,18 @@ function printClassTitle() {
 
 
 // Part 1 der Menüleiste
-function printSidebarMenuBegin() {
+function printSidebarMenuBegin($entry) {
   echo'<div id="cWrapper">';
   echo'		<div id="cMenu">';
   echo'			<ul id="lMenu">';
-  echo'				<li><a href="student.php">Übersicht</a></li>';
-  echo'				<li><a href="survey_main.php">Fragebogen beantworten</a></li>';
+
+  if($entry == "overview") {
+    echo'				<li><b>Übersicht</b></li>';
+    echo'				<li><a href="survey_main.php">Fragebogen beantworten</a></li>';
+  } else {
+    echo'				<li><a href="student.php">Übersicht</a></li>';
+    echo'				<li><b>Fragebogen beantworten</b></li>';
+  }
   echo'			</ul>';
   echo'		</div>';
   echo'		<div id="cFrame">';
