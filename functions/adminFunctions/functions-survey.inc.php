@@ -240,7 +240,7 @@
   }
 
   // Rückgabe der Anzahl von Beantwortungen
-  // Muster: [[00,01,02,03],[10,11,12,13],[20,21,22,23],[30,31,32,33]] -> Array für jede Frage mit Subarray für jede Antwort
+  // Nur Fragen beachtet, die bereits abgegeben wurden!
   function GetAmountOfVotes($questionName, $surveyName) {
     $conn = getDBConnection();
     $surveyID = mysqli_real_escape_string($conn,$surveyName);
@@ -253,20 +253,24 @@
     $answers = $question->GetQuestionAnswers();
 
     /*
-    $query = "SELECT COUNT(DISTINCT " . BEANTWORTET_AWID . ") as count, " . BEANTWORTET_AWID .
-                    " FROM " . BEANTWORTET .
-                    " WHERE " . BEANTWORTET_FBID . " = $surveyID" .
-                    " AND " . BEANTWORTET_FRID . " = $qid" .
-                    " AND " . BEANTWORTET_AWTEXT . " = " . SHORT_TRUE . " GROUP BY " . BEANTWORTET_AWID . ";";
-
-    */
-
     $query = "SELECT SUM(CASE WHEN " . BEANTWORTET_AWTEXT . " > 0 THEN 1 ELSE 0 END) as sum, " . BEANTWORTET_AWID .
-                  " FROM " . BEANTWORTET .
-                  " WHERE " . BEANTWORTET_FBID . " = $surveyID " .
-                  " AND " . BEANTWORTET_FRID . " = $qid GROUP BY " . BEANTWORTET_AWID .
-                  " ORDER BY " . BEANTWORTET_AWID . ";";
-
+                  " FROM " . BEANTWORTET . " be, " . FBABGABE . " ab" .
+                  " WHERE be." . BEANTWORTET_FBID . " = $surveyID " .
+                  " AND ab." . FBABGABE_FBID . " = $surveyID" .
+                  " AND be." . BEANTWORTET_FRID . " = $qid GROUP BY be." . BEANTWORTET_AWID .
+                  *
+                  " AND EXISTS (SELECT *"
+                                  " FROM " . FBABGABE .
+                                  " WHERE " . FBABGABE_FBID . " = $surveyID)"
+                  *
+                  " AND be." . BEANTWORTET_STUD . " = ab." . FBABGABE_STUD .
+                  " ORDER BY be." . BEANTWORTET_AWID . ";";
+*/
+      $query = "SELECT SUM(CASE WHEN " . BEANTWORTET_AWTEXT . " > 0 THEN 1 ELSE 0 END) as sum, " . BEANTWORTET_AWID .
+                " FROM " . BEANTWORTET . " be INNER JOIN " . FBABGABE . " ab ON be. " . BEANTWORTET_STUD . " = ab." . FBABGABE_STUD . " AND be.".BEANTWORTET_FBID." = ab." . FBABGABE_FBID .
+                " WHERE be." . BEANTWORTET_FBID . " = $surveyID " .
+                " AND ab." . FBABGABE_FBID . " = $surveyID" .
+                " AND be." . BEANTWORTET_FRID . " = $qid GROUP BY be." . BEANTWORTET_AWID;
 
     $rows = mysqli_query($conn,$query);
 

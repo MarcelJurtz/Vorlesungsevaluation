@@ -38,12 +38,9 @@
 				echo '<h3>Frage '.($i+1).'</h3>';
 				echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
 
+				echo '<canvas id="chartQ'.$i.'"></canvas>';
 
-
-
-				//$data = array(1,3,5,4,2);
 				$data = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['cbStatisticsSurvey']);
-				//$fields = array();
 				$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
 				$trueCol = COLOR_TRUE;
 				$falseCol = COLOR_FALSE;
@@ -55,8 +52,7 @@
 
 				$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
 				foreach($answers as $k => $v) {
-						$fields[] = $k;
-					  if($v == SHORT_TRUE) {
+					  if(implode("-",$v) == SHORT_TRUE) {
 							$colors[] = COLOR_TRUE;
 							$borderColors[] = COLOR_TRUE_BORDER;
 						} else {
@@ -64,8 +60,7 @@
 							$borderColors[] = COLOR_FALSE_BORDER;
 						}
 				}
-
-				echo '<script>DrawChart('. json_encode($fields) .','.json_encode($data).','.json_encode($colors).','.json_encode($borderColors).')</script>';
+				echo '<script>DrawChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data).','.json_encode($colors).','.json_encode($borderColors).')</script>';
 
 			}
 		}

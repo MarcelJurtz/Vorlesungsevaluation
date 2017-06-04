@@ -19,7 +19,7 @@ iframe {
 }
 
 #cWrapper {
-	
+
 }
 
 #cMenu {
@@ -36,4 +36,10 @@ iframe {
 
 .break {
 	clear: both;
+}
+
+/* Statistiken */
+canvas {
+	max-height: 200px;
+	width: auto;
 }
