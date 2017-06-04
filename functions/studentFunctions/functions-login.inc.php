@@ -52,7 +52,6 @@ function printSidebarMenuBegin() {
   echo'			<ul id="lMenu">';
   echo'				<li><a href="student.php">Übersicht</a></li>';
   echo'				<li><a href="survey_main.php">Fragebogen beantworten</a></li>';
-  echo'				<li><a href="statistics_main.php">Statistiken anzeigen</a></li>';
   echo'			</ul>';
   echo'		</div>';
   echo'		<div id="cFrame">';
