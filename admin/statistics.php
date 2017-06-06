@@ -20,7 +20,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_STATISTICS);
 
-	echo'			<h1>Statistiken</h1>';
+	echo'<h1>Statistiken</h1>';
 
 	if(isset($_POST['cmdSelectSurvey'])) {
 
@@ -29,7 +29,7 @@
 		$studTotal = getTotalStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
 		$studSubmitted =  getSubmittedStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
 
-		echo "$studSubmitted von $studTotal Studenten haben diesen Fragebogen bereits abgegeben.";
+		echo "<p>$studSubmitted von $studTotal Studenten haben diesen Fragebogen bereits abgegeben.</p>";
 
 		echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
 

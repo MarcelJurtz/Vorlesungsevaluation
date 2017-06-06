@@ -94,7 +94,7 @@ class question {
 
     $answers = array();
 
-    $query = "SELECT " . ANTWORT_AWTEXT . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $this->id";
+    $query = "SELECT " . ANTWORT_AWTEXT . " FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $this->id ORDER BY " . ANTWORT_AwID;
     $result = mysqli_query($conn,$query);
     while($entry = mysqli_fetch_assoc($result))
     {
