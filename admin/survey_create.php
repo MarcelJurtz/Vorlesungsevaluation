@@ -90,10 +90,27 @@
 		$iterator = 0;
 		$existenceChecked = false;
 		$fbCreated = false;
-		if(!isset($_POST['chk0'])) {
-			echo "Es wurden keine Fragen ausgewählt.";
+
+
+		// Prüfen, ob Fragen markiert wurden
+		$questionsSelected = false;
+		while(true) {
+			// Schleife beenden, wenn keine Fragen mehr übrig
+			if(!isset($_POST["txt$iterator"])) break;
+
+			// Schleife beenden, wenn Frage markiert
+			if(isset($_POST["chk$iterator"])) {
+				$questionsSelected = true;
+				break;
+			}
+			$iterator++;
+		}
+
+		if(!$questionsSelected) {
+			echo "<p>Es wurden keine Fragen ausgewählt.</p>";
 		} else {
 
+			$iterator = 0;
 			$surveyAlreadyExisting = false;
 
 			// Fragebogen prüfen / erstellen
