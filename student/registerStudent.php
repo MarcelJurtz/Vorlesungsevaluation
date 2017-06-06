@@ -15,10 +15,10 @@ if(!isset($_POST['cmdRegisterStudent']) && !isset($_POST['cmdStUserLogin'])) {
       break;
     }
     // TODO: Loop verhindern
-    echo "Es wurde kein Kurs mit dem Kürzel '" . $_POST['txtStudentClass'] . "' gefunden!";
+    echo "<p>Es wurde kein Kurs mit dem Kürzel '" . $_POST['txtStudentClass'] . "' gefunden!</p>";
   }
 } elseif(isset($_POST['cmdStUserLogin'])) {
-  echo "Validiere User " . $_POST['txtStUserLogin'];
+  echo "<p>Validiere User " . $_POST['txtStUserLogin'] ."</p>";
   if(ValidateUsername($_POST['txtStUserLogin'])) {
     SetSessionUsername($_POST['txtStUserLogin']);
     header("Location: ./student.php");

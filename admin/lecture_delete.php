@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_LECTURE_DELETE);
 
-	echo'			<h1>Vorlesung löschen - Administrator</h1>';
+	echo'<h1>Vorlesung löschen - Administrator</h1>';
 
 	if(!isset($_POST['cmdDeleteLecture'])) {
 		echo'

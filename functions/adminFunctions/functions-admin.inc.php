@@ -13,9 +13,9 @@ function changePassword($oldPassword, $newPassword, $newPasswordConfirmed) {
   if($oldPassword == NULL || $oldPassword == '' ||
       $newPasswordConfirmed == NULL || $newPasswordConfirmed == '' ||
       $newPassword == NULL || $newPassword == '') {
-        echo 'Mindestens eine der Eingaben fehlt. Bitte überpüfen Sie diese.';
+        echo '<p>Mindestens eine der Eingaben fehlt. Bitte überpüfen Sie diese.</p>';
   } else if($newPassword != $newPasswordConfirmed) {
-        echo 'Die Passwörter stimmen nicht überein.';
+        echo '<p>Die Passwörter stimmen nicht überein.</p>';
   } else {
 
     $query = "SELECT " . ADMINISTRATOR_AKennwort . " FROM " . ADMINISTRATOR . " WHERE " . ADMINISTRATOR_AName . " = '" . ADMIN_DEFAULT_USERNAME . "';";
@@ -26,12 +26,12 @@ function changePassword($oldPassword, $newPassword, $newPasswordConfirmed) {
       $query = "UPDATE " . ADMINISTRATOR . " SET " . ADMINISTRATOR_AKennwort . " = '$newPassword' WHERE " . ADMINISTRATOR_AName . " = '" . ADMIN_DEFAULT_USERNAME . "';";
       echo $query;
       if(mysqli_query($conn,$query)) {
-        echo 'Änderung erfolgreich durchgeführt.';
+        echo '<p>Änderung erfolgreich durchgeführt.</p>';
       } else {
-        echo 'Fehler beim Speichern der neuen Anmeldedaten.';
+        echo '<p>Fehler beim Speichern der neuen Anmeldedaten.</p>';
       }
     } else {
-      echo 'Falsches Passwort.';
+      echo '<p>Falsches Passwort.</p>';
     }
 
     mysqli_close($conn);

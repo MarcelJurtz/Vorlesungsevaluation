@@ -53,7 +53,7 @@ function addLectureChapter($lectureDescription, $chapterDescription) {
   $results = mysqli_query($conn, $query);
   if($results) {
     if($results->num_rows !== 0) {
-      echo "Ein Kapitel mit der Bezeichnung '$chapterDescription' existiert bereits in der Vorlesung '$lectureDescription'!";
+      echo "<p>Ein Kapitel mit der Bezeichnung '$chapterDescription' existiert bereits in der Vorlesung '$lectureDescription'!</p>";
       $chapterExisting = true;
     }
   }
@@ -74,18 +74,18 @@ function addLectureChapter($lectureDescription, $chapterDescription) {
       $query = "INSERT INTO " . FRAGEPOOL . " VALUES (NULL, $KaID);";
 
       if(mysqli_query($conn,$query)) {
-        echo "Kapitel '$chapterDescription' erfolgreich zur Vorlesung '$lectureDescription' hinzugefügt!";
+        echo "<p>Kapitel '$chapterDescription' erfolgreich zur Vorlesung '$lectureDescription' hinzugefügt!</p>";
       } else {
         // Kapitel löschen wenn Fragepool nicht erstellt wurde
         $query = "DELETE FROM " . KAPITEL . " WHERE " . KAPITEL_VOID . " =  $VoID AND " . KAPITEL_KAID . " = $KaID;";
         if(mysqli_query($conn, $query)) {
-          echo "Fehler beim Erstellen des Fragepools,das Kapitel wurde gelöscht.";
+          echo "<p>Fehler beim Erstellen des Fragepools,das Kapitel wurde gelöscht.</p>";
         } else {
-          echo "Fehler beim Erstellen des Fragepools, das Kapitel konnte nicht gelöscht werden.";
+          echo "<p>Fehler beim Erstellen des Fragepools, das Kapitel konnte nicht gelöscht werden.</p>";
         }
       }
     } else {
-      echo "Fehler beim hinzufügen des Kapitels '$chapterDescription' zur Vorlesung '$lectureDescription'!";
+      echo "<p>Fehler beim hinzufügen des Kapitels '$chapterDescription' zur Vorlesung '$lectureDescription'!</p>";
     }
   }
   mysqli_close($conn);

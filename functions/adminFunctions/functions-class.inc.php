@@ -8,12 +8,12 @@ function toggleClassRegistration($classID, $regStatus) {
   $classID = mysqli_real_escape_string($conn,$classID);
   $query = "UPDATE " . KURS . " SET " . KURS_KUFREIGESCHALTET . " = $regStatus WHERE " . KURS_KUID . " = '$classID';";
 
-  $feedbackTextSuccess = "Kurs '$classID' erfolgreich zur Registrierung freigegeben!";
-  $feedbackTextError = "Fehler bei der Freigabe des Kurses '$classID'!";
+  $feedbackTextSuccess = "<p>Kurs '$classID' erfolgreich zur Registrierung freigegeben!</p>";
+  $feedbackTextError = "<p>Fehler bei der Freigabe des Kurses '$classID'!</p>";
 
   if($regStatus == REGFREIGABE_FALSE) {
-    $feedbackTextSuccess = "Freigabe des Kurses '$classID' erfolgreich widerrufen!";
-    $feedbackTextError = "Fehler beim Widerrufen der Freigabe von Kurs '$classID'!";
+    $feedbackTextSuccess = "<p>Freigabe des Kurses '$classID' erfolgreich widerrufen!</p>";
+    $feedbackTextError = "<p>Fehler beim Widerrufen der Freigabe von Kurs '$classID'!</p>";
   }
 
   if(mysqli_query($conn,$query)) {
@@ -41,9 +41,7 @@ function createClass($kDescription, $kShort) {
     $existsResult = mysqli_query($dbConn, $existsQuery);
     if(mysqli_num_rows($existsResult) > 0){
       // Kürzel bereits vergeben
-      echo '<p>Ein Kurs mit diesem Kürzel existiert bereits: <br />
-        Kürzel: ' . $kShort . ',<br />
-        Beschreibung: ' . $kDescription . '</p>';
+      echo '<p>Ein Kurs mit diesem Kürzel existiert bereits.</p>';
     }else{
       // Einfügen des Kurses
       $insertQuery = "INSERT INTO kurs VALUES('$kShort','$kDescription', 0);";
@@ -71,9 +69,9 @@ function deleteClass($classID) {
   $conn = getDBConnection();
   $query = "DELETE FROM " . KURS . " WHERE " . KURS_KUID . " = '$classID';";
   if (mysqli_query($conn, $query)) {
-    echo "Kurs $classID erfolgreich gelöscht!";
+    echo "<p>Kurs $classID erfolgreich gelöscht!</p>";
   } else {
-    echo "Fehler beim Löschen des Kurses $classID";
+    echo "<p>Fehler beim Löschen des Kurses $classID</p>";
   }
 
   // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?

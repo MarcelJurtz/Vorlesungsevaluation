@@ -120,7 +120,7 @@
     $surveyName = $_SESSION['currentSurveyName'];
 
     if(!ValidateUserSurveyEdit(GetSessionUsername(),$surveyName)) {
-      echo "Keine Berechtigung zur Bearbeitung des Fragebogens '".$surveyName."'";
+      echo "<p>Keine Berechtigung zur Bearbeitung des Fragebogens '".$surveyName."'</p>";
     } else {
       $conn = getDBConnection();
 

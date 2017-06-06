@@ -26,9 +26,9 @@
 		$id = $survey->GetID();
 		$query = "INSERT INTO " . FBABGABE . " VALUES('".GetSessionUsername()."',$id)";
 		if(!mysqli_query($conn,$query)) {
-			echo "Fehler beim Abgeben des Fragebogens.";
+			echo "<p>Fehler beim Abgeben des Fragebogens.</p>";
 		} else {
-			echo "Fragebogen erfolgreich abgegeben.";
+			echo "<p>Fragebogen erfolgreich abgegeben.</p>";
 		}
 
 		mysqli_close($conn);
@@ -107,7 +107,7 @@
 					*/
 
 					if(!mysqli_query($conn,$query)) {
-						echo "Fehler beim Speichern der Antwort. <br /><br />";
+						echo "<p>Fehler beim Speichern der Antwort.</p><br />";
 					}
 				}
 
@@ -129,7 +129,7 @@
 					$query = "REPLACE INTO " . BEANTWORTET . " VALUES ('$stud',$id,0,'$answer', ".$survey->GetID().");";
 
 					if(!mysqli_query($conn,$query)) {
-						echo "Fehler beim Speichern der Antwort.";
+						echo "<p>Fehler beim Speichern der Antwort.</p>";
 					}
 					mysqli_close($conn);
 				}

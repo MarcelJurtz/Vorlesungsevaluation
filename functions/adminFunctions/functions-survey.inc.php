@@ -15,9 +15,9 @@
 
     $query = "INSERT INTO " . FRAGEBOGEN . "(" . FRAGEBOGEN_FbBezeichnung . "," . FRAGEBOGEN_Kapitel . ") VALUES('$fb',$chapterID);";
     if(mysqli_query($conn,$query)) {
-      echo "Fragebogen erfolgreich angelegt!<br /><br />";
+      echo "<p>Fragebogen erfolgreich angelegt!</p><br />";
     } else {
-      echo "Fehler beim Anlegen des Fragebogens.";
+      echo "<p>Fehler beim Anlegen des Fragebogens.</p>";
     }
 
     mysqli_close($conn);
@@ -37,7 +37,7 @@
     $query = "INSERT INTO " . FR_IN_FB . " VALUES($fbID, '" . $question . "');";
 
     if(mysqli_query($conn,$query)) {
-      echo "Frage '$question' erfolgreich zum Fragebogen hinzugefügt.<br />";
+      echo "<p>Frage '$question' erfolgreich zum Fragebogen hinzugefügt.</p>";
     } else {
       // TODO
     }
@@ -51,9 +51,9 @@
     $fbID = getSurveyID($fb);
     $query = "DELETE FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FBID . " = '$fbID';";
     if(mysqli_query($conn,$query)) {
-      echo "Fragebogen erfolgreich zurückgesetzt.<br />";
+      echo "<p>Fragebogen erfolgreich zurückgesetzt.</p>";
     } else {
-      echo "Fehler beim Zurücksetzen des Fragebogens.<br />";
+      echo "<p>Fehler beim Zurücksetzen des Fragebogens.</p>";
     }
 
     mysqli_close($conn);
@@ -72,7 +72,7 @@
     $query = "INSERT INTO " . FR_IN_FB . " VALUES($fbID, '" . $question . "');";
 
     if(mysqli_query($conn,$query)) {
-      echo "Frage '$question' erfolgreich zum Fragebogen hinzugefügt.<br />";
+      echo "<p>Frage '$question' erfolgreich zum Fragebogen hinzugefügt.</p>";
     } else {
       // TODO
     }
@@ -104,13 +104,13 @@
       $queryFr = "DELETE FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FBID . " = $id;";
       $queryFb = "DELETE FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbID . " = $id;";
       if(mysqli_query($conn,$queryFr) && mysqli_query($conn,$queryFb)) {
-        echo "Fragebogen erfolgreich gelöscht.";
+        echo "<p>Fragebogen erfolgreich gelöscht.</p>";
       } else {
-        echo "Fehler beim Löschen des Fragebogens.";
+        echo "<p>Fehler beim Löschen des Fragebogens.</p>";
         // TODO: Wiederherstellung?
       }
     } else {
-      echo "Ungültige Auswahl.";
+      echo "<p>Ungültige Auswahl.</p>";
     }
   }
 
@@ -137,9 +137,9 @@
 
     $query = "INSERT INTO " . FBFREIGABE . " VALUES('$class',$surveyID);";
     if(mysqli_query($conn,$query)) {
-      echo "Fragebogen '$survey' erfolgreich für Kurs '$class' freigegeben!";
+      echo "<p>Fragebogen '$survey' erfolgreich für Kurs '$class' freigegeben!</p>";
     } else {
-      echo "Die Freigabe des Fragebogens '$survey' besteht bereits für Kurs '$class'.";
+      echo "<p>Die Freigabe des Fragebogens '$survey' besteht bereits für Kurs '$class'.</p>";
     }
     mysqli_close($conn);
   }

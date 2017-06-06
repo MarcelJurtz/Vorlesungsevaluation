@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_ENABLE);
 
-	echo'			<h1>Fragebogen freigeben - Administrator</h1>';
+	echo'<h1>Fragebogen freigeben - Administrator</h1>';
 
 	if(isset($_POST['cmdEnableSurvey'])) {
 		enableSurvey($_POST['cbSurveys'], $_POST['cbClasses']);
@@ -56,7 +56,7 @@
 			echo '<input type="submit" value="Freigeben" name="cmdEnableSurvey" />';
 			echo '</form>';
 		} else {
-			echo 'Keine Fragebögen vorhanden!';
+			echo '<p>Keine Fragebögen vorhanden!</p>';
 		}
 
 		// Liste aller freigegebenen Fragebögen
@@ -73,7 +73,7 @@
 
 			echo '</ul>';
 		} else {
-			echo 'Keine freigegebenen Fragebögen vorhanden!';
+			echo '<p>Keine freigegebenen Fragebögen vorhanden!</p>';
 		}
 	}
 

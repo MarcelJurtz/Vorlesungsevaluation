@@ -17,7 +17,7 @@ function deleteQuestion($chapterID,$questionText) {
   if(mysqli_query($conn,$query)) {
     $query = "DELETE FROM " . FRAGE . " WHERE " . FRAGE_FrID . " = $ID;";
     if(mysqli_query($conn,$query)) {
-      echo "Frage '$questionText' und dazugehörige Antworten erfolgreich gelöscht.";
+      echo "<p>Frage '$questionText' und dazugehörige Antworten erfolgreich gelöscht.</p>";
     } else {
       // TODO
     }
@@ -176,10 +176,10 @@ function saveQuestion($questionType) {
 
       $queryAnswer = "INSERT INTO " . ANTWORT . " VALUES ($FrID, '$answer', " . SHORT_FALSE . ", 0);";
       if(mysqli_query($conn, $queryAnswer)) {
-        echo "Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!";
+        echo "<p>Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!</p>";
       }
     } else {
-      echo "Fehler beim Speichern der Frage. Der Eintrag wurde rückgängig gemacht.";
+      echo "<p>Fehler beim Speichern der Frage. Der Eintrag wurde rückgängig gemacht.</p>";
     }
 
   } else if ($questionType == FRAGENTYP_MULTIPLE_CHOICE) {
@@ -214,24 +214,24 @@ function saveQuestion($questionType) {
         $queryAnswer = "INSERT INTO " . ANTWORT . " VALUES ($FrID, '$text', '$bool', $i);";
 
         if(mysqli_query($conn, $queryAnswer)) {
-          echo "Antwort '$text' wurde der Frage hinzugefügt.<br />";
+          echo "<p>Antwort '$text' wurde der Frage hinzugefügt.</p>";
         } else {
           $failedQuestions++;
         }
         if($failedQuestions > 0 && $i == count($answers) -1) {
-          echo "Fehler beim Speichern aufgetreten. Die Änderungen werden rückgängig gemacht.";
+          echo "<p>Fehler beim Speichern aufgetreten. Die Änderungen werden rückgängig gemacht.</p>";
           //TODO: Einträge wieder löschen (?)
         } else {
           if($i == count($answers) -1) {
-            echo "Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!";
+            echo "<p>Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!</p>";
           }
         }
       }
     } else {
-      echo "Fehler beim Speichern der Frage. Der Eintrag wurde rückgängig gemacht.";
+      echo "<p>Fehler beim Speichern der Frage. Der Eintrag wurde rückgängig gemacht.</p>";
     }
   } else {
-    echo 'Ungültiger Fragentyp!';
+    echo '<p>Ungültiger Fragentyp!</p>';
   }
 }
 

@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_MODIFY);
 
-	echo'			<h1>Fragebogen bearbeiten - Administrator</h1>';
+	echo'<h1>Fragebogen bearbeiten - Administrator</h1>';
 
 
 	if(isset($_POST['cmdSaveSurveyModifications'])) {
@@ -82,7 +82,7 @@
 			echo '<input type="submit" value="Bearbeiten" name="cmdModifySurvey" />';
 			echo '</form>';
 		} else {
-			echo 'Keine Fragebögen vorhanden!';
+			echo '<p>Keine Fragebögen vorhanden!</p>';
 		}
 	}
 

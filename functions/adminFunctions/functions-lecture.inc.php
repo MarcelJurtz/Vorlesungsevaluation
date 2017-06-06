@@ -29,7 +29,7 @@ function createLecture($description) {
   $results = mysqli_query($conn, $query);
   if($results) {
     if($results->num_rows !== 0) {
-      echo "Eine Vorlesung mit der Bezeichnung '$description' existiert bereits!";
+      echo "<p>Eine Vorlesung mit der Bezeichnung '$description' existiert bereits!</p>";
       $lectureExisting = true;
     }
   }
@@ -37,9 +37,9 @@ function createLecture($description) {
     $query = "INSERT INTO " . VORLESUNG . "(" . VORLESUNG_VOBEZEICHNUNG . ") VALUES ('$description');";
 
     if(mysqli_query($conn,$query)) {
-      echo "Vorlesung $description erfolgreich angelegt!";
+      echo "<p>Vorlesung $description erfolgreich angelegt!</p>";
     } else {
-      echo "Eine Vorlesung mit der Bezeichnung $description existiert bereits!";
+      echo "<p>Eine Vorlesung mit der Bezeichnung $description existiert bereits!</p>";
     }
     mysqli_close($conn);
   }
@@ -52,9 +52,9 @@ function renameLecture($lectureDescriptionOld, $lectureDescriptionNew) {
   $lectureDescriptionNew = mysqli_real_escape_string($conn,$lectureDescriptionNew);
   $query = "UPDATE ". VORLESUNG . " SET " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescriptionNew' WHERE " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescriptionOld';";
   if (mysqli_query($conn, $query)) {
-    echo "Vorlesungsbezeichnung erfolgreich von '$lectureDescriptionOld' zu '$lectureDescriptionNew' geändert!";
+    echo "<p>Vorlesungsbezeichnung erfolgreich von '$lectureDescriptionOld' zu '$lectureDescriptionNew' geändert!</p>";
   } else {
-    echo "Fehler beim Ändern der Vorlesungsbezeichnung on '$lectureDescriptionOld' zu '$lectureDescriptionNew'!";
+    echo "<p>Fehler beim Ändern der Vorlesungsbezeichnung on '$lectureDescriptionOld' zu '$lectureDescriptionNew'!</p>";
   }
 
   // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?
@@ -68,9 +68,9 @@ function deleteLecture($lectureDescription) {
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
   $query = "DELETE FROM " . VORLESUNG . " WHERE " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescription';";
   if (mysqli_query($conn, $query)) {
-    echo "Vorlesung $lectureDescription erfolgreich gelöscht!";
+    echo "<p>Vorlesung $lectureDescription erfolgreich gelöscht!</p>";
   } else {
-    echo "Fehler beim Löschen der Vorlesung '$lectureDescription.'";
+    echo "<p>Fehler beim Löschen der Vorlesung '$lectureDescription.'</p>";
   }
 
   // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?

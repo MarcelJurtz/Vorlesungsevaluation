@@ -37,7 +37,7 @@
 			echo '</select>';
 			echo '<input type="submit" name="cmdEditSurveyNew" value="Bearbeiten" />';
 		} else {
-			echo 'Keine freigegebenen Fragebögen vorhanden!';
+			echo '<p>Keine freigegebenen Fragebögen vorhanden!</p>';
 		}
 
 		// Angefangene Fragebögen
@@ -52,7 +52,7 @@
 			echo '</select>';
 			echo '<input type="submit" name="cmdEditSurveyEdited" value="Bearbeiten" />';
 		} else {
-			echo 'Keine angefangenen Fragebögen vorhanden!';
+			echo '<p>Keine angefangenen Fragebögen vorhanden!</p>';
 		}
 
 		// Abgeschlossene Fragebögen
@@ -67,7 +67,7 @@
 			echo '</select>';
 			echo '<input type="submit" name="cmdViewSurveysCompleted" value="Musterlösung anzeigen"/>';
 		} else {
-			echo 'Keine abgeschlossenen Fragebögen vorhanden!';
+			echo '<p>Keine abgeschlossenen Fragebögen vorhanden!</p>';
 		}
 
 		echo '</form>';

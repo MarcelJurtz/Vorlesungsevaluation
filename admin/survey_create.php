@@ -134,7 +134,7 @@
 
 		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
 	} else {
-		echo "Es wurde keine Bezeichnung festgelegt.";
+		echo "<p>Es wurde keine Bezeichnung festgelegt.</p>";
 		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
 	}
 

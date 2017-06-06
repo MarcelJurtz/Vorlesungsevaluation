@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_QUESTION_MODIFY);
 
-	echo'			<h1>Frage bearbeiten - Administrator</h1>';
+	echo'<h1>Frage bearbeiten - Administrator</h1>';
 
 	if(isset($_POST['cmdSelectLecture'])) {
 
@@ -88,7 +88,7 @@
 			echo '<input type="submit" name="cmdSubmitModifications" value="Speichern" />';
 			echo '</form>';
 		} else {
-			echo "Ungültige Auswahl der Frage '" . $_POST['cbQuestionQuestionModify'] . "'.";
+			echo "<p>Ungültige Auswahl der Frage '" . $_POST['cbQuestionQuestionModify'] . "'.</p>";
 		}
 
 		echo'<br /><br /><a href="question_modify.php">Zurück</a>';
@@ -121,7 +121,7 @@
 										ANTWORT_AwID . " = $iterator;");
 
 			if(!$result) {
-				echo "Fehler beim Update von Antwort '$answer'<br />";
+				echo "<p>Fehler beim Update von Antwort '$answer'.</p>";
 			}
 
 			if(!$result) $res = false;
@@ -138,14 +138,14 @@
 										" WHERE " . FRAGE_FrBezeichnung . " = '". $_SESSION['MODIFY_QUESTION'] . "';");
 
 		if(!$result) {
-			echo "Fehler beim Update von Frage '" . $_SESSION['MODIFY_QUESTION'] . "'<br />";
+			echo "<p>Fehler beim Update von Frage '" . $_SESSION['MODIFY_QUESTION'] . "'.</p>";
 		}
 
 		$res = $res && $result;
 
 		if ($res) {
 			$conn -> commit();
-			echo "Speichern der Änderungen erfolgreich abgeschlossen.<br /><br /><a href='question_modify.php'>Zurück</a>";
+			echo "<p>Speichern der Änderungen erfolgreich abgeschlossen.</p><br /><a href='question_modify.php'>Zurück</a>";
 		} else {
 			$conn -> rollback();
 		}

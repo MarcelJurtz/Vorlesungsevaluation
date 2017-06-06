@@ -57,7 +57,7 @@
 						echo '<br />';
     	}
 		} else {
-			echo 'Es wurden keine Kurse zur Aufhebung der Freigabe ausgewählt!';
+			echo '<p>Es wurden keine Kurse zur Aufhebung der Freigabe ausgewählt!</p>';
 		}
 
 		echo '</br/><br /><a href="class_enable.php">Zurück</a>';

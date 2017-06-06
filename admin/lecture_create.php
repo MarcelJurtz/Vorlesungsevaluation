@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_LECTURE_CREATE);
 
-	echo'			<h1>Vorlesung anlegen - Administrator</h1>';
+	echo'<h1>Vorlesung anlegen - Administrator</h1>';
 
 	if(!isset($_POST['cmdCreateLecture'])) {
 		echo'

@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_DELETE);
 
-	echo'			<h1>Fragebogen löschen - Administrator</h1>';
+	echo'<h1>Fragebogen löschen - Administrator</h1>';
 
 	if(isset($_POST['cmdDeleteSurvey'])) {
 		deleteSurvey($_POST['cbSurveys']);
@@ -36,7 +36,7 @@
 			echo '<input type="submit" value="Löschen" name="cmdDeleteSurvey" />';
 			echo '</form>';
 		} else {
-			echo 'Keine Fragebögen vorhanden!';
+			echo '<p>Keine Fragebögen vorhanden!</p>';
 		}
 	}
 

@@ -8,9 +8,9 @@ function registerStudent($username, $class) {
   $query = "INSERT INTO " . STUDENT . " VALUES ('" . $username . "','" . $class . "');";
 
   if(mysqli_query($conn,$query)) {
-    echo "Benutzername '$username' erfolgreich registriert!";
+    echo "<p>Benutzername '$username' erfolgreich registriert!</p>";
   } else {
-    echo "Der Benutzername '$username' ist bereits vergeben!";
+    echo "<p>Der Benutzername '$username' ist bereits vergeben!</p>";
   }
 
   mysqli_close($conn);
@@ -41,7 +41,7 @@ function GetSessionUsername() {
 
 // Ausgabe: Fragebögen für Kurs WI214
 function printClassTitle() {
-  echo "<h1> Fragebögen für Kurs " . GetClassFromStudent(GetSessionUsername()) . "</h1>";
+  echo "<h1>Fragebögen für Kurs " . GetClassFromStudent(GetSessionUsername()) . "</h1>";
 }
 
 
