@@ -158,6 +158,10 @@
           $getAnswer = mysqli_fetch_assoc(mysqli_query($conn,$query));
           $answer = $getAnswer[BEANTWORTET_AWTEXT];
 
+          // Darstellung für Antwortmöglichkeiten mit < / >, sonst Wertung als HTML-Tag
+          $answers[$i] = str_replace("<","&lt;",$answers[$i]);
+          $answers[$i] = str_replace(">","&gt;",$answers[$i]);
+
           if($answer == SHORT_TRUE) {
             echo '<input type="checkbox" name="chkAnswer'.$i.'" checked/>' . $answers[$i] . '<br />';
           } else {
@@ -190,7 +194,7 @@
         $_SESSION['lastQuestionType'] = FRAGENTYP_TEXTFRAGE_DB;
         $_SESSION['lastQuestionID'] = $currentQuestion->GetID();
       } else {
-        echo "TYPE ERROR: ".$currentQuestion->GetType();
+        echo "<p>Ungültiger Fragentyp: ".$currentQuestion->GetType() . "</p>";
       }
 
       mysqli_close($conn);
