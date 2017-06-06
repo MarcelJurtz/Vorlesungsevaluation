@@ -39,7 +39,7 @@
 							Neue Bezeichnung:
 						</td>
 						<td>
-							<input type="text" name="txtLectureNewDescription" class="fullwidth"/>
+							<input type="text" name="txtLectureNewDescription" class="fullwidth" required />
 						</td>
 					</tr>
 				</table>
@@ -67,7 +67,7 @@
 						Kapitelbezeichnung:
 					</td>
 					<td>
-						<input type="text" name="txtChapterNewDescription" class="fullwidth" />
+						<input type="text" name="txtChapterNewDescription" class="fullwidth" required />
 					</td>
 				</tr>
 			</table>

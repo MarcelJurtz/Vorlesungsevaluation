@@ -60,7 +60,7 @@
 		if($question != null) {
 			echo '<form action="question_modify.php" method="POST">';
 				$_SESSION['MODIFY_QUESTION'] = $question->GetName();
-				echo 'Fragebezeichnung:<br/><input type="text" name="txtQuestionName" value="'.$question->GetName().'" />';
+				echo 'Fragebezeichnung:<br/><input type="text" name="txtQuestionName" value="'.$question->GetName().'" required />';
 				echo '<br/><br/>';
 				echo 'Fragebetext:<br/><textarea name="txtQuestionText" rows="5" cols="30">'.$question->GetText().'</textarea>';
 				echo '<br/><br/>';
@@ -70,7 +70,7 @@
 					$answers = $question->GetQuestionAnswersWithTruths();
 					$iterator = 0;
 					foreach($answers as $answer => $truth) {
-  					echo 'Antwort: <input type="text" name="txtAnswer'.$iterator.'" value="'.$answer.'" /> ';
+  					echo 'Antwort: <input type="text" name="txtAnswer'.$iterator.'" value="'.$answer.'" required /> ';
 						if(implode("",$truth) == SHORT_TRUE) {
 							echo 'Korrekt: <input type="checkbox" name="chk'.$iterator.'" checked />';
 						} else {

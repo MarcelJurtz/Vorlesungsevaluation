@@ -21,7 +21,7 @@
 	if(!isset($_POST['cmdCreateLecture'])) {
 		echo'
 			<form action="lecture_create.php" method="POST">
-				Bezeichnung: <input type="text" name="txtLectureDescription">
+				Bezeichnung: <input type="text" name="txtLectureDescription" required>
 				<input type="submit" name="cmdCreateLecture" value="Speichern">
 			</form>
 		';

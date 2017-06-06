@@ -27,7 +27,7 @@
 							Kürzel:
 						</td>
 						<td>
-							<input type="text" name="txtClassShort">
+							<input type="text" name="txtClassShort" required>
 						</td>
 					</tr>
 					<tr>
@@ -35,7 +35,7 @@
 							Beschreibung:
 						</td>
 						<td>
-							<input type="text" name="txtClassDescription">
+							<input type="text" name="txtClassDescription" required>
 						</td>
 					</tr>
 				</table>

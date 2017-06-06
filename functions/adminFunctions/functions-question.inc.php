@@ -1,6 +1,4 @@
 <?php
-// Enthält Funktionen zur Verarbeitung von Fragen und Fragenpools
-
 // Löschen von Fragen und dazugehörigen Antworten
 function deleteQuestion($chapterID,$questionText) {
   $conn = getDBConnection();
@@ -120,8 +118,8 @@ function addQuestionContainer() {
   echo '<div id="questionMCContainer">
   <p>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" size="80" /><br /><br />
-    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" cols="125"></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" size="80" required /><br /><br />
+    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" cols="125" required ></textarea>
   </p>
   <p>
     <b>Lösungsmöglichkeiten bearbeiten:</b><br /><br />
@@ -129,7 +127,7 @@ function addQuestionContainer() {
     <br />
     <div id="questionMCAnswerContainer">
     <div>
-      Lösungstext: <input type="text" size="80" name="txtAnswers[]" />
+      Lösungstext: <input type="text" size="80" name="txtAnswers[]" required />
       <label><input type="checkbox" name="cbAnswerCorrect[]" onchange="toggleTextBox(this)"/>Antwort korrekt</label>
       <input type="button" name="cmdDeleteAnswer" value="Antwort löschen" onClick="deleteAnswerContainer(this)"/>
       <input class="hid" type="hidden" name="txtTrueFalse[]" value="false" />
@@ -143,9 +141,9 @@ function addQuestionContainer() {
   echo '<div id="questionTextContainer" style="display: none">
   <div>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitle" size="80" /><br /><br />
-    Fragetext: <br /><textarea name="txtQuestionText" rows="5" cols="125"></textarea><br /><br />
-    Musterlösung: <br / /><textarea name="txtAnswer" rows="5" cols="125"></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitle" size="80" required/><br /><br />
+    Fragetext: <br /><textarea name="txtQuestionText" rows="5" cols="125" required></textarea><br /><br />
+    Musterlösung: <br / /><textarea name="txtAnswer" rows="5" cols="125" required></textarea>
   </div>
   </div>';
 

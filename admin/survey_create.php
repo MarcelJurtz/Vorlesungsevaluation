@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_CREATE);
 
-	echo'			<h1>Fragebogen anlegen - Administrator</h1>';
+	echo'<h1>Fragebogen anlegen - Administrator</h1>';
 
 	// Start: Auswahl Vorlesung
 	// !Vorlesung und !Kapitel und !Speicherbutton
@@ -64,7 +64,7 @@
 
 		echo '<form action="survey_create.php" method="POST">';
 
-		echo 'Bezeichnung des Fragebogens:<input type="text" name="txtFbName" /><br /><br />Enthaltene Fragen: <br />';
+		echo 'Bezeichnung des Fragebogens: <input type="text" name="txtFbName" required /><br /><br />Enthaltene Fragen: <br />';
 
 		while(true) {
 			if(!isset($questions[$iterator])) {

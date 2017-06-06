@@ -3,7 +3,7 @@ function addAnswerContainer() {
     div = document.getElementById("questionMCAnswerContainer");
 
 	  div.innerHTML = div.innerHTML + '<div>'
-    +  'Lösungstext: <input type="text" size="80" name="txtAnswers[]" /> '
+    +  'Lösungstext: <input type="text" size="80" name="txtAnswers[]" required/> '
     +  '<label><input type="checkbox" name="cbAnswerCorrect[]" onchange="toggleTextBox(this)"/>Antwort korrekt</label> '
     +  '<input type="button" name="cmdDeleteAnswer" value="Antwort löschen" onClick="deleteAnswerContainer(this)"/>'
     +  '<input class="hid" type="hidden" name="txtTrueFalse[]" value="false" />'
