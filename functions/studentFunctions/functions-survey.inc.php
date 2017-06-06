@@ -15,7 +15,8 @@
               " WHERE fb.".FRAGEBOGEN_FbID . " = ff.".FBFREIGABE_FBID .
               " AND ff." . FBFREIGABE_KUID . " = '$class'".
               " AND fb.".FRAGEBOGEN_FbID . " NOT IN (
-                SELECT DISTINCT " . BEANTWORTET_FBID . " FROM " . BEANTWORTET ."
+                SELECT DISTINCT " . BEANTWORTET_FBID . " FROM " . BEANTWORTET .
+                " WHERE " . BEANTWORTET_STUD . " = '" . GetSessionUsername() . "'
                 )";
 
     if(!(mysqli_num_rows(mysqli_query($conn,$query)) > 0)) {
@@ -44,7 +45,8 @@
               " AND ff." . FBFREIGABE_KUID . " = '$class'".
               " AND fb.".FRAGEBOGEN_FbID . " IN (
                 SELECT DISTINCT " . BEANTWORTET_FBID .
-                " FROM " . BEANTWORTET ."
+                " FROM " . BEANTWORTET .
+                " WHERE " . BEANTWORTET_STUD . " = '" . GetSessionUsername() . "'
                 ) AND fb.".FRAGEBOGEN_FbID . " NOT IN (
                   SELECT " . FBABGABE_FBID .
                   " FROM " . FBABGABE .

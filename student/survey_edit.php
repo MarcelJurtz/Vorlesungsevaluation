@@ -53,10 +53,6 @@
 				$currentQuestionIsMax = true;
 			}
 
-
-			// Minimum
-			if($_SESSION['currentSurveyIndex'] == 1) $currentQuestionIsMin = true;
-
 			// Letzte Frage speichern
 			if($_SESSION['lastQuestionType'] == FRAGENTYP_MULTIPLE_CHOICE_DB) {
 				$id = $_SESSION['lastQuestionID'];
@@ -117,7 +113,16 @@
 				$_SESSION['currentSurveyIndex'] = 1;
 		} else {
 			$_SESSION['currentSurveyIndex'] = 1;
-			$_SESSION['currentSurveyName'] = $_POST['cbSurveysToEdit'];
+
+			// Neu
+			if(isset($_POST['cmdEditSurveyNew'])) {
+				$_SESSION['currentSurveyName'] = $_POST['cbSurveysNew'];
+			// Bearbeitete
+			} else if(isset($_POST['cmdEditSurveyEdited'])) {
+				$_SESSION['currentSurveyName'] = $_POST['cbSurveysToEdit'];
+			}
+
+			echo "Lade Survey: " . $_SESSION['currentSurveyName'];
 		}
 
 		echo '<form action="survey_edit.php" method="POST">';
