@@ -22,22 +22,35 @@ Folgende Services werden benötigt:
 * MySQL
 * PhpMyAdmin
 
-Zu Testzwecken kann dies gut mit XAMPP erledigt werden.  
+Zu Testzwecken kann dies mit XAMPP erledigt werden.  
 https://www.apachefriends.org/de/index.html
 
+Bei der Verwendung von Xampp gibt es ein paar Kleinigkeiten zu beachten:  
+Um die Datenbank mit einem Passwort zu beschützen, muss die Datei *PhpMyAdmin/config.inc.php* folgendermaßen angepasst werden:
+```php
+<?php
+// ...
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+// ...
+?>
+```
 
-Öffnen Sie zuerst die Weboberfläche von PhpMyAdmin. Importieren Sie die die Datenbank
-durch die Datei *DB-BACKUP/import.sql*.
+Anschließend muss die Anwenderkonfiguration unter ```localhost:port/phpmyadmin``` angepasst werden. Nach der Anmeldung mit dem Benutzernamen *root* und leerem Kennwort kann dies in den Einstellungen gesetzt werden.
+
+
+Öffnen Sie zuerst die Weboberfläche von PhpMyAdmin. Erstellen Sie eine neue Datenbank (Standardname: veva).  
+Importieren Sie die sql-dateien *DB-Import/struktur.sql* und *DB-Import/inhalt.sql* in dieser Reihenfolge.
+Hierdurch wird die benötigte Struktur angelegt und mit Beispieldaten des Kapitels *Logik und Algebra* befüllt.
 Sobald der Import ohne Fehler abgeschlossen wurde, kann das Programm verwendet werden.  
-Bitte passen Sie hierzu die Datenbank-Konfiguration in der Datei *functions.inc.php* an (Zeile 44).
+Bitte passen Sie abschließend die Datenbank-Konfiguration in der Datei *functions/db.inc.php* an.
 
 Es wurde ein Standard-Administrator angelegt, welcher das Kennwort *DHBW* besitzt.
-Sie können dies später per Menüpunkt *Einstellungen* anpassen.
+Das Kennwort ist per SHA256-Hashing in der Datenbank hinterlegt und kann im Menüpunkt *Einstellungen* angepasst werden.
 
 Kopieren Sie den Inhalt des Ordners in das Web-Verzeichnis des Apache-Servers.
 Bei XAMPP ist dies */htdocs*.
 
-Sobald der Inhalt übertragen wurde, ist die Administrationsseite unter ````localhost:port/admin```
+Sobald der Inhalt übertragen wurde, ist die Administrationsseite unter ```localhost:port/admin```
 und die Anwenderseite über ```localhost:port/student``` erreichbar. Bei Verwendung von lediglich ```localhost:port```
 werden Sie auf die Studentenseite weitergeleitet.
 
@@ -76,12 +89,39 @@ Nach erfolgreicher Anmeldung erhalten Sie eine Menüansicht mit den verschiedene
 
 Dieser Abschnitt beschreibt die Verteilung der Dateien, um zukünftige Anpassungen zu erleichtern.
 
+Allgemein baut sich die Struktur folgendermaßen auf: Die Seiten in den Ordnern 'admin' und 'student' stellen die Teilfunktionen dar, welche über die Menüstruktur erreichbar sind. Die Funktionalität der Seiten, beispielsweise das Anlegen eines neuen Kurses gestaltet sich in der Form, dass der Administrator die gewünschten Daten eingibt, und das HTML-Formular auf die aktuelle Seite referenziert.
+Auf der Seite selbst wird der Stand überprüft und entsprechende Steuerelemente ausgegeben.
+Die eigentlichen Funktionen jedoch sind jeweils in den entsprechenden Dateien ausgelagert.
+
+### Dateien
+
 Ordner:
+
 * ```admin```: Enthält alle Seiten des Administrationsbereichs (Funktionen sind ausgelagert)
 * ```student```: Enthält alle Seiten des Anwenderbereichs (Funktionen sind ausgelagert)
+* ```functions```: Enthält die ausgelagerten Funktionsdateien, getrennt für Admin und Student. Funktionen, die von beiden Parteien benötigt werden, befinden sich in der Datei ```mixed.inc.php```. Außerdem: ```logout.inc.php``` zur Ausführung der Abmeldung, ```db.inc.php``` zur Erstellung einer Datenbankverbindung, sowie ```constants.inc.php```, welche Konstanten enthält, um die verwendeten Zeichenketten zu zentralisieren. Dies beinhaltet auch Datenbank- und Tabellenbezeichnungen.
 
-Dateien im Hauptverzeichnis:
-* ```constants.inc.php``` Enthält Konstanten-Definitionen, u.a. zur Tabellenbeschreibung, enthält aber auch interne Boolean-Notationen
+Dateien im Ordner *admin*:
+
+* ```admin.php``` Startseite nach erfolgreicher Anmeldung
+* ```adminFunctions.inc.php``` Inkludiert die Funktionsdateien für den Administrationsbereich.
+* ```class_*.php``` Seiten der Menüpunkte zur Verwaltung von Kursen.
+* ```lecture_*.php``` Seiten der Menüpunkte zur Verwaltung von Vorlesungen.
+* ```question_*.php``` Seiten der Menüpunkte zur Verwaltung von Fragen.
+* ```settings.php``` Einstellungsseite, enthält Funktionalität zur Änderung des Kennworts.
+* ```statistics.php``` Übersichtsseite zur Auswertung von Fragebögen
+* ```survey_*.php``` Seiten der Menüpunkte zur Verwaltung von Fragebögen.
+
+Dateien im Ordner *student*:
+
+* ```registerStudent.php```
+* ```student.php``` Startseite nach erfolgreicher Anmeldung
+* ```studFunctions.inc.php``` Inkludiert die Funktionsdateien für den Studentenbereich.
+* ```survey_edit.php``` Seite zur Bearbeitung eines ausgewählten Fragebogens.
+* ```survey_main.php``` Startseite zur Bearbeitung von Fragebögen (Übersicht und Auswahl).
+
+Dateien im Ordner *functions/adminFunctions*:
+
 * ```functions.inc.php``` Enthält grundlegende Funktionalitäten, DB-Verbindung, Logout, Verlinkung auf die anderen Includes
 * ```functions-admin.inc.php``` Enthält Konfigurations-Funktionalitäten, wie das Ändern des Passworts
 * ```functions-chapter.inc.php``` Enthält Funktionalitäten zur Verwaltung von Kapiteln (einer Vorlesung)
@@ -89,10 +129,15 @@ Dateien im Hauptverzeichnis:
 * ```functions-question.inc.php``` Enthält Funktionalitäten zur Verwaltung von Vorlesungen
 * ```functions-student.inc.php``` Enthält Funktionalitäten zur Verwaltung von Fragen
 * ```functions-student.inc.php``` Enthält Funktionalitäten zur Verwaltung von Studenten
-* ```global.css``` Enthält allgemeine Stylesheets (noch zu implementieren)
-* ```index.php``` Startseite, leitet auf Studenten-Login weiter
-* ```logout.php``` Logout-Seite, kann sowohl für Studenten, als auch Administratoren verwendet werden
 
-Allgemein baut sich die Struktur folgendermaßen auf: Die Seiten in den Ordnern 'admin' und 'student' stellen die Teilfunktionen dar, welche über die Menüstruktur erreichbar sind. Die Funktionalität der Seiten, beispielsweise das Anlegen eines neuen Kurses gestaltet sich in der Form, dass der Administrator die gewünschten Daten eingibt, und das HTML-Formular auf die aktuelle Seite referenziert.
-Auf der Seite selbst wird der Stand überprüft und entsprechende Steuerelemente ausgegeben.
-Die eigentlichen Funktionen jedoch sind jeweils in den entsprechenden Dateien ausgelagert.
+Dateien im Ordner *functions/studentFunctions*:
+
+* ```functions-class.inc.php``` Enthält Funktion zum Bezug des Kurses eines Studenten
+* ```functions-info.inc.php``` Enthält Funktion zum Laden eines Info-Texts für die Startseite des Studenten
+* ```functions-login.inc.php``` Enthält Funktionalitäten zur Registrierung und Anmeldung
+* ```functions-survey.inc.php``` Enthält Funktionalitäten zur Bearbeitung von Fragebögen
+* ```survey.php``` Klassen ```survey``` und ```question```
+
+### Boolean-Notationen:
+
+Aufgrund fehlender Unterstützung des Datentyps *Boolean* wurde intern mit der Notation *0* für *false* und *1* für *true* gearbeitet. In der Datei ```functions/constants.inc.php``` sind Konstanten hierfür definiert.
