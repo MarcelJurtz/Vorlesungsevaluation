@@ -20,16 +20,21 @@ function getChapterId($lectureDescription, $chapterDescription) {
 // Zur Verwendung in ComboBoxen
 // Muster: <option>Bezeichnung</option>
 function getAllChaptersOfLecture($lectureDescription) {
+  echo "Call to deprecated function'getAllChaptersOfLecture' - Replaced by: getAllChapersOfLectureArray";
+}
+
+
+function getAllChaptersOfLectureArray($lectureDescription) {
   $conn = getDBConnection();
 
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
 
   $query = "SELECT " . KAPITEL_KABEZEICHNUNG . " FROM " . KAPITEL . " kap INNER JOIN " . VORLESUNG . " vor ON kap." .KAPITEL_VOID . " = vor." . VORLESUNG_VOID . " WHERE " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescription';";
   $rows = mysqli_query($conn, $query);
-  $returnString = '';
+  $chapters = array();
   while($entry = mysqli_fetch_assoc($rows))
   {
-    $returnString .= "<option>" . $entry[KAPITEL_KABEZEICHNUNG] . "</option>";
+	$chapters[] = $entry[KAPITEL_KABEZEICHNUNG];
   }
   mysqli_close($conn);
   return $returnString;

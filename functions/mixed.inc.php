@@ -7,20 +7,7 @@
 // subsetOnly -> Suche nur eine Teilmenge (Nur die (nicht) freigeschaltenen)
 // subsetIndicator  -> Verwendung der Konstanten zur Angabe des Status freigeschaltet / nicht freigeschaltet
 function getAllClasses($subsetOnly = false, $subsetIndicator = -1) {
-  $conn = getDBConnection();
-  // Muster der Zeichenketten: KuID - KuBezeichnung
-  $query = "SELECT " . KURS_KUID . " , " . KURS_KUBEZEICHNUNG . " FROM " . KURS . ";";
-  if($subsetOnly) {
-    $query = "SELECT " . KURS_KUID . " , " . KURS_KUBEZEICHNUNG . " FROM " . KURS . " WHERE " . KURS_KUFREIGESCHALTET ." = $subsetIndicator;";
-  }
-  $rows = mysqli_query($conn, $query);
-  $returnString = '';
-  while($entry = mysqli_fetch_assoc($rows))
-  {
-    $returnString .= "<option>" . $entry[KURS_KUID] . " - " . $entry[KURS_KUBEZEICHNUNG] . "</option>";
-  }
-  mysqli_close($conn);
-  return $returnString;
+  echo "Call to deprecated function'getAllLectures' - Replaced by: getAllLecturesArray";
 }
 
 function getAllClassesArray() {
