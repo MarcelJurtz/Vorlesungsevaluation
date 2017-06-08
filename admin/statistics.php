@@ -40,7 +40,7 @@
 
 				echo '<canvas id="chartQ'.$i.'"></canvas>';
 
-				$data = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['cbStatisticsSurvey']);
+				$data = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['cbStatisticsSurvey'], $_SESSION['STAT_CLASS']);
 				$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
 				$trueCol = COLOR_TRUE;
 				$falseCol = COLOR_FALSE;

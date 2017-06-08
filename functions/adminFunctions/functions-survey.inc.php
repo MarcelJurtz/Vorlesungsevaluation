@@ -262,9 +262,10 @@
 
   // Rückgabe der Anzahl von Beantwortungen
   // Nur Fragen beachtet, die bereits abgegeben wurden!
-  function GetAmountOfVotes($questionName, $surveyName) {
+  function GetAmountOfVotes($questionName, $surveyName, $classID) {
     $conn = getDBConnection();
     $surveyID = mysqli_real_escape_string($conn,$surveyName);
+    $classID = mysqli_real_escape_string($conn,$classID);
     $surveyID = getSurveyID($surveyID);
 
     $votes = array();
@@ -273,23 +274,10 @@
     $qid = $question->GetID();
     $answers = $question->GetQuestionAnswers();
 
-    /*
     $query = "SELECT SUM(CASE WHEN " . BEANTWORTET_AWTEXT . " > 0 THEN 1 ELSE 0 END) as sum, " . BEANTWORTET_AWID .
-                  " FROM " . BEANTWORTET . " be, " . FBABGABE . " ab" .
-                  " WHERE be." . BEANTWORTET_FBID . " = $surveyID " .
-                  " AND ab." . FBABGABE_FBID . " = $surveyID" .
-                  " AND be." . BEANTWORTET_FRID . " = $qid GROUP BY be." . BEANTWORTET_AWID .
-                  *
-                  " AND EXISTS (SELECT *"
-                                  " FROM " . FBABGABE .
-                                  " WHERE " . FBABGABE_FBID . " = $surveyID)"
-                  *
-                  " AND be." . BEANTWORTET_STUD . " = ab." . FBABGABE_STUD .
-                  " ORDER BY be." . BEANTWORTET_AWID . ";";
-*/
-      $query = "SELECT SUM(CASE WHEN " . BEANTWORTET_AWTEXT . " > 0 THEN 1 ELSE 0 END) as sum, " . BEANTWORTET_AWID .
                 " FROM " . BEANTWORTET . " be INNER JOIN " . FBABGABE . " ab ON be. " . BEANTWORTET_STUD . " = ab." . FBABGABE_STUD . " AND be.".BEANTWORTET_FBID." = ab." . FBABGABE_FBID .
                 " WHERE be." . BEANTWORTET_FBID . " = $surveyID " .
+                " AND be." . BEANTWORTET_STUD . " IN (SELECT " . STUDENT_BENUTZERNAME . " FROM " . STUDENT . " WHERE " . STUDENT_KUID . " = '" . $classID . "')" .
                 " AND ab." . FBABGABE_FBID . " = $surveyID" .
                 " AND be." . BEANTWORTET_FRID . " = $qid GROUP BY be." . BEANTWORTET_AWID;
 
