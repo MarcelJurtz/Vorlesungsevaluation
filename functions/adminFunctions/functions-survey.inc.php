@@ -95,6 +95,27 @@
     return $surveys;
   }
 
+
+  // Rückgabe eines Arrays mit allen Fragebögen,
+  // die mindestens für zwei Kurse freigeschaltet sind,
+  // um diese zu vergleichen
+  function getComparableSurveys() {
+    $conn = getDBConnection();
+
+    $query = "SELECT " . FRAGEBOGEN_FbBezeichnung . ", FBCOUNT FROM (SELECT COUNT(*) as FBCOUNT, " . FBFREIGABE_FBID . " FROM " . FBFREIGABE . " GROUP BY " . FBFREIGABE_FBID . ") as A INNER JOIN " . FRAGEBOGEN . " fb ON A." . FBFREIGABE_FBID . " = fb." . FRAGEBOGEN_FbID . "  WHERE FBCOUNT > 1;";
+
+    $surveys = array();
+
+    $rows = mysqli_query($conn,$query);
+    while($entry = mysqli_fetch_assoc($rows))
+    {
+      $surveys[] = $entry[FRAGEBOGEN_FbBezeichnung];
+    }
+
+    mysqli_close($conn);
+    return $surveys;
+  }
+
   function deleteSurvey($surveyName) {
     $conn = getDBConnection();
     $id = getSurveyID($surveyName);

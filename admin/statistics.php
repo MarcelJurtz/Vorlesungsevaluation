@@ -89,6 +89,9 @@
 
 		echo '</form>';
 	} else {
+
+		echo '<h2>Ergebnisse eines Kurses einsehen</h2>';
+
 		// Auswahl Kurs
 		echo '<form action="statistics.php" method="POST">';
 
@@ -104,6 +107,25 @@
 			echo 'Keine Kurse verfügbar.';
 		}
 
+
+		echo '</form>';
+
+		echo '<h2>Kurse vergleichen</h2>';
+
+		// Auswahl Fragebogen
+		echo '<form action="statistics.php" method="POST">';
+
+		$surveys = getComparableSurveys();
+		if(count($surveys) > 0) {
+			echo '<select name="cbStatisticsSurvey_Comparison">';
+			for($i = 0; $i < count($surveys); $i++) {
+				echo '<option>'.$surveys[$i].'</option>';
+			}
+			echo '</select>';
+			echo '<input type="submit" name="cmdSelectSurvey_Comparison" value="Bestätigen" />';
+		} else {
+			echo 'Keine Fragebögen wurden für mehr als einen Kurs freigegeben.';
+		}
 
 		echo '</form>';
 	}
