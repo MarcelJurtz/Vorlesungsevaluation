@@ -121,8 +121,6 @@
 			} else if(isset($_POST['cmdEditSurveyEdited'])) {
 				$_SESSION['currentSurveyName'] = $_POST['cbSurveysToEdit'];
 			}
-
-			echo "Lade Survey: " . $_SESSION['currentSurveyName'];
 		}
 
 		echo '<form action="survey_edit.php" method="POST">';

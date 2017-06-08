@@ -29,7 +29,7 @@
 					<input type="submit" name="cmdEnableClassRegistration" value="Freischalten">
 				</form>';
 		} else {
-			echo "Keine Kurse zur Freigabe verfügbar!";
+			echo "<p>Keine Kurse zur Freigabe verfügbar!</p>";
 		}
 
 			echo '
