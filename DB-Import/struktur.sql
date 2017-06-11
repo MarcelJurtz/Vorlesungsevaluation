@@ -26,7 +26,7 @@ CREATE TABLE kapitel (
   KaID smallint(6) AUTO_INCREMENT PRIMARY KEY,
   KaBezeichnung varchar(100) DEFAULT NULL,
   VoID smallint(6),
-  FOREIGN KEY(VoID) REFERENCES vorlesung(VoID)
+  FOREIGN KEY(VoID) REFERENCES vorlesung(VoID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE kapitel ADD KEY `VoID` (VoID);
@@ -36,7 +36,7 @@ ALTER TABLE kapitel ADD KEY `VoID` (VoID);
 CREATE TABLE fragepool (
   FpID smallint(6) AUTO_INCREMENT PRIMARY KEY,
   KaID smallint(6),
-  FOREIGN KEY (KaID) REFERENCES kapitel(KaID)
+  FOREIGN KEY (KaID) REFERENCES kapitel(KaID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE fragepool ADD KEY `KaID` (KaID);
@@ -50,7 +50,7 @@ CREATE TABLE frage (
   FpID smallint(6),
   FrTyp char(6) DEFAULT NULL,
   PRIMARY KEY(FrID,FpID),
-  FOREIGN KEY (FpID) REFERENCES fragepool(FpID)
+  FOREIGN KEY (FpID) REFERENCES fragepool(FpID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE frage ADD KEY `FpID` (FpID);
@@ -63,7 +63,7 @@ CREATE TABLE antwort (
   AwWahrheit tinyint(1) unsigned DEFAULT NULL,
   AwID tinyint(4) unsigned NOT NULL,
   PRIMARY KEY(FrID,AwID),
-  FOREIGN KEY(FrID) REFERENCES Frage(FrID)
+  FOREIGN KEY(FrID) REFERENCES Frage(FrID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE antwort ADD KEY `FrID` (FrID), ADD KEY `AwID` (AwID);
@@ -92,7 +92,7 @@ CREATE TABLE fragebogen (
   FbId mediumint(9) AUTO_INCREMENT PRIMARY KEY,
   FbBezeichnung varchar(100) NOT NULL UNIQUE,
   KaID smallint(6),
-  FOREIGN KEY(KaID) REFERENCES kapitel(KaID)
+  FOREIGN KEY(KaID) REFERENCES kapitel(KaID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE fragebogen ADD KEY `KaID` (KaID);
@@ -115,8 +115,8 @@ CREATE TABLE fbfreigabe (
   KuID char(5),
   FbID mediumint(9),
   PRIMARY KEY(KuID,FbID),
-  FOREIGN KEY(FbID) REFERENCES fragebogen(FbId),
-  FOREIGN KEY(KuID) REFERENCES kurs(KuID)
+  FOREIGN KEY(FbID) REFERENCES fragebogen(FbId) ON DELETE CASCADE,
+  FOREIGN KEY(KuID) REFERENCES kurs(KuID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE fbfreigabe ADD KEY `FbID` (FbID);
@@ -142,8 +142,8 @@ CREATE TABLE beantwortet (
    fbID mediumint(9),
    frBezeichnung varchar(50),
    PRIMARY KEY(fbID, frBezeichnung),
-   FOREIGN KEY(fbID) REFERENCES fragebogen(FbId),
-   FOREIGN KEY(frBezeichnung) REFERENCES frage(FrBezeichnung)
+   FOREIGN KEY(fbID) REFERENCES fragebogen(FbId) ON DELETE CASCADE,
+   FOREIGN KEY(frBezeichnung) REFERENCES frage(FrBezeichnung) ON DELETE CASCADE
 
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
