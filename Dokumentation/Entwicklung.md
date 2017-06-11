@@ -129,7 +129,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
   * ```ValidateUsername($username)```: Student anmelden
   * ```SetSessionUsername($username)```: Sessionvariablen setzen
   * ```GetSessionUsername()```: Sessionvariablen prüfen (Anmeldung legitimieren)
-  * ```printClassTitle()```: Ausgabe <h1> ... KURS ... </h1>
+  * ```printClassTitle()```: Ausgabe des Kurses in der Überschrift
   * ```printSidebarMenuBegin($entry)```: Beginn Menüstruktur Student
   * ```printSidebarMenuEnd()```: Ende Menüstruktur Student
 
