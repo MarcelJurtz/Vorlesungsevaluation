@@ -77,4 +77,21 @@ function deleteClass($classID) {
   // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?
   mysqli_close($conn);
 }
+
+// Rückgabe aller Kurse, die für eine Vorlesung freigeschaltet sind
+function getClassesForSurvey($surveyID) {
+  $conn = getDBConnection();
+
+  // Muster der Zeichenketten: KuID - KuBezeichnung
+  $query = "SELECT " . KURS_KUID . " , " . KURS_KUBEZEICHNUNG . " FROM " . KURS . " WHERE " . KURS_KUID . " IN ".
+    "(SELECT " . KURS_KUID . " FROM " . FBFREIGABE . " WHERE " . FBFREIGABE_FBID . " = $surveyID);";
+  $rows = mysqli_query($conn, $query);
+  $classes = array();
+  while($entry = mysqli_fetch_assoc($rows))
+  {
+    $classes[] = $entry[KURS_KUID] . " - " . $entry[KURS_KUBEZEICHNUNG];
+  }
+  mysqli_close($conn);
+  return $classes;
+}
 ?>

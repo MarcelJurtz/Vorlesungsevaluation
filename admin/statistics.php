@@ -28,7 +28,6 @@
 		$survey = new survey($_POST['cbStatisticsSurvey']);
 		$studTotal = getTotalStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
 		$studSubmitted =  getSubmittedStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
-
 		echo "<p>$studSubmitted von $studTotal Studenten haben diesen Fragebogen bereits abgegeben.</p>";
 
 		echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
@@ -88,6 +87,119 @@
 
 
 		echo '</form>';
+	} else if (isset($_POST['cmdSelectSurvey_Comparison'])) {
+
+		echo '<h2>Kurse vergleichen</h2>';
+
+		echo '<form action="statistics.php" method="POST">';
+
+		$classes = getClassesForSurvey(getSurveyID($_POST['cbStatisticsSurvey_Comparison']));
+		if(count($classes) > 0) {
+			echo '<table>';
+				echo '<tr>';
+					echo '<td>';
+						echo 'Fragebogen:';
+					echo '</td>';
+					echo '<td>';
+						echo '<input type="text" name="txtStatisticsComparisonSurvey" readonly class="invisibleBorder" value="'.$_POST['cbStatisticsSurvey_Comparison'].'"/>';
+					echo '</td>';
+				echo '</tr>';
+				echo '<tr>';
+					echo '<td>Erster Kurs:</td>';
+					echo '<td><select name="cbStatisticsClass_Comparison1">';
+						for($i = 0; $i < count($classes); $i++) {
+							echo '<option>'.$classes[$i].'</option>';
+						}
+					echo '</select></td>';
+				echo '</tr>';
+				echo '<tr>';
+					echo '<td>Zweiter Kurs:</td>';
+					echo '<td><select name="cbStatisticsClass_Comparison2">';
+						for($i = 0; $i < count($classes); $i++) {
+							echo '<option>'.$classes[$i].'</option>';
+						}
+					echo '</select></td>';
+				echo '</tr>';
+			echo '<table>';
+			echo '<br />';
+			echo '<input type="submit" name="cmdSelectClass_Comparison" value="Bestätigen" />';
+		} else {
+			echo 'Keine Kurse verfügbar.';
+		}
+
+		echo '</form>';
+
+	} else if(isset($_POST['cmdSelectClass_Comparison'])) {
+		$conn = getDBConnection();
+
+		$class1 = getClassIdFromCbString(mysqli_real_escape_string($conn,$_POST['cbStatisticsClass_Comparison1']));
+		$class2 = getClassIdFromCbString(mysqli_real_escape_string($conn,$_POST['cbStatisticsClass_Comparison2']));
+
+		if($class1 == $class2) {
+			echo '<p>Ungültige Kursauswahl!</p>';
+		} else {
+			echo '<h2>Vergleiche Kurse: ' . $class1 . ' mit ' . $class2 . '.</h2>';
+
+			// Fragebögen Statistiken laden
+			$survey = new survey($_POST['txtStatisticsComparisonSurvey']);
+
+			$studTotal1 = getTotalStudents($survey->GetID(),$class1);
+			$studSubmitted1 =  getSubmittedStudents($survey->GetID(),$class1);
+
+			$studTotal2 = getTotalStudents($survey->GetID(),$class2);
+			$studSubmitted2 =  getSubmittedStudents($survey->GetID(),$class2);
+
+			echo "<p>$class1: $studSubmitted1 von $studTotal1 Studenten haben diesen Fragebogen bereits abgegeben.<br />";
+			echo "$class2: $studSubmitted2 von $studTotal2 Studenten haben diesen Fragebogen bereits abgegeben.</p>";
+
+
+
+			echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
+
+
+			for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
+				if($survey->GetQuestionAt($i)->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
+					echo '<h3>Frage '.($i+1).'</h3>';
+					echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
+
+					echo '<canvas id="chartQ'.$i.'"></canvas>';
+
+					$data = array();
+					$data['class1'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class1);
+					$data['class2'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class2);
+
+					$labels = array();
+					$labels['class1'] = $class1;
+					$labels['class2'] = $class2;
+
+					$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
+
+					$colors = array();
+					$borderColors = array();
+
+					$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
+					foreach($answers as $k => $v) {
+						  if(implode("-",$v) == SHORT_TRUE) {
+								$colors['class1'][] = COLOR_TRUE_A;
+								$colors['class2'][] = COLOR_TRUE_B;
+								$borderColors['class1'][] = COLOR_TRUE_BORDER_A;
+								$borderColors['class2'][] = COLOR_TRUE_BORDER_B;
+							} else {
+								$colors['class1'][] = COLOR_FALSE_A;
+								$colors['class2'][] = COLOR_FALSE_B;
+								$borderColors['class1'][] = COLOR_FALSE_BORDER_A;
+								$borderColors['class2'][] = COLOR_FALSE_BORDER_B;
+							}
+					}
+					echo '<script>DrawComparisonChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data) .','.json_encode($colors).','.json_encode($borderColors).','.json_encode($labels).')</script>';
+
+				}
+			}
+			echo'<br /><br /><a href="statistics.php">Zurück</a>';
+		}
+
+		mysqli_close($conn);
+
 	} else {
 
 		echo '<h2>Ergebnisse eines Kurses einsehen</h2>';
