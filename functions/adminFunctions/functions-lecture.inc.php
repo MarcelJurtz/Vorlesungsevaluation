@@ -4,14 +4,18 @@
 
 // Liste aller Vorlesungen als Array
 function getAllLectures() {
+  echo "Call to deprecated function'getAllLectures' - Replaced by: getAllLecturesArray";
+}
+
+function getAllLecturesArray() {
   $conn = getDBConnection();
   // Muster der Zeichenketten: KuID - KuBezeichnung
   $query = "SELECT " . VORLESUNG_VOBEZEICHNUNG . " FROM " . VORLESUNG . ";";
   $rows = mysqli_query($conn, $query);
-  $returnString = '';
+  $lectures = array();
   while($entry = mysqli_fetch_assoc($rows))
   {
-    $returnString .= "<option>" . $entry[VORLESUNG_VOBEZEICHNUNG] . "</option>";
+    $lectures[] = $entry[VORLESUNG_VOBEZEICHNUNG];
   }
   mysqli_close($conn);
   return $returnString;

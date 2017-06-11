@@ -29,10 +29,11 @@ function deleteQuestion($chapterID,$questionText) {
 // Zur Verwendung in ComboBoxen
 // Muster: <option>Bezeichnung</option> als Standard, sonst Verwendung des dritten Parameters
 function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $returnOptionTags = true) {
+  /*
   $conn = getDBConnection();
 
   $chapterID = getChapterId($lectureDescription, $chapterDescription);
-  $_SESSION['chapterIDtoDelete'] = $chapterID;
+  $_SESSION['chapterIDtoDelete'] = $chapterID; TODO: Zweck prüfen
 
 
   $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
@@ -56,8 +57,25 @@ function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $retu
     }
     return $returnString;
   }
+  */
+  echo "Call to deprecated function'getAllQuestionsOfChapter' - Replaced by: getAllQuestionsOfChapterArray";
 }
+function getAllQuestionsOfChapterArray($chapterID) {
+  $conn = getDBConnection();
+  $chapterID = mysqli_real_escape_string($conn,$chapterID);
 
+  $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
+  $rows = mysqli_query($conn, $query);
+  if($rows) {
+    $questions = array();
+    while($entry = mysqli_fetch_assoc($rows))
+    {
+      $questions[] = $entry[FRAGE_FrBezeichnung];
+    }
+    mysqli_close($conn);
+    return $questions;
+  }
+}
 // Rückgabe aller Fragen als Array
 // zweiter Parameter kann als 'true' übergeben werden
 // um nur Fragen zurückzugeben, die noch in keinem Fragebogen enthalten sind
@@ -84,23 +102,6 @@ function getAllQuestions($chapterID, $unusedOnly = false) {
   }
   mysqli_close($conn);
   return $questions;
-}
-
-function getAllQuestionsOfChapterArray($chapterID) {
-  $conn = getDBConnection();
-  $chapterID = mysqli_real_escape_string($conn,$chapterID);
-
-  $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
-  $rows = mysqli_query($conn, $query);
-  if($rows) {
-    $questions = array();
-    while($entry = mysqli_fetch_assoc($rows))
-    {
-      $questions[] = $entry[FRAGE_FrBezeichnung];
-    }
-    mysqli_close($conn);
-    return $questions;
-  }
 }
 
 // Aufbau der Frageboxen
