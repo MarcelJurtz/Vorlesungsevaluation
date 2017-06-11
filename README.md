@@ -14,7 +14,7 @@ Studenten sind lediglich mit einem frei wählbaren Namen registriert, wodurch An
 
 ## Installation und Anwendung
 
-Siehe [Kurzanleitung.md](Kurzanleitung.md).
+Siehe: [Kurzanleitung](Dokumentation/Kurzanleitung.md).
 
 ## Dependencies
 
