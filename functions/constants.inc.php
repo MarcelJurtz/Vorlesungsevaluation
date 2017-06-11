@@ -120,10 +120,14 @@ define("FRAGENTYP_TEXTFRAGE_DB","text");
 /*                FARBEN STATISTIK               */
 /*************************************************/
 
-define("COLOR_TRUE","rgba(0,150,64,0.2)");
-define("COLOR_TRUE_BORDER","rgba(0,150,64,0.8)");
-define("COLOR_FALSE","rgba(255,0,0,0.2)");
-define("COLOR_FALSE_BORDER","rgba(255,0,0,0.8)");
+define("COLOR_TRUE_A","rgba(105,168,84,0.4)");
+define("COLOR_TRUE_BORDER_A","rgba(83,171,61,0.8)");
+define("COLOR_FALSE_A","rgba(217,93,91,0.4)");
+define("COLOR_FALSE_BORDER_A","rgba(196,61,57,0.8)");
 
+define("COLOR_TRUE_B","rgba(76,141,137,0.4)");
+define("COLOR_TRUE_BORDER_B","rgba(59,128,125,0.8)");
+define("COLOR_FALSE_B","rgba(223,153,94,0.4)");
+define("COLOR_FALSE_BORDER_B","rgba(204,124,63,0.8)");
 
 ?>
