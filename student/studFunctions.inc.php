@@ -12,6 +12,7 @@ include "../functions/studentFunctions/survey.php";
 include "../functions/db.inc.php";
 
 include "../functions/mixed.inc.php";
+include "../functions/toaster.inc.php";
 
 require_once("../functions/constants.inc.php");
 

@@ -2,33 +2,31 @@
 
 include "studFunctions.inc.php";
 
-if(!isset($_POST['cmdRegisterStudent']) && !isset($_POST['cmdStUserLogin'])) {
-  echo "<script>console.log('Kein BUtton gesetzt registerStudent.php')</script>";
-  header("Location: ./index.html");
-} elseif(isset($_POST['cmdRegisterStudent'])) {
+if(isset($_POST['cmdRegisterStudent'])) {
   // Student registrieren
   $enabledClasses = getAllRegEnabledClasses();
+
+  $classExists = false;
 
   for($i = 0; $i < count($enabledClasses); $i++) {
     if(getClassIdFromCbString($enabledClasses[$i]) == $_POST['txtStudentClass']) {
       registerStudent($_POST['txtStudentUsername'], $_POST['txtStudentClass']);
+      $classExists = true;
       break;
     }
-    // TODO: Loop verhindern
-    echo "<p>Es wurde kein Kurs mit dem Kürzel '" . $_POST['txtStudentClass'] . "' gefunden!</p>";
+  }
+  if(!$classExists) {
+    $_SESSION['toaster'] = TOAST_ILLEGAL_COURSE;
+    header("Location: ./index.php");
   }
 } elseif(isset($_POST['cmdStUserLogin'])) {
-  echo "<p>Validiere User " . $_POST['txtStUserLogin'] ."</p>";
   if(ValidateUsername($_POST['txtStUserLogin'])) {
     SetSessionUsername($_POST['txtStUserLogin']);
     header("Location: ./student.php");
+  } else {
+    $_SESSION['toaster'] = TOAST_UNKNOWN_USERNAME;
+    header("Location: ./index.php");
   }
-    // TODO: Fehlermeldung
 }
-
-
-
-
-echo '</br/><br /><a href="index.html">Zurück</a>'
 
 ?>

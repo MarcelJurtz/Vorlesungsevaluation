@@ -130,4 +130,12 @@ define("COLOR_TRUE_BORDER_B","rgba(59,128,125,0.8)");
 define("COLOR_FALSE_B","rgba(223,153,94,0.4)");
 define("COLOR_FALSE_BORDER_B","rgba(204,124,63,0.8)");
 
+/*************************************************/
+/*                      TOASTS                   */
+/*************************************************/
+
+define("TOAST_DUPLICATE_USER","TOAST_DUPL_USER");
+define("TOAST_ILLEGAL_COURSE","TOAST_ILLGL_COURSE");
+define("TOAST_UNKNOWN_USERNAME","TOAST_UNKN_USER");
+
 ?>

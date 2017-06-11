@@ -8,9 +8,11 @@ function registerStudent($username, $class) {
   $query = "INSERT INTO " . STUDENT . " VALUES ('" . $username . "','" . $class . "');";
 
   if(mysqli_query($conn,$query)) {
-    echo "<p>Benutzername '$username' erfolgreich registriert!</p>";
+    SetSessionUsername($username);
+    header("Location: ./student.php");
   } else {
-    echo "<p>Der Benutzername '$username' ist bereits vergeben!</p>";
+    $_SESSION['toaster'] = TOAST_DUPLICATE_USER;
+    header("Location: ./index.php");
   }
 
   mysqli_close($conn);

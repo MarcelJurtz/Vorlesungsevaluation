@@ -10,9 +10,6 @@
 	</head>
 	<body>
 		<form action="registerStudent.php" name="stud_login" method="POST">
-
-
-
 <table class="reg">
 <tr>
 	<td>
@@ -71,5 +68,19 @@
 </tr>
 </table>
 </form>
+<div id="toast">NO CONTENT</div>
+<?php
+	include "studFunctions.inc.php";
+	if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
+		if($_SESSION['toaster'] == TOAST_DUPLICATE_USER) {
+			duplicateUserToast();
+		} else if($_SESSION['toaster'] == TOAST_ILLEGAL_COURSE) {
+			illegalCourseToast();
+		} else if($_SESSION['toaster'] == TOAST_UNKNOWN_USERNAME) {
+			unknownUserToast();
+		}
+		$_SESSION['toaster'] == "";
+	}
+?>
 	</body>
 </html>
