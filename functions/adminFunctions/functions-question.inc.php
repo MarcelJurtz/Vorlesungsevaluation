@@ -10,61 +10,30 @@ function deleteQuestion($chapterID,$questionText) {
   $getID = mysqli_fetch_assoc(mysqli_query($conn, $query));
   $ID = $getID[FRAGE_FrID];
 
-  // Frage und Antworten löschen
-  $query = "DELETE FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $ID;";
-  if(mysqli_query($conn,$query)) {
+  // Löschen nur erlaubt, wenn nicht in Fragebogen enthalten
+  $query = "SELECT COUNT(*) as CNT FROM " . FR_IN_FB . " WHERE " . FR_IN_FB_FRBEZ . " = '$ID'";
+  $getCount = mysqli_fetch_assoc(mysqli_query($conn,$query));
+  $count = $getCount['CNT'];
+
+  if($count == 0) {
     $query = "DELETE FROM " . FRAGE . " WHERE " . FRAGE_FrID . " = $ID;";
     if(mysqli_query($conn,$query)) {
       echo "<p>Frage '$questionText' und dazugehörige Antworten erfolgreich gelöscht.</p>";
     } else {
-      // TODO
+      echo "<p>Fehler beim Löschen der Frage '$questionText'.</p>";
     }
   } else {
-    //TODO
+    echo "<p>Die gewählte Frage kann nicht gelöscht werden, da sie bereits in einem Fragebpogen verwendet wird.</p>";
   }
   mysqli_close($conn);
 }
 
-// Rückgabe aller Fragen eines Kapitels
-// Zur Verwendung in ComboBoxen
-// Muster: <option>Bezeichnung</option> als Standard, sonst Verwendung des dritten Parameters
-function getAllQuestionsOfChapter($lectureDescription,$chapterDescription, $returnOptionTags = true) {
-  /*
-  $conn = getDBConnection();
-
-  $chapterID = getChapterId($lectureDescription, $chapterDescription);
-  $_SESSION['chapterIDtoDelete'] = $chapterID; TODO: Zweck prüfen
-
-
-  $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
-  //$query = "SELECT FrBezeichnung FROM frage fr INNER JOIN fragepool fp ON fr.FpID = fp.FpID WHERE KaID = $chapterID";
-  $rows = mysqli_query($conn, $query);
-  if($rows) {
-    $returnString = '';
-    while($entry = mysqli_fetch_assoc($rows))
-    {
-      if($returnOptionTags) {
-        $returnString .= "<option>" . $entry[FRAGE_FrBezeichnung] . "</option>";
-      } else {
-        $returnString .= $entry[FRAGE_FrBezeichnung] .= "-";
-      }
-    }
-    mysqli_close($conn);
-    // Letzten - Abstandshalter vom String entfernen
-    // Später aufteilung in Array
-    if(!$returnOptionTags) {
-      $returnString = substr($returnString, 0, strlen($returnString)-1);
-    }
-    return $returnString;
-  }
-  */
-  echo "Call to deprecated function'getAllQuestionsOfChapter' - Replaced by: getAllQuestionsOfChapterArray";
-}
-function getAllQuestionsOfChapterArray($chapterID) {
+function getAllQuestionsOfChapter($chapterID) {
   $conn = getDBConnection();
   $chapterID = mysqli_real_escape_string($conn,$chapterID);
 
   $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
+
   $rows = mysqli_query($conn, $query);
   if($rows) {
     $questions = array();
@@ -119,8 +88,8 @@ function addQuestionContainer() {
   echo '<div id="questionMCContainer">
   <p>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" size="80" required /><br /><br />
-    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" cols="125" required ></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" size="80" /><br /><br />
+    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" cols="125" ></textarea>
   </p>
   <p>
     <b>Lösungsmöglichkeiten bearbeiten:</b><br /><br />
@@ -128,7 +97,7 @@ function addQuestionContainer() {
     <br />
     <div id="questionMCAnswerContainer">
     <div>
-      Lösungstext: <input type="text" size="80" name="txtAnswers[]" required />
+      Lösungstext: <input type="text" size="80" name="txtAnswers[]" />
       <label><input type="checkbox" name="cbAnswerCorrect[]" onchange="toggleTextBox(this)"/>Antwort korrekt</label>
       <input type="button" name="cmdDeleteAnswer" value="Antwort löschen" onClick="deleteAnswerContainer(this)"/>
       <input class="hid" type="hidden" name="txtTrueFalse[]" value="false" />
@@ -142,9 +111,9 @@ function addQuestionContainer() {
   echo '<div id="questionTextContainer" style="display: none">
   <div>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitle" size="80" required/><br /><br />
-    Fragetext: <br /><textarea name="txtQuestionText" rows="5" cols="125" required></textarea><br /><br />
-    Musterlösung: <br / /><textarea name="txtAnswer" rows="5" cols="125" required></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitle" size="80" /><br /><br />
+    Fragetext: <br /><textarea name="txtQuestionText" rows="5" cols="125" ></textarea><br /><br />
+    Musterlösung: <br / /><textarea name="txtAnswer" rows="5" cols="125" ></textarea>
   </div>
   </div>';
 
@@ -157,6 +126,7 @@ function addQuestionContainer() {
 // Fragetyp ist entweder Multiple Choice oder Textfrage
 function saveQuestion($questionType) {
   $conn = getDBConnection();
+  mysqli_autocommit($conn,FALSE);
 
   if($questionType == FRAGENTYP_TEXTFRAGE) {
     // Textfrage speichern
@@ -164,21 +134,28 @@ function saveQuestion($questionType) {
     $text = mysqli_real_escape_string($conn,$_POST['txtQuestionText']);
     $answer = mysqli_real_escape_string($conn,$_POST['txtAnswer']);
 
-    $poolId = getQuestionPoolId(getChapterId($_SESSION['lectureToAddQuestion'], $_SESSION['chapterToAddQuestion']));
+    if($title != "" && $text != "" && $answer != "") {
+      $poolId = getQuestionPoolId(getChapterId($_SESSION['lectureToAddQuestion'], $_SESSION['chapterToAddQuestion']));
 
-    $queryQuestion = "INSERT INTO " . FRAGE . " VALUES (NULL, '$title','$text',$poolId,'$questionType');";
-    if(mysqli_query($conn, $queryQuestion)) {
+      $queryQuestion = "INSERT INTO " . FRAGE . " VALUES (NULL, '$title','$text',$poolId,'$questionType');";
+      mysqli_query($conn, $queryQuestion);
 
-      $query = "SELECT " . FRAGE_FrID . " FROM " . FRAGE . " WHERE " . FRAGE_FrBezeichnung . " = '$title' AND " . FRAGE_FPID . " = $poolId";
-      $getID = mysqli_fetch_assoc(mysqli_query($conn, $query));
+      $queryID = "SELECT " . FRAGE_FrID . " FROM " . FRAGE . " WHERE " . FRAGE_FrBezeichnung . " = '$title' AND " . FRAGE_FPID . " = $poolId";
+      $getID = mysqli_fetch_assoc(mysqli_query($conn, $queryID));
       $FrID = $getID[FRAGE_FrID];
 
       $queryAnswer = "INSERT INTO " . ANTWORT . " VALUES ($FrID, '$answer', " . SHORT_FALSE . ", 0);";
-      if(mysqli_query($conn, $queryAnswer)) {
+      mysqli_query($conn, $queryAnswer);
+
+      if($queryAnswer && $queryID) {
         echo "<p>Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!</p>";
+        mysqli_commit($conn);
+      } else {
+        echo "<p>Fehler beim Speichern der Frage. Die Änderungen werden rückgängig gemacht.</p>";
+        mysqli_rollback($conn);
       }
     } else {
-      echo "<p>Fehler beim Speichern der Frage. Der Eintrag wurde rückgängig gemacht.</p>";
+      echo "<p>Unvollständige Angaben. Die Frage wurde nicht gespeichert.</p>";
     }
 
   } else if ($questionType == FRAGENTYP_MULTIPLE_CHOICE) {
@@ -219,11 +196,12 @@ function saveQuestion($questionType) {
         }
         if($failedQuestions > 0 && $i == count($answers) -1) {
           echo "<p>Fehler beim Speichern aufgetreten. Die Änderungen werden rückgängig gemacht.</p>";
-          //TODO: Einträge wieder löschen (?)
+          mysqli_rollback($conn);
         } else {
           if($i == count($answers) -1) {
             echo "<p>Frage '$title' erfolgreich zum Kapitel '" . $_SESSION['chapterToAddQuestion'] . "' hinzugefügt!</p>";
           }
+          mysqli_commit($conn);
         }
       }
     } else {

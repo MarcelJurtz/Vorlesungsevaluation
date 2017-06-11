@@ -24,7 +24,8 @@
 	} else {
 
 		$surveys = getAllSurveys();
-		if(count($surveys) > 0) {
+		$classes = getAllClasses();
+		if(count($surveys) > 0 && count($classes) > 0) {
 			echo '<form action="survey_enable.php" method="POST">';
 
 			echo '<table>';
@@ -46,7 +47,9 @@
 					echo '</td>';
 					echo '<td>';
 						echo '<select name="cbClasses" class="fullwidth">';
-							echo getAllClasses();
+							for($i = 0; $i < count($classes); $i++) {
+								echo "<option>$classes[$i]</option>";
+							}
 						echo '</select>';
 					echo '</td>';
 				echo '</tr>';
@@ -56,7 +59,7 @@
 			echo '<input type="submit" value="Freigeben" name="cmdEnableSurvey" />';
 			echo '</form>';
 		} else {
-			echo '<p>Keine Fragebögen vorhanden!</p>';
+			echo '<p>Keine Einträge vorhanden. Zur Freigabe wird mindestens ein Kurs, sowie ein Fragebogen benötigt!</p>';
 		}
 
 		// Liste aller freigegebenen Fragebögen
@@ -64,7 +67,7 @@
 
 		$enabledSurveys = getEnabledSurveys();
 		if(count($enabledSurveys) > 0) {
-			echo '<ul>';
+			echo '<ul class="paddingList">';
 
 			sort($enabledSurveys);
 			for($i = 0; $i < count($enabledSurveys); $i++) {

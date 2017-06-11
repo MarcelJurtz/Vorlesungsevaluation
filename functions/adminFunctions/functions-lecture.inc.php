@@ -2,12 +2,7 @@
 // Funktionen zur Verwaltung von Vorlesungen
 
 
-// Liste aller Vorlesungen als Array
 function getAllLectures() {
-  echo "Call to deprecated function'getAllLectures' - Replaced by: getAllLecturesArray";
-}
-
-function getAllLecturesArray() {
   $conn = getDBConnection();
   // Muster der Zeichenketten: KuID - KuBezeichnung
   $query = "SELECT " . VORLESUNG_VOBEZEICHNUNG . " FROM " . VORLESUNG . ";";
@@ -18,7 +13,7 @@ function getAllLecturesArray() {
     $lectures[] = $entry[VORLESUNG_VOBEZEICHNUNG];
   }
   mysqli_close($conn);
-  return $returnString;
+  return $lectures;
 }
 
 // Vorlesung anlegen

@@ -71,10 +71,8 @@ function deleteClass($classID) {
   if (mysqli_query($conn, $query)) {
     echo "<p>Kurs $classID erfolgreich gelöscht!</p>";
   } else {
-    echo "<p>Fehler beim Löschen des Kurses $classID</p>";
+    echo "<p>Fehler beim Löschen des Kurses $classID.</p>";
   }
-
-  // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?
   mysqli_close($conn);
 }
 

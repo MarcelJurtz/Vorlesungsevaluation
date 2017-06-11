@@ -1,4 +1,4 @@
 <?php
-	include "functions/logout.inc.php";
-	logoutAdmin();
+	include "functions/mixed.inc.php";
+	logout();
 ?>

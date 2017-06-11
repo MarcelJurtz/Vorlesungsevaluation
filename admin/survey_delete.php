@@ -36,7 +36,7 @@
 			echo '<input type="submit" value="Löschen" name="cmdDeleteSurvey" />';
 			echo '</form>';
 		} else {
-			echo '<p>Keine Fragebögen vorhanden!</p>';
+			echo '<p>Keine Einträge vorhanden!</p>';
 		}
 	}
 

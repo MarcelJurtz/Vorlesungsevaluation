@@ -22,7 +22,10 @@
 		echo'
 			<form action="class_delete.php" method="POST">
 			<select name="cbClassToDelete" size=1>';
-		echo getAllClasses();
+		$classes = getAllClasses();
+		for($i = 0; $i < count($classes); $i++) {
+			echo "<option>" . $classes[$i] . "</option>";
+		}
 		echo '</select>
 				<input type="submit" name="cmdDeleteClass" value="Löschen">
 			</form>';

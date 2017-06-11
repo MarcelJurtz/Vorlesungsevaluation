@@ -16,15 +16,7 @@ function getChapterId($lectureDescription, $chapterDescription) {
   return $getID[KAPITEL_KAID];
 }
 
-// Gibt alle Kapitel einer Vorlesung zurück
-// Zur Verwendung in ComboBoxen
-// Muster: <option>Bezeichnung</option>
 function getAllChaptersOfLecture($lectureDescription) {
-  echo "Call to deprecated function'getAllChaptersOfLecture' - Replaced by: getAllChapersOfLectureArray";
-}
-
-
-function getAllChaptersOfLectureArray($lectureDescription) {
   $conn = getDBConnection();
 
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
@@ -37,7 +29,7 @@ function getAllChaptersOfLectureArray($lectureDescription) {
 	$chapters[] = $entry[KAPITEL_KABEZEICHNUNG];
   }
   mysqli_close($conn);
-  return $returnString;
+  return $chapters;
 }
 
 // Vorlesungskapitel hinzufügen

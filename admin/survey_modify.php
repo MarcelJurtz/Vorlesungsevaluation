@@ -41,7 +41,7 @@
 	else if(isset($_POST['cmdModifySurvey'])) {
 		echo '<form action="survey_modify.php" method="POST">';
 
-		$questionsInChapter = getAllQuestionsOfChapterArray(getSurveyChapterID($_POST['cbSurveys']));
+		$questionsInChapter = getAllQuestionsOfChapter(getSurveyChapterID($_POST['cbSurveys']));
 		$questionsInSurvey = getSurveyQuestions($_POST['cbSurveys']);
 		$_SESSION['surveyToModify'] = $_POST['cbSurveys'];
 
@@ -59,7 +59,7 @@
 				echo '<input type="checkbox" name="chk'.$i.'" />';
 			}
 
-			echo '<input type="text" name="txt'.$i.'" readonly value="'.$questionsInChapter[$i].'" />';
+			echo '<input type="text" name="txt'.$i.'" readonly value="'.$questionsInChapter[$i].'" class="invisibleBorder"/>';
 			echo '<br />';
 		}
 

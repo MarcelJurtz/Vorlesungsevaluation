@@ -21,11 +21,15 @@
 
 	if(isset($_POST['cmdSelectLecture'])) {
 
+		$_SESSION['cbLectureQuestionDelete'] = $_POST['cbLectureQuestionDelete'];
+		$chapters = getAllChaptersOfLecture($_POST['cbLectureQuestionDelete']);
+
 		// Vorlesung gewählt -> Kapitel wählen
 		echo'<form action="question_delete.php" method="POST">
 			<select name="cbChapterQuestionDelete" size=1>';
-		echo getAllChaptersOfLecture($_POST['cbLectureQuestionDelete']);
-		$_SESSION['cbLectureQuestionDelete'] = $_POST['cbLectureQuestionDelete'];
+		for($i = 0; $i < count($chapters); $i++) {
+			echo "<option>" . $chapters[$i] . "</option>";
+		}
 		echo '</select>
 				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
 			</form>';
@@ -34,12 +38,15 @@
 
 	} else if (isset($_POST['cmdSelectChapter'])) {
 
+		$questions = getAllQuestionsOfChapter(getChapterId($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']));
+		$_SESSION['chapterIDtoDelete'] = getChapterId($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']);
+
 		// Kapitel gewählt -> Frage wählen
 		echo'<form action="question_delete.php" method="POST">
 			<select name="cbQuestionQuestionDelete" size=1>';
-
-		echo getAllQuestionsOfChapter($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']);
-		$_SESSION['cbChapterQuestionDelete'] = $_POST['cbChapterQuestionDelete'];
+		for($i = 0; $i < count($questions); $i++) {
+			echo "<option>" . $questions[$i] . "</option>";
+		}
 		echo '</select>
 				<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
 			</form>';
@@ -53,11 +60,13 @@
 		echo'<br /><br /><a href="question_delete.php">Zurück</a>';
 
 	} else {
-
+		$lectures = getAllLectures();
 		// Vorlesung wählen
 		echo'<form action="question_delete.php" method="POST">
 					<select name="cbLectureQuestionDelete" size=1>';
-		echo getAllLectures();
+		for($i = 0; $i < count($lectures); $i++) {
+			echo "<option>" . $lectures[$i] . "</option>";
+		}
 		echo '</select>
 				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
 			</form>';

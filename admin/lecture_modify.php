@@ -19,61 +19,71 @@
 	echo'<h1>Vorlesung bearbeiten - Administrator</h1>';
 
 	if(!isset($_POST['cmdModifyLecture']) && !isset($_POST['cmdAddChapter'])) {
+
+		$lectures = getAllLectures();
 		// Vorlesung umbenennen
-		echo'
-			<h2>Vorlesung umbenennen</h2>
-			<form action="lecture_modify.php" method="POST">
+		if(count($lectures) > 0) {
+			echo'
+				<h2>Vorlesung umbenennen</h2>
+				<form action="lecture_modify.php" method="POST">
+					<table>
+						<tr>
+							<td>
+								Alte Bezeichnung:
+							</td>
+							<td>
+								<select name="cbLectureToDelete" size=1 class="fullwidth">';
+									for($i = 0; $i < count($lectures); $i++) {
+										echo "<option>$lectures[$i]</option>";
+									}
+								echo '</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Neue Bezeichnung:
+							</td>
+							<td>
+								<input type="text" name="txtLectureNewDescription" class="fullwidth" required />
+							</td>
+						</tr>
+					</table>
+					<br />
+					<input type="submit" name="cmdModifyLecture" value="Ändern">
+				</form>';
+
+			// Kapitel hinzufügen
+			echo'
+				<h2>Kapitel zur Vorlesung hinzufügen</h2>
+				<form action="lecture_modify.php" method="POST">
 				<table>
 					<tr>
 						<td>
-							Alte Bezeichnung:
+							Vorlesung:
 						</td>
 						<td>
-							<select name="cbLectureToDelete" size=1 class="fullwidth">';
-								echo getAllLectures();
+							<select name="cbLectureToAddChapter" size=1 class="fullwidth">';
+								for($i = 0; $i < count($lectures); $i++) {
+									echo "<option>$lectures[$i]</option>";
+								}
 							echo '</select>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							Neue Bezeichnung:
+							Kapitelbezeichnung:
 						</td>
 						<td>
-							<input type="text" name="txtLectureNewDescription" class="fullwidth" required />
+							<input type="text" name="txtChapterNewDescription" class="fullwidth" required />
 						</td>
 					</tr>
 				</table>
 				<br />
-				<input type="submit" name="cmdModifyLecture" value="Ändern">
+				<input type="submit" name="cmdAddChapter" value="Speichern">
 			</form>';
-
-		// Kapitel hinzufügen
-		echo'
-			<h2>Kapitel zur Vorlesung hinzufügen</h2>
-			<form action="lecture_modify.php" method="POST">
-			<table>
-				<tr>
-					<td>
-						Vorlesung:
-					</td>
-					<td>
-						<select name="cbLectureToAddChapter" size=1 class="fullwidth">';
-							echo getAllLectures();
-						echo '</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Kapitelbezeichnung:
-					</td>
-					<td>
-						<input type="text" name="txtChapterNewDescription" class="fullwidth" required />
-					</td>
-				</tr>
-			</table>
-			<br />
-			<input type="submit" name="cmdAddChapter" value="Speichern">
-		</form>';
+		} else {
+			echo "<p>Keine Einträge vorhanden!</p>";
+		}
 
 	} elseif(isset($_POST['cmdModifyLecture'])) {
 		renameLecture($_POST['cbLectureToDelete'],$_POST['txtLectureNewDescription']);

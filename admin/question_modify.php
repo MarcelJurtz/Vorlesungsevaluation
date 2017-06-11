@@ -18,16 +18,24 @@
 
 	echo'<h1>Frage bearbeiten - Administrator</h1>';
 
+	// Vorlesung gewählt -> Kapitel wählen
 	if(isset($_POST['cmdSelectLecture'])) {
 
-		// Vorlesung gewählt -> Kapitel wählen
-		echo'<form action="question_modify.php" method="POST">
-			<select name="cbChapterQuestionModify" size=1>';
-		echo getAllChaptersOfLecture($_POST['cbLectureQuestionModify']);
+		$chapters = getAllChaptersOfLecture($_POST['cbLectureQuestionModify']);
 		$_SESSION['cbLectureQuestionModify'] = $_POST['cbLectureQuestionModify'];
-		echo '</select>
-				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
-			</form>';
+
+		if(count($chapters) > 0) {
+			echo'<form action="question_modify.php" method="POST">
+				<select name="cbChapterQuestionModify" size=1>';
+				for($i = 0; $i < count($chapters); $i++) {
+					echo "<option>" . $chapters[$i] . "</option>";
+				}
+			echo '</select>
+					<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
+				</form>';
+		} else {
+			echo '<p>Keine Einträge vorhanden.</p>';
+		}
 
 		echo'<br /><br /><a href="question_modify.php">Zurück</a>';
 
@@ -37,7 +45,6 @@
 		echo'<form action="question_modify.php" method="POST">';
 			//<select name="cbQuestionQuestionModify" size=1>';
 
-		//echo getAllQuestionsOfChapter($_SESSION['cbLectureQuestionModify'],$_POST['cbChapterQuestionModify']);
 		$unusedOnly = true;
 		$questions = getAllQuestions(getChapterId($_SESSION['cbLectureQuestionModify'],$_POST['cbChapterQuestionModify']), $unusedOnly);
 
@@ -55,7 +62,7 @@
 
 	} else if (isset($_POST['cmdSelectQuestion'])) {
 
-		include "./../functions/studentFunctions/survey.php";
+		include_once("./../functions/studentFunctions/survey.php");
 		$question = new question($_POST['cbQuestionQuestionModify']);
 		if($question != null) {
 			echo '<form action="question_modify.php" method="POST">';
@@ -153,13 +160,21 @@
 		mysqli_close($conn);
 	} else {
 
-		// Vorlesung wählen
-		echo'<form action="question_modify.php" method="POST">
-					<select name="cbLectureQuestionModify" size=1>';
-		echo getAllLectures();
-		echo '</select>
-				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
-			</form>';
+		$lectures = getAllLectures();
+
+		if(count($lectures) > 0) {
+			// Vorlesung wählen
+			echo'<form action="question_modify.php" method="POST">
+						<select name="cbLectureQuestionModify" size=1>';
+					for($i = 0; $i < count($lectures); $i++) {
+				echo "<option>" . $lectures[$i] . "</option>";
+			}
+			echo '</select>
+					<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
+				</form>';
+		} else {
+			echo "<p>Keine Einträge vorhanden.</p>";
+		}
 	}
 
 	echo'		</div>';

@@ -208,7 +208,7 @@
 		// Auswahl Kurs
 		echo '<form action="statistics.php" method="POST">';
 
-		$classes = getAllClassesArray();
+		$classes = getAllClasses();
 		if(count($classes) > 0) {
 			echo '<select name="cbStatisticsClass">';
 			for($i = 0; $i < count($classes); $i++) {

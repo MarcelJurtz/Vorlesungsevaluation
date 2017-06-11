@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link href="../global.css" rel="stylesheet" type="text/css">
+	<script src="../functions/js/question.js"></script>
 	<title>Admin - Übersicht</title>
 	<meta charset="UTF-8">
 </head>
@@ -25,7 +26,10 @@
 		echo'
 			<form action="question_create.php" method="POST">
 			<select name="cbLectureToModify" size=1>';
-			echo getAllLectures();
+				$lectures = getAllLectures();
+				for($i = 0; $i < count($lectures); $i++) {
+					echo "<option>" . $lectures[$i] . "</option>";
+				}
 			echo '</select>
 				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
 			</form>';
@@ -33,11 +37,15 @@
 	// Auswahl Kapitel
 	// !Kapitel und Vorlesung
 } else if(isset($_POST['cmdSelectLecture']) && !isset($_POST['cmdSelectChapter'])) {
+	$chapters = getAllChaptersOfLecture($_POST['cbLectureToModify']);
+	$lecture = $_POST['cbLectureToModify'];
+
 		echo'
 			<form action="question_create.php" method="POST">
 			<select name="cbChapterToModify" size=1>';
-		echo getAllChaptersOfLecture($_POST['cbLectureToModify']);
-		$lecture = $_POST['cbLectureToModify'];
+			for($i = 0; $i < count($chapters); $i++) {
+				echo "<option>" . $chapters[$i] . "</option>";
+			}
 		echo '</select>
 				<input type="hidden" name="cbLectureToModify" value="'.$lecture.'" />
 				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">

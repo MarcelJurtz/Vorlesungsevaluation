@@ -22,33 +22,50 @@
 	// !Vorlesung und !Kapitel und !Speicherbutton
 	if(!isset($_POST['cmdSelectLecture']) && !isset($_POST['cmdSelectChapter']) && !isset($_POST['cmdSaveSurvey']))
 	{
-		echo'
-			<form action="survey_create.php" method="POST">
-			Vorlesung auswählen: <select name="cbLectureToAddSurvey" size=1>';
-			echo getAllLectures();
-			echo '</select>
-				<br /><br />
-				<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
-			</form>';
+		$lectures = getAllLectures();
+
+		if(count($lectures) > 0) {
+			echo'
+				<form action="survey_create.php" method="POST">
+				<select name="cbLectureToAddSurvey" size=1>';
+
+				for($i = 0; $i < count($lectures); $i++) {
+					echo "<option>" . $lectures[$i] . "</option>";
+				}
+
+				echo '</select>
+					<input type="submit" name="cmdSelectLecture" value="Vorlesung bestätigen">
+				</form>';
+		} else {
+			echo "<p>Keine Einträge vorhanden!</p>";
+		}
 
 	// Auswahl Kapitel
 	// !Kapitel und Vorlesung
 	} else if(isset($_POST['cmdSelectLecture']) && !isset($_POST['cmdSelectChapter']) && !isset($_POST['cmdSaveSurvey'])) {
 
 		$_SESSION['lectureToAddSurvey'] = $_POST['cbLectureToAddSurvey'];
-
-		echo'
-			<form action="survey_create.php" method="POST">
-			Kapitel auswählen: <select name="cbChapterToAddSurvey" size=1>';
-		echo getAllChaptersOfLecture($_POST['cbLectureToAddSurvey']);
+		$chapters = getAllChaptersOfLecture($_POST['cbLectureToAddSurvey']);
 		$lecture = $_POST['cbLectureToAddSurvey'];
-		echo '</select>
-				<br /><br />
-				<input type="hidden" name="cbLectureToAddSurvey" value="'.$lecture.'" />
-				<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
-			</form>';
 
-			echo'<br /><br /><a href="survey_create.php">Zurück</a>';
+		if(count($chapters) > 0) {
+			echo'
+				<form action="survey_create.php" method="POST">
+				<select name="cbChapterToAddSurvey" size=1>';
+
+				for($i = 0; $i < count($chapters); $i++) {
+					echo "<option>" . $chapters[$i] . "</option>";
+				}
+
+			echo '</select>
+					<input type="hidden" name="cbLectureToAddSurvey" value="'.$lecture.'" />
+					<input type="submit" name="cmdSelectChapter" value="Kapitel bestätigen">
+				</form>';
+		} else {
+			echo "<p>Keine Einträge vorhanden.</p>";
+		}
+
+		echo'<br /><br /><a href="survey_create.php">Zurück</a>';
 
 		// Frage Speichern nach Betätigen der Schaltfläche
 		// SpeicherButton
@@ -58,8 +75,7 @@
 
 		// Ausgabe aller Fragen mit Checkboxen des Kapitels
 		// fr1txt fr1chk
-		//$questions = explode ( "-" , getAllQuestionsOfChapter($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey'], false));
-		$questions = getAllQuestionsOfChapterArray(getChapterId($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey']));
+		$questions = getAllQuestionsOfChapter(getChapterId($_POST['cbLectureToAddSurvey'], $_POST['cbChapterToAddSurvey']));
 		$iterator = 0;
 
 		echo '<form action="survey_create.php" method="POST">';
