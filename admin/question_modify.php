@@ -62,7 +62,6 @@
 
 	} else if (isset($_POST['cmdSelectQuestion'])) {
 
-		include_once("./../functions/studentFunctions/survey.php");
 		$question = new question($_POST['cbQuestionQuestionModify']);
 		if($question != null) {
 			echo '<form action="question_modify.php" method="POST">';
@@ -102,7 +101,6 @@
 
 	} else if (isset($_POST['cmdSubmitModifications'])) {
 
-		include "./../functions/studentFunctions/survey.php";
 		$question = new question($_SESSION['MODIFY_QUESTION']);
 
 		// Änderungen der Antworten speichern
@@ -148,13 +146,11 @@
 			echo "<p>Fehler beim Update von Frage '" . $_SESSION['MODIFY_QUESTION'] . "'.</p>";
 		}
 
-		$res = $res && $result;
-
-		if ($res) {
-			$conn -> commit();
+		if ($res && $result) {
+			mysqli_commit($conn);
 			echo "<p>Speichern der Änderungen erfolgreich abgeschlossen.</p><br /><a href='question_modify.php'>Zurück</a>";
 		} else {
-			$conn -> rollback();
+			mysqli_rollback($conn);
 		}
 
 		mysqli_close($conn);

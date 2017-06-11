@@ -1,5 +1,4 @@
 <?php
-
 class survey {
   private $fbID;
   // TODO benötigt? private $kaID;
