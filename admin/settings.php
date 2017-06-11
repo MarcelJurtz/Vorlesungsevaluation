@@ -16,7 +16,7 @@
   	// Aufbau Website
 		printAdminMenu(MENU_SETTINGS);
 
-  	echo'			<h1>Einstellungen - Administrator</h1>';
+  	echo'<h1>Einstellungen - Administrator</h1>';
 
     if(isset($_POST['cmdSubmitNewPassword'])) {
 

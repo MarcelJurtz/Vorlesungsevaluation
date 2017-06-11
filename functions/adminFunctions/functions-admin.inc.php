@@ -24,7 +24,7 @@ function changePassword($oldPassword, $newPassword, $newPasswordConfirmed) {
 
     if($adminPW == $oldPassword) {
       $query = "UPDATE " . ADMINISTRATOR . " SET " . ADMINISTRATOR_AKennwort . " = '$newPassword' WHERE " . ADMINISTRATOR_AName . " = '" . ADMIN_DEFAULT_USERNAME . "';";
-      echo $query;
+
       if(mysqli_query($conn,$query)) {
         echo '<p>Änderung erfolgreich durchgeführt.</p>';
       } else {
