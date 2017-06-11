@@ -28,43 +28,43 @@
 		$survey = new survey($_POST['cbStatisticsSurvey']);
 		$studTotal = getTotalStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
 		$studSubmitted =  getSubmittedStudents($survey->GetID(),$_SESSION['STAT_CLASS']);
-		echo "<p>$studSubmitted von $studTotal Studenten haben diesen Fragebogen bereits abgegeben.</p>";
 
-		echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
+		if($studSubmitted == 0) {
+			echo '<p>Von mindestens einem der Kurse wurde dieser Fragebogen noch nicht beantwortet.</p>';
+		} else {
+			echo "<p>$studSubmitted von $studTotal Studenten des Kurses " . $_SESSION['STAT_CLASS'] ." haben den Fragebogen '" . $_POST['cbStatisticsSurvey'] . "' bereits abgegeben.</p>";
 
-		for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
-			if($survey->GetQuestionAt($i)->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
-				echo '<h3>Frage '.($i+1).'</h3>';
-				echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
+			echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
 
-				echo '<canvas id="chartQ'.$i.'"></canvas>';
+			for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
+				if($survey->GetQuestionAt($i)->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
+					echo '<h3>Frage '.($i+1).'</h3>';
+					echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
 
-				$data = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['cbStatisticsSurvey'], $_SESSION['STAT_CLASS']);
-				$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
-				$trueCol = COLOR_TRUE;
-				$falseCol = COLOR_FALSE;
-				$trueColBorder = COLOR_TRUE_BORDER;
-				$falseColBorder = COLOR_FALSE_BORDER;
+					echo '<canvas id="chartQ'.$i.'"></canvas>';
 
-				$colors = array();
-				$borderColors = array();
+					$data = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['cbStatisticsSurvey'], $_SESSION['STAT_CLASS']);
+					$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
 
-				$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
-				foreach($answers as $k => $v) {
-					  if(implode("-",$v) == SHORT_TRUE) {
-							$colors[] = COLOR_TRUE;
-							$borderColors[] = COLOR_TRUE_BORDER;
-						} else {
-							$colors[] = COLOR_FALSE;
-							$borderColors[] = COLOR_FALSE_BORDER;
-						}
+					$colors = array();
+					$borderColors = array();
+
+					$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
+					foreach($answers as $k => $v) {
+						  if(implode("-",$v) == SHORT_TRUE) {
+								$colors[] = COLOR_TRUE_A;
+								$borderColors[] = COLOR_TRUE_BORDER_A;
+							} else {
+								$colors[] = COLOR_FALSE_A;
+								$borderColors[] = COLOR_FALSE_BORDER_A;
+							}
+					}
+					echo '<script>DrawChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data).','.json_encode($colors).','.json_encode($borderColors).')</script>';
+
 				}
-				echo '<script>DrawChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data).','.json_encode($colors).','.json_encode($borderColors).')</script>';
-
 			}
 		}
-		echo'<br /><br /><a href="statistics.php">Zurück</a>';
-
+		echo'<br /><br /><a href="statistics.php">Zurück</a><br /><br />';
 
 	}	else if(isset($_POST['cmdSelectClass'])) {
 		// Auswahl Fragebogen
@@ -128,6 +128,7 @@
 		}
 
 		echo '</form>';
+		echo'<br /><br /><a href="statistics.php">Zurück</a>';
 
 	} else if(isset($_POST['cmdSelectClass_Comparison'])) {
 		$conn = getDBConnection();
@@ -149,53 +150,53 @@
 			$studTotal2 = getTotalStudents($survey->GetID(),$class2);
 			$studSubmitted2 =  getSubmittedStudents($survey->GetID(),$class2);
 
-			echo "<p>$class1: $studSubmitted1 von $studTotal1 Studenten haben diesen Fragebogen bereits abgegeben.<br />";
-			echo "$class2: $studSubmitted2 von $studTotal2 Studenten haben diesen Fragebogen bereits abgegeben.</p>";
+			if($studSubmitted1 == 0 || $studSubmitted2 == 0) {
+				echo '<p>Von mindestens einem der Kurse wurde dieser Fragebogen noch nicht beantwortet.</p>';
+			} else {
+				echo "<p>$class1: $studSubmitted1 von $studTotal1 Studenten des Kurses " . $class1 . " haben den Fragebogen '" . $_POST['txtStatisticsComparisonSurvey'] . "' bereits abgegeben.<br />";
+				echo "$class2: $studSubmitted2 von $studTotal2 Studenten des Kurses " . $class2 . " haben den Fragebogen '" . $_POST['txtStatisticsComparisonSurvey'] . "' bereits abgegeben.</p>";
 
+				echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
 
+				for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
+					if($survey->GetQuestionAt($i)->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
+						echo '<h3>Frage '.($i+1).'</h3>';
+						echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
 
-			echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
+						echo '<canvas id="chartQ'.$i.'"></canvas>';
 
+						$data = array();
+						$data['class1'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class1);
+						$data['class2'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class2);
 
-			for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
-				if($survey->GetQuestionAt($i)->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
-					echo '<h3>Frage '.($i+1).'</h3>';
-					echo '<p>' . $survey->GetQuestionAt($i)->GetText() . '</p>';
+						$labels = array();
+						$labels['class1'] = $class1;
+						$labels['class2'] = $class2;
 
-					echo '<canvas id="chartQ'.$i.'"></canvas>';
+						$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
 
-					$data = array();
-					$data['class1'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class1);
-					$data['class2'] = GetAmountOfVotes($survey->GetQuestionAt($i)->GetName(),$_POST['txtStatisticsComparisonSurvey'], $class2);
+						$colors = array();
+						$borderColors = array();
 
-					$labels = array();
-					$labels['class1'] = $class1;
-					$labels['class2'] = $class2;
-
-					$fields = $survey->GetQuestionAt($i)->GetQuestionAnswers();
-
-					$colors = array();
-					$borderColors = array();
-
-					$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
-					foreach($answers as $k => $v) {
-						  if(implode("-",$v) == SHORT_TRUE) {
-								$colors['class1'][] = COLOR_TRUE_A;
-								$colors['class2'][] = COLOR_TRUE_B;
-								$borderColors['class1'][] = COLOR_TRUE_BORDER_A;
-								$borderColors['class2'][] = COLOR_TRUE_BORDER_B;
-							} else {
-								$colors['class1'][] = COLOR_FALSE_A;
-								$colors['class2'][] = COLOR_FALSE_B;
-								$borderColors['class1'][] = COLOR_FALSE_BORDER_A;
-								$borderColors['class2'][] = COLOR_FALSE_BORDER_B;
-							}
+						$answers = $survey->GetQuestionAt($i)->GetQuestionAnswersWithTruths();
+						foreach($answers as $k => $v) {
+							  if(implode("-",$v) == SHORT_TRUE) {
+									$colors['class1'][] = COLOR_TRUE_A;
+									$colors['class2'][] = COLOR_TRUE_B;
+									$borderColors['class1'][] = COLOR_TRUE_BORDER_A;
+									$borderColors['class2'][] = COLOR_TRUE_BORDER_B;
+								} else {
+									$colors['class1'][] = COLOR_FALSE_A;
+									$colors['class2'][] = COLOR_FALSE_B;
+									$borderColors['class1'][] = COLOR_FALSE_BORDER_A;
+									$borderColors['class2'][] = COLOR_FALSE_BORDER_B;
+								}
+						}
+						echo '<script>DrawComparisonChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data) .','.json_encode($colors).','.json_encode($borderColors).','.json_encode($labels).')</script>';
 					}
-					echo '<script>DrawComparisonChart("chartQ' . $i . '",' . json_encode($fields) .','.json_encode($data) .','.json_encode($colors).','.json_encode($borderColors).','.json_encode($labels).')</script>';
-
 				}
 			}
-			echo'<br /><br /><a href="statistics.php">Zurück</a>';
+			echo'<br /><br /><a href="statistics.php">Zurück</a><br /><br />';
 		}
 
 		mysqli_close($conn);

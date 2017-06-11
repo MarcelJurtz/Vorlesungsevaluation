@@ -64,8 +64,15 @@ iframe {
 
 /* Statistiken */
 canvas {
+
 	max-height: 200px;
 	width: auto;
+	max-width: 95%;
+}
+
+.canvasContainer {
+	height: 200px;
+	width: 80%;
 }
 
 /* Tabelle zur Auswertung von Multiple Choice Fragen auf Studentenseite */
@@ -96,6 +103,8 @@ table.review {
 	 outline: none;
 	 border: none;
 	 width: 500px;
+	 font-size: 1em;
+	 background-color: transparent;
 }
 
 .fullwidth {

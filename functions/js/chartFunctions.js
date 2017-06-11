@@ -21,7 +21,8 @@ function DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorde
                   if (t.length > maxLabelLength) return t.substr(0, maxLabelLength) + '...';
                   else return t;
                }
-            }
+            },
+						barPercentage: 0.8
          }],
             yAxes: [{
                 ticks: {
@@ -48,9 +49,6 @@ function DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorde
 
 function DrawComparisonChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorderColors, remoteLabel) {
 	var ctx = document.getElementById(canvasID).getContext('2d');
-
-	console.log(remoteData);
-	console.log(remoteData[0]);
 
 	var myChart = new Chart(ctx, {
     type: 'bar',
