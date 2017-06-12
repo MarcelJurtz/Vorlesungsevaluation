@@ -14,5 +14,17 @@
 				<input type="submit" name="cmdLoginAdmin" value="Absenden" class="submit">
 			</div>
 		</form>
+		<div id="toast">NO CONTENT</div>
+		<?php
+			include "adminFunctions.inc.php";
+			if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
+				if($_SESSION['toaster'] == TOAST_WRONG_PASSWORD) {
+					wrongPasswordToast();
+				} else if($_SESSION['toaster'] == TOAST_NO_PERMISSION) {
+					noPermissionToast();
+				}
+				session_destroy();
+			}
+		?>
 	</body>
 </html>

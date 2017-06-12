@@ -4,9 +4,8 @@
 		<meta lang="DE">
 		<meta charset="UTF-8">
 		<title>Login Vorlesungsevaluation</title>
-		<link href="stylesheet.css" type="text/css" rel="stylesheet">
-		<link href="../global.css" type="text/css" rel="stylesheet"
-		<script src="https://use.fontawesome.com/a027443663.js"></script>
+		<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+		<link href="../global.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
 		<form action="registerStudent.php" name="stud_login" method="POST">
@@ -79,7 +78,7 @@
 		} else if($_SESSION['toaster'] == TOAST_UNKNOWN_USERNAME) {
 			unknownUserToast();
 		}
-		$_SESSION['toaster'] == "";
+		session_destroy();
 	}
 ?>
 	</body>

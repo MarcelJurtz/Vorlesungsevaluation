@@ -10,7 +10,8 @@
 	include 'adminFunctions.inc.php';
 
 	if(!isset($_SESSION['adminName'])) {
-		header("Location: ./login.html");
+		$_SESSION['toaster'] = TOAST_NO_PERMISSION;
+		header("Location: ./index.php");
 	}
 
 	// Aufbau Website

@@ -27,10 +27,12 @@
 
 		if($adminName[ADMINISTRATOR_AKennwort] != $pw) {
 			// Falsches Passwort
-			header("Location: ./login.html");
+			$_SESSION['toaster'] = TOAST_WRONG_PASSWORD;
+			header("Location: ./index.php");
 		}
 	} else if (!isset($_SESSION['adminName'])){
-		header("Location: ./login.html");
+		$_SESSION['toaster'] = TOAST_NO_PERMISSION;
+		header("Location: ./index.php");
 	}
 
 	// Aufbau Website
