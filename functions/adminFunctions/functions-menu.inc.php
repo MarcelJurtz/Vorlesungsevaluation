@@ -81,8 +81,9 @@
         break;
     }
 
-    echo'<div id="cWrapper">';
-  	echo'<div id="cMenu">';
+    echo '<div id="cWrapper">';
+  	echo '<div id="cMenu">';
+    echo '<h1>&nbsp;</h1>';
     echo '<ul id="lMenu">';
       echo '<li>'.$overview.'</li>';
       echo 'Kurse<ul>';

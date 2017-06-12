@@ -44,6 +44,7 @@ iframe {
 #cMenu {
 	width: 20%;
 	float:left;
+	min-width: 170px;
 	/*border-right: 1px solid #161616;*/
 }
 
