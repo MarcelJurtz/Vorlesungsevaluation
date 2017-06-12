@@ -19,16 +19,23 @@
 	echo'			<h1>Kurs löschen - Administrator</h1>';
 
 	if(!isset($_POST['cmdDeleteClass'])) {
-		echo'
-			<form action="class_delete.php" method="POST">
-			<select name="cbClassToDelete" size=1>';
+
 		$classes = getAllClasses();
-		for($i = 0; $i < count($classes); $i++) {
-			echo "<option>" . $classes[$i] . "</option>";
+
+		if(count($classes) > 0) {
+			echo'
+				<form action="class_delete.php" method="POST">
+				<select name="cbClassToDelete" size=1>';
+			for($i = 0; $i < count($classes); $i++) {
+				echo "<option>" . $classes[$i] . "</option>";
+			}
+			echo '</select>
+					<input type="submit" name="cmdDeleteClass" value="Löschen">
+				</form>';
+		} else {
+			echo "<p>Keine Einträge vorhanden!</p>";
 		}
-		echo '</select>
-				<input type="submit" name="cmdDeleteClass" value="Löschen">
-			</form>';
+
 	} else {
 		// Button wurde gedrückt - Kurs löschen
 		// WI214 - Wirtschaftsinformatik 2014 / 2 -> Nur Kürzel wird benötigt
