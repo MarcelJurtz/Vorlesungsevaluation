@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_LECTURE_MODIFY);
 
-	echo'<h1>Vorlesung bearbeiten - Administrator</h1>';
+	echo'<h1>Vorlesung bearbeiten</h1>';
 
 	if(!isset($_POST['cmdModifyLecture']) && !isset($_POST['cmdAddChapter'])) {
 

@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_QUESTION_DELETE);
 
-	echo'<h1>Frage löschen - Administrator</h1>';
+	echo'<h1>Frage löschen</h1>';
 
 
 	if(isset($_POST['cmdSelectLecture'])) {

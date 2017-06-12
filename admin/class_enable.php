@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_CLASS_ENABLE);
 
-	echo'			<h1>Kursfreigabe verwalten - Administrator</h1>';
+	echo'			<h1>Kursfreigabe verwalten</h1>';
 
 	if(!isset($_POST['cmdEnableClassRegistration']) && !isset($_POST['cmdDisableClassRegistration'])) {
 		// Combobox aller nicht-freigegebenen Kurse zur Freigabe

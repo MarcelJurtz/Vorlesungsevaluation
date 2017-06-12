@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_DELETE);
 
-	echo'<h1>Fragebogen löschen - Administrator</h1>';
+	echo'<h1>Fragebogen löschen</h1>';
 
 	if(isset($_POST['cmdDeleteSurvey'])) {
 		deleteSurvey($_POST['cbSurveys']);

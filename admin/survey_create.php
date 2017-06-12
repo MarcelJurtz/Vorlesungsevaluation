@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_CREATE);
 
-	echo'<h1>Fragebogen anlegen - Administrator</h1>';
+	echo'<h1>Fragebogen anlegen</h1>';
 
 	// Start: Auswahl Vorlesung
 	// !Vorlesung und !Kapitel und !Speicherbutton

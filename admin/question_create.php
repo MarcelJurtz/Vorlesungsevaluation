@@ -17,7 +17,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_QUESTION_CREATE);
 
-	echo'<h1>Frage anlegen - Administrator</h1>';
+	echo'<h1>Frage anlegen</h1>';
 
 	// Start: Auswahl Vorlesung
 	// !Vorlesung und !Kapitel und !Speicherbutton

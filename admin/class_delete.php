@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_CLASS_DELETE);
 
-	echo'			<h1>Kurs löschen - Administrator</h1>';
+	echo'			<h1>Kurs löschen</h1>';
 
 	if(!isset($_POST['cmdDeleteClass'])) {
 

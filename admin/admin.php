@@ -37,7 +37,7 @@
 
 	printAdminMenu(MENU_OVERVIEW);
 
-	echo'			<h1>Übersicht - Administrator</h1>';
+	echo'			<h1>Übersicht</h1>';
 	echo'			<p>Wählen Sie einen Menüpunkt zur Bearbeitung</p>';
 
 	printAdminMenuBottom();

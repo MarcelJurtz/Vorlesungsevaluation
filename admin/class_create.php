@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_CLASS_CREATE);
 
-	echo'			<h1>Kurs anlegen - Administrator</h1>';
+	echo'			<h1>Kurs anlegen</h1>';
 
 	if(!isset($_POST['cmdSubmitClass'])) {
 		echo'

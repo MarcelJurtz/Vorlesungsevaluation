@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_SURVEY_ENABLE);
 
-	echo'<h1>Fragebogen freigeben - Administrator</h1>';
+	echo'<h1>Fragebogen freigeben</h1>';
 
 	if(isset($_POST['cmdEnableSurvey'])) {
 		enableSurvey($_POST['cbSurveys'], $_POST['cbClasses']);

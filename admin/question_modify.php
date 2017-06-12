@@ -16,7 +16,7 @@
 	// Aufbau Website
 	printAdminMenu(MENU_QUESTION_MODIFY);
 
-	echo'<h1>Frage bearbeiten - Administrator</h1>';
+	echo'<h1>Frage bearbeiten</h1>';
 
 	// Vorlesung gewählt -> Kapitel wählen
 	if(isset($_POST['cmdSelectLecture'])) {
