@@ -47,6 +47,14 @@ iframe {
 	/*border-right: 1px solid #161616;*/
 }
 
+#lMenu > li {
+	list-style-type: none;
+}
+
+li a:hover {
+	font-style: italic;
+}
+
 #cFrame {
 	width: 80%;
 	min-height: 100%;
