@@ -25,3 +25,5 @@ Die eingebundene Skript-Datei liegt unter ```functions/js/Chart.bundle.min.js```
 ## Lizenz
 
 [MIT](LICENSE)
+
+Font used: Open Sans, Apache License 2.0
