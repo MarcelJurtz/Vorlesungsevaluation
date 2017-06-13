@@ -59,7 +59,7 @@
 			echo '<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
 			</form>';
 		} else {
-			echo "<p>In diesem Kapitel sind keine Fragen vorhanden, die nicht bereits in einem Fragebogen verwendet werden.</p>"
+			echo "<p>In diesem Kapitel sind keine Fragen vorhanden, die nicht bereits in einem Fragebogen verwendet werden.</p>";
 		}
 
 

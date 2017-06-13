@@ -59,13 +59,18 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
 
 ### PHP
 
+Einige der Funktionen besitzen einen Parameter ```$deletable = false```.
+Dieser kann mit dem Wert ```true``` verwendet werden, um nicht die gesamte Menge der Einträge (beispielsweise Kurse) abzufragen, sondern lediglich diejenigen,
+die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet in den Funktionalitäten zum Löschen und Ändern von Einträgen Anwendung.
+
 * ./functions/adminFunctions/functions-admin.inc.php
   * ```changePassword($oldPassword, $newPassword, $newPasswordConfirmed)```: Ändern des Admin-Passworts
 
 * ./functions/adminFunctions/functions-chapter.inc.php:
   * ```getChapterId($lectureDescription, $chapterDescription)```: Bezug der ID eines Kapitels anhand Vorlesungs- und Kapitelbezeichnung
-  * ```getAllChaptersOfLecture($lectureDescription)```: Bezug aller Kapitel einer Vorlesung anhand deren Bezeichnung
+  * ```getAllChaptersOfLecture($lectureDescription, $deletable = false)```: Bezug aller Kapitel einer Vorlesung anhand deren Bezeichnung
   * ```addLectureChapter($lectureDescription, $chapterDescription)```: Hinzufügen eines Kapitels zu einer Vorlesung
+  * ```getAllChaptersOfLecture($lectureDescription, $deletable = false)```: Löschen eines Kapitels
 
 * ./functions/adminFunctions/functions-class.inc.php
   * ```toggleClassRegistration($classID, $regStatus)```: Umschalten der Freigabe eines Kurses zur Registrierung
@@ -74,7 +79,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
   * ```getClassesForSurvey($surveyID)```: Rückgabe aller Kurse, die für eine Vorlesung freigeschaltet sind
 
 * ./functions/adminFunctions/functions-lecture.inc.php:
-  * ```getAllLectures()```: Rückgabe aller Vorlesungen
+  * ```getAllLectures($deletable = false)```: Rückgabe aller Vorlesungen
   * ```createLecture($description)```: Erstellen einer Vorlesung
   * ```renameLecture($lectureDescriptionOld, $lectureDescriptionNew)```: Umbenennen einer Vorlesung
   * ```deleteLecture($lectureDescription)```: Löschen einer Vorlesung
@@ -85,7 +90,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
 
 * ./functions/adminFunctions/functions-question.inc.php:
   * ```deleteQuestion($chapterID,$questionText)```: Löschen eines Kapitels
-  * ```getAllQuestionsOfChapter($chapterID, $deletable = false)```: Rückgabe aller Fragen eines Kapitels. Verwendung des zweiten Parameters zur Angabe, ob nur Fragen zurückgegeben werden sollen, die bearbeitet / gelöscht werden können, also in keinem Fragebogen vorkommen.
+  * ```getAllQuestionsOfChapter($chapterID, $deletable = false)```: Rückgabe aller Fragen eines Kapitels.
   * ```addQuestionContainer()```: Aufbau der Frageboxen
   * ```saveQuestion($questionType)```: Speichern einer Frage (Multiple Choice oder Textfrage)
   * ```getQuestionPoolId($chapterID)```: Bezug der ID des Fragepools eines Kapitels
@@ -96,7 +101,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
   * ```saveQuestionToFb($fb, $question)```: Hinzufügen einer Frage zu einem Fragebogen
   * ```saveQuestionToFbV2($fb, $question)```: S.o.
   * ```deleteSurveyQuestions($fb)```: Löschen der Fragen eines Fragebogens
-  * ```getAllSurveys()```: Rückgabe aller Fragebögen
+  * ```getAllSurveys($deletable = false)```: Rückgabe aller Fragebögen
   * ```getComparableSurveys()```: Rückgabe aller Fragebögen, die für mindestens zwei Kurse freigeschaltet sind
   * ```deleteSurvey($surveyName)```: Löschen eines Fragebogens
   * ```getSurveyID($surveyName)```: Rückgabe der ID eines Fragebogens anhand dessen Bezeichnung
@@ -115,7 +120,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
   * ```logoutAdmin()```; Durchführen des Logout-Vorgangs
 
 * ./functions/mixed.inc.php
-  * ```getAllClasses()```: Bezug aller Kurse
+  * ```getAllClasses($deletable = false)```: Bezug aller Kurse
   * ```getAllRegEnabledClasses($enabled = SHORT_TRUE)```: Bezug aller Kurs, die (nicht) freigeschalten sind
   * ```GetClassSurveys($class)```: Bezug aller Fragebögen, die für einen Kurs freigeschalten sind
   * ```getClassIdFromCbString($cbString)```: Konversion der Schreibweise 'WI214 - Wirtschaftsinformatik 2 2014' in 'WI214'
