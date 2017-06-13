@@ -19,7 +19,7 @@
 
 	echo'<h1>Vorlesung bearbeiten</h1>';
 
-	if(!isset($_POST['cmdModifyLecture']) && !isset($_POST['cmdAddChapter'])) {
+	if(!isset($_POST['cmdModifyLecture']) && !isset($_POST['cmdAddChapter']) && !isset($_POST['cmdLectureChapDel']) && !isset($_POST['cmdChapterChapDel'])) {
 
 		$lectures = getAllLectures();
 		// Vorlesung umbenennen
@@ -82,16 +82,45 @@
 				<br />
 				<input type="submit" name="cmdAddChapter" value="Speichern">
 			</form>';
+
+			// Kapitel löschen
+			echo '<h2>Kapitel löschen</h2>';
+			echo '<form action="lecture_modify.php" method="POST">
+							<select name="cbLectureChapDel">';
+								for($i = 0; $i < count($lectures); $i++) {
+									echo "<option>$lectures[$i]</option>";
+								}
+							echo '</select>
+							<input type="submit" name="cmdLectureChapDel" value="Vorlesung bestätigen">
+						</form>';
 		} else {
 			echo "<p>Keine Einträge vorhanden!</p>";
 		}
 
-	} elseif(isset($_POST['cmdModifyLecture'])) {
+	} else if(isset($_POST['cmdModifyLecture'])) {
 		renameLecture($_POST['cbLectureToDelete'],$_POST['txtLectureNewDescription']);
 		echo '</br/><br /><a href="lecture_modify.php">Zurück</a>';
-	} elseif(isset($_POST['cmdAddChapter'])) {
+	} else if(isset($_POST['cmdAddChapter'])) {
 		addLectureChapter($_POST['cbLectureToAddChapter'], $_POST['txtChapterNewDescription']);
 		echo '</br/><br /><a href="lecture_modify.php">Zurück</a>';
+	} else if(isset($_POST['cmdLectureChapDel'])) {
+
+		$chapters = getAllChaptersOfLecture($_POST['cbLectureChapDel'],true);
+		$_SESSION['cbLectureChapDel'] = $_POST['cbLectureChapDel'];
+		echo '<form action="lecture_modify.php" method="POST">
+						<select name="cbChapterChapDel">';
+							for($i = 0; $i < count($chapters); $i++) {
+								echo "<option>$chapters[$i]</option>";
+							}
+						echo '</select>
+						<input type="submit" name="cmdChapterChapDel" value="Kapitel bestätigen">
+					</form>';
+
+		echo '<br /></br /><a href="lecture_modify.php">Zurück</a>';
+	} else if(isset($_POST['cmdChapterChapDel'])) {
+		deleteChapter($_SESSION['cbLectureChapDel'], $_POST['cbChapterChapDel']);
+		$_SESSION['cbLectureChapDel'] = "";
+		echo '<br /></br /><a href="lecture_modify.php">Zurück</a>';
 	}
 
 	printAdminMenuBottom();
