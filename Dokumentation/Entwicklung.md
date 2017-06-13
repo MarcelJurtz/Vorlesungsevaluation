@@ -85,8 +85,7 @@ Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Fun
 
 * ./functions/adminFunctions/functions-question.inc.php:
   * ```deleteQuestion($chapterID,$questionText)```: Löschen eines Kapitels
-  * ```getAllQuestionsOfChapter($chapterID)```: Rückgabe aller Fragen eines Kapitels
-  * ```getAllQuestions($chapterID, $unusedOnly = false)```: Rückgabe aller Fragen eines Kapitels mit Parameter zur Angabe von bisheriger Verwendung, Nutzung bei Veränderung von Fragen.
+  * ```getAllQuestionsOfChapter($chapterID, $deletable = false)```: Rückgabe aller Fragen eines Kapitels. Verwendung des zweiten Parameters zur Angabe, ob nur Fragen zurückgegeben werden sollen, die bearbeitet / gelöscht werden können, also in keinem Fragebogen vorkommen.
   * ```addQuestionContainer()```: Aufbau der Frageboxen
   * ```saveQuestion($questionType)```: Speichern einer Frage (Multiple Choice oder Textfrage)
   * ```getQuestionPoolId($chapterID)```: Bezug der ID des Fragepools eines Kapitels

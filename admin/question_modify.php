@@ -43,21 +43,26 @@
 	} else if (isset($_POST['cmdSelectChapter'])) {
 
 		// Kapitel gewählt -> Frage wählen
-		echo'<form action="question_modify.php" method="POST">';
-			//<select name="cbQuestionQuestionModify" size=1>';
 
-		$unusedOnly = true;
-		$questions = getAllQuestions(getChapterId($_SESSION['cbLectureQuestionModify'],$_POST['cbChapterQuestionModify']), $unusedOnly);
+		// Parameter true -> Nur Bezug von Fragen, die bisher nicht verwendet wurden
+		$questions = getAllQuestionsOfChapter(getChapterId($_SESSION['cbLectureQuestionModify'],$_POST['cbChapterQuestionModify']), true);
 
-		echo '<select name="cbQuestionQuestionModify">';
-		for($i = 0; $i < count($questions); $i++) {
-			echo '<option>'.$questions[$i].'</option>';
-		}
-		echo '</select>';
+		if(count($questions) > 0) {
+			$_SESSION['cbChapterQuestionModify'] = $_POST['cbChapterQuestionModify'];
 
-		$_SESSION['cbChapterQuestionModify'] = $_POST['cbChapterQuestionModify'];
+			echo'<form action="question_modify.php" method="POST">';
+			echo '<select name="cbQuestionQuestionModify">';
+			for($i = 0; $i < count($questions); $i++) {
+				echo '<option>'.$questions[$i].'</option>';
+			}
+			echo '</select>';
 			echo '<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
-		</form>';
+			</form>';
+		} else {
+			echo "<p>In diesem Kapitel sind keine Fragen vorhanden, die nicht bereits in einem Fragebogen verwendet werden.</p>"
+		}
+
+
 
 		echo'<br /><br /><a href="question_modify.php">Zurück</a>';
 

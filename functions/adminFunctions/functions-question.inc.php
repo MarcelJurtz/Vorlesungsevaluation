@@ -54,33 +54,7 @@ function getAllQuestionsOfChapter($chapterID, $deletable = false) {
     return $questions;
   }
 }
-// Rückgabe aller Fragen als Array
-// zweiter Parameter kann als 'true' übergeben werden
-// um nur Fragen zurückzugeben, die noch in keinem Fragebogen enthalten sind
-function getAllQuestions($chapterID, $unusedOnly = false) {
-  $conn = getDBConnection();
 
-  $query = "SELECT " . FRAGE_FrBezeichnung .
-            " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID .
-            " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
-
-  if($unusedOnly) {
-    $query = "SELECT " . FRAGE_FrBezeichnung .
-              " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID .
-              " WHERE " . FRAGEPOOL_KaID . " = $chapterID AND fr." . FRAGE_FrBezeichnung . " NOT IN (SELECT " . FR_IN_FB_FRBEZ . " FROM " . FR_IN_FB . ");";
-  }
-
-  $rows = mysqli_query($conn, $query);
-  $questions = array();
-  if($rows) {
-    while($entry = mysqli_fetch_assoc($rows))
-    {
-      $questions[] = $entry[FRAGE_FrBezeichnung];
-    }
-  }
-  mysqli_close($conn);
-  return $questions;
-}
 
 // Aufbau der Frageboxen
 function addQuestionContainer() {
