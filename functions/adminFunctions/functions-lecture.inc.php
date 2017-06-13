@@ -2,10 +2,23 @@
 // Funktionen zur Verwaltung von Vorlesungen
 
 
-function getAllLectures() {
+function getAllLectures($deletable = false) {
   $conn = getDBConnection();
   // Muster der Zeichenketten: KuID - KuBezeichnung
   $query = "SELECT " . VORLESUNG_VOBEZEICHNUNG . " FROM " . VORLESUNG . ";";
+
+  if($deletable) {
+    $query = "SELECT " . VORLESUNG_VOBEZEICHNUNG .
+                " FROM " . VORLESUNG .
+                " WHERE " . VORLESUNG_VOBEZEICHNUNG ." NOT IN (
+                  SELECT DISTINCT vo." . VORLESUNG_VOBEZEICHNUNG .
+                  " FROM " . VORLESUNG ." vo
+                  INNER JOIN " . KAPITEL . " ka ON vo." . VORLESUNG_VOID . " = ka." . KAPITEL_VOID .
+                  " INNER JOIN " . FRAGEBOGEN . " fb ON ka." . KAPITEL_KAID . " = fb." . FRAGEBOGEN_Kapitel .
+                  " INNER JOIN " . BEANTWORTET . " be ON fb." . FRAGEBOGEN_FbID . " = be." . BEANTWORTET_FBID .
+                ");";
+  }
+
   $rows = mysqli_query($conn, $query);
   $lectures = array();
   while($entry = mysqli_fetch_assoc($rows))
@@ -36,7 +49,7 @@ function createLecture($description) {
     $query = "INSERT INTO " . VORLESUNG . "(" . VORLESUNG_VOBEZEICHNUNG . ") VALUES ('$description');";
 
     if(mysqli_query($conn,$query)) {
-      echo "<p>Vorlesung $description erfolgreich angelegt!</p>";
+      echo "<p>Vorlesung '$description' erfolgreich angelegt!</p>";
     } else {
       echo "<p>Eine Vorlesung mit der Bezeichnung $description existiert bereits!</p>";
     }

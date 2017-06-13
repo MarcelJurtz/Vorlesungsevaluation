@@ -21,7 +21,8 @@
 
 	if(!isset($_POST['cmdDeleteLecture'])) {
 
-		$lectures = getAllLectures();
+		// Parameter true -> Nur Löschen von Vorlesungen möglich, die noch keine beantworteten Fragen besitzen
+		$lectures = getAllLectures(true);
 		if(count($lectures) > 0) {
 			echo'
 				<form action="lecture_delete.php" method="POST">
@@ -33,7 +34,7 @@
 					<input type="submit" name="cmdDeleteLecture" value="Löschen">
 				</form>';
 		} else {
-			echo "<p>Keine Einträge vorhanden.</p>";
+			echo "<p>Keine Vorlesungen vorhanden, von denen bisher keine Frage bearbeitet wurde!</p>";
 		}
 	} else {
 		// Button wurde gedrückt - Kurs löschen
