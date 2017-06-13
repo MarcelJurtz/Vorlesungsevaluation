@@ -28,11 +28,20 @@ function deleteQuestion($chapterID,$questionText) {
   mysqli_close($conn);
 }
 
-function getAllQuestionsOfChapter($chapterID) {
+function getAllQuestionsOfChapter($chapterID, $deletable = false) {
   $conn = getDBConnection();
   $chapterID = mysqli_real_escape_string($conn,$chapterID);
 
-  $query = "SELECT " . FRAGE_FrBezeichnung . " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID . " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
+  $query = "SELECT " . FRAGE_FrBezeichnung .
+              " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID .
+              " WHERE " . FRAGEPOOL_KaID . " = $chapterID;";
+
+  if($deletable) {
+    $query = "SELECT " . FRAGE_FrBezeichnung .
+                " FROM " . FRAGE . " fr INNER JOIN " . FRAGEPOOL . " fp ON fr." .FRAGE_FPID . " = fp." . FRAGEPOOL_FpID .
+                " WHERE " . FRAGEPOOL_KaID . " = $chapterID ".
+                " AND fr." . FRAGE_FrBezeichnung . " NOT IN (SELECT DISTINCT " . FR_IN_FB_FRBEZ . " FROM " . FR_IN_FB . ");";
+  }
 
   $rows = mysqli_query($conn, $query);
   if($rows) {

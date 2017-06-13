@@ -39,18 +39,23 @@
 
 	} else if (isset($_POST['cmdSelectChapter'])) {
 
-		$questions = getAllQuestionsOfChapter(getChapterId($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']));
+		// Parameter true -> Nur Fragen beziehen, die nicht in Fragebögen verwendet werden
+		$questions = getAllQuestionsOfChapter(getChapterId($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']), true);
 		$_SESSION['chapterIDtoDelete'] = getChapterId($_SESSION['cbLectureQuestionDelete'],$_POST['cbChapterQuestionDelete']);
 
-		// Kapitel gewählt -> Frage wählen
-		echo'<form action="question_delete.php" method="POST">
-			<select name="cbQuestionQuestionDelete" size=1>';
-		for($i = 0; $i < count($questions); $i++) {
-			echo "<option>" . $questions[$i] . "</option>";
+		if(count($questions) > 0) {
+			// Kapitel gewählt -> Frage wählen
+			echo'<form action="question_delete.php" method="POST">
+				<select name="cbQuestionQuestionDelete" size=1>';
+			for($i = 0; $i < count($questions); $i++) {
+				echo "<option>" . $questions[$i] . "</option>";
+			}
+			echo '</select>
+					<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
+				</form>';
+		} else {
+			echo "<p>In diesem Kapitel sind keine Fragen vorhanden, die nicht bereits in einem Fragebogen verwendet werden.</p>";
 		}
-		echo '</select>
-				<input type="submit" name="cmdSelectQuestion" value="Frage bestätigen">
-			</form>';
 
 		echo'<br /><br /><a href="question_delete.php">Zurück</a>';
 
