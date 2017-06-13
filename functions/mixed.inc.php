@@ -1,9 +1,14 @@
 <?php
 
-function getAllClasses() {
+function getAllClasses($deletable = false) {
   $conn = getDBConnection();
   // Muster der Zeichenketten: KuID - KuBezeichnung
   $query = "SELECT " . KURS_KUID . " , " . KURS_KUBEZEICHNUNG . " FROM " . KURS . ";";
+
+  if($deletable) {
+    $query = "SELECT " . KURS_KUID . " , " . KURS_KUBEZEICHNUNG . " FROM " . KURS . " WHERE " . KURS_KUID . " NOT IN (SELECT DISTINCT " . STUDENT_KUID . " FROM " . STUDENT . ");";
+  }
+
   $rows = mysqli_query($conn, $query);
   $classes = array();
   while($entry = mysqli_fetch_assoc($rows))

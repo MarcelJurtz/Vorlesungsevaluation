@@ -69,9 +69,9 @@ function deleteClass($classID) {
   $conn = getDBConnection();
   $query = "DELETE FROM " . KURS . " WHERE " . KURS_KUID . " = '$classID';";
   if (mysqli_query($conn, $query)) {
-    echo "<p>Kurs $classID erfolgreich gelöscht!</p>";
+    echo "<p>Kurs '$classID' erfolgreich gelöscht!</p>";
   } else {
-    echo "<p>Fehler beim Löschen des Kurses $classID.</p>";
+    echo "<p>Fehler beim Löschen des Kurses '$classID'.</p>";
   }
   mysqli_close($conn);
 }

@@ -17,11 +17,12 @@
 	// Aufbau Website
 	printAdminMenu(MENU_CLASS_DELETE);
 
-	echo'			<h1>Kurs löschen</h1>';
+	echo'<h1>Kurs löschen</h1>';
 
 	if(!isset($_POST['cmdDeleteClass'])) {
 
-		$classes = getAllClasses();
+		// Parameter true -> Bezieht nur Kurse, die noch von keinem Studenten verwendet werden
+		$classes = getAllClasses(true);
 
 		if(count($classes) > 0) {
 			echo'
@@ -34,7 +35,7 @@
 					<input type="submit" name="cmdDeleteClass" value="Löschen">
 				</form>';
 		} else {
-			echo "<p>Keine Einträge vorhanden!</p>";
+			echo "<p>Keine Kurse vorhanden, die noch von keinem Studenten verwendet werden.</p>";
 		}
 
 	} else {
