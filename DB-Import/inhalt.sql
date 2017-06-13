@@ -32,7 +32,8 @@ INSERT INTO kapitel (KaID, KaBezeichnung, VoID) VALUES
 (2, 'Relationen', 1),
 (3, 'Relationenalgebra', 1),
 (4, 'Abbildungen', 1),
-(5, 'Boolesche Algebra', 1);
+(5, 'Boolesche Algebra', 1),
+(6, 'Aussagenlogik', 1);
 
 
 
@@ -45,7 +46,8 @@ INSERT INTO fragepool (FpID, KaID) VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
+(5, 5),
+(6, 6);
 
 
 
@@ -105,6 +107,10 @@ INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
 (36, 'Konjunktive Normalform 1', 'Nennen Sie die konjunktive Normalform von a + b*c.', 5, 'text'),
 (37, 'Implikation 1', 'Lösen Sie in dem Booleschen Ausdruck (a + b) -> ¬(a + b) die Implikation auf.', 5, 'text'),
 (38, 'Äquivalenz 1', 'Welcher Ausdruck ist äquivalent zu a*(¬(a*b))', 5, 'mchoic');
+
+-- Aussagenlogik
+INSERT INTO frage (FrID, FrBezeichnung, FrText, FpID, FrTyp) VALUES
+(39, 'Aussagenlogik 1', 'Welche Aussagen sind wahr?', 6, 'mchoic');
 
 
 
@@ -230,6 +236,13 @@ INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
 (38, 'a*b', 0, 2),
 (38, '¬a*b', 0, 3),
 (38, 'a*¬b', 1, 4);
+
+-- Aussagenlogik
+INSERT INTO antwort (FrID, AwText, AwWahrheit, AwID) VALUES
+(39, 'Alle Primzahlen sind gerade', 0, 0),
+(39, 'Die Wurzel aus 2 ist eine rationale Zahl', 0, 1),
+(39, '1>1', 0, 2),
+(39, 'Friedrichshafen liegt am Bodensee ', 1, 3);
 
 
 
