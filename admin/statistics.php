@@ -35,6 +35,11 @@
 		} else {
 			echo "<p>$studSubmitted von $studTotal Studenten des Kurses " . $_SESSION['STAT_CLASS'] ." haben den Fragebogen '" . $_POST['cbStatisticsSurvey'] . "' bereits abgegeben.</p>";
 
+			echo "<p>
+						<span class='class1true'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Korrekte Antworten<br />
+						<span class='class1false'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Falsche Antworten
+					</p>";
+					
 			echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
 
 			for($i = 0; $i < $survey->GetQuestionCount(); $i++) {
@@ -157,6 +162,13 @@
 				echo "<p>$class1: $studSubmitted1 von $studTotal1 Studenten des Kurses " . $class1 . " haben den Fragebogen '" . $_POST['txtStatisticsComparisonSurvey'] . "' bereits abgegeben.<br />";
 				echo "$class2: $studSubmitted2 von $studTotal2 Studenten des Kurses " . $class2 . " haben den Fragebogen '" . $_POST['txtStatisticsComparisonSurvey'] . "' bereits abgegeben.</p>";
 
+				echo "<p>
+						<span class='class1true'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Korrekte Antworten von $class1<br />
+						<span class='class1false'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Falsche Antworten von $class1<br /><br />
+						<span class='class2true'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Korrekte Antworten von $class2<br />
+						<span class='class2false'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> - Falsche Antworten von $class2
+					</p>";
+				
 				echo "<h2>Auswertung der Multiple Choice Fragen</h2>";
 
 				for($i = 0; $i < $survey->GetQuestionCount(); $i++) {

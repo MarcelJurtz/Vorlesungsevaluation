@@ -197,3 +197,21 @@ input[type="submit"]:hover {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+
+/* Statistik Legende */
+.class1true {
+	background-color: rgba(105,168,84,0.4);
+}
+
+.class1false {
+	background-color: rgba(217,93,91,0.4);
+}
+
+.class2true {
+	background-color: rgba(76,141,137,0.4);
+}
+
+.class2false {
+	background-color: rgba(223,153,94,0.4);
+}
