@@ -69,21 +69,21 @@ li a:hover {
 
 /* Statistiken */
 canvas {
-
 	max-height: 200px;
 	width: auto;
 	max-width: 95%;
 }
 
-.canvasContainer {
-	height: 200px;
-	width: 80%;
+/* Auswertung von Fragen auf Studentenseite */
+.studAnswerContainer {
+	margin-left: 20px;
+	margin-bottom: 20px;
 }
 
-/* Tabelle zur Auswertung von Multiple Choice Fragen auf Studentenseite */
 table.review {
 	text-align: center;
 	border-collapse: collapse;
+	margin-left: 10px;
 }
 
 .review thead {
@@ -99,7 +99,7 @@ table.review {
 }
 
 .review tr:nth-child(even) {
-    background-color: #CCCCCC;
+    background-color: rgba(226,0,26,0.2);
 }
 
 
@@ -115,7 +115,6 @@ table.review {
 .fullwidth {
 	width: 100%;
 }
-
 
 /* HEADER */
 

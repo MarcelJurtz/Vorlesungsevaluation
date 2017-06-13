@@ -20,6 +20,8 @@
   printSidebarMenuBegin("survey");
 
 	if(isset($_POST['cmdSurveySubmit'])) {
+
+		echo '<h1>' . $_SESSION['currentSurveyName'] . '</h1>';
 		$conn = getDBConnection();
 
 		$survey = new survey($_SESSION['currentSurveyName']);
@@ -37,6 +39,10 @@
 	// Bearbeitung eines neuen Fragebogens: Auswahl, nächstes oder letztes
 	else if(isset($_POST['cmdEditSurveyNew']) || isset($_POST['cmdSurveyNewPrevious']) || isset($_POST['cmdSurveyNewNext']) || isset($_POST['cmdEditSurveyEdited'])) {
 
+		$heading = "";
+		if(isset($_POST['cb'])) $heading = $_POST['cbSurveysNew'];
+		else if(isset($_SESSION['currentSurveyName'])) $heading = $_SESSION['currentSurveyName'];
+		echo '<h1>' . $heading . '</h1>';
 
 		// Steuerung der Weiter / Zurück / Abgeben Buttons
 		$currentQuestionIsMax = false;
@@ -140,6 +146,8 @@
 
 		echo '</form>';
 	} else if(isset($_POST['cmdViewSurveysCompleted'])){
+
+		echo '<h1>Musterlösung - ' . $_POST['cbSurveysCompleted'] . '</h1>';
 		$conn = getDBConnection();
 
 		$surveyName = mysqli_real_escape_string($conn,$_POST['cbSurveysCompleted']);
@@ -153,7 +161,8 @@
 			$type = "(Multiple Choice)";
 			if($question->GetType() == FRAGENTYP_TEXTFRAGE_DB) $type = "(Textfrage)";
 
-			echo '<h2>'.$question->GetName()." ".$type.'</h2>';
+			echo '<h2>'. ($i +1) . ". " .$question->GetName()." ".$type.'</h2>';
+			echo '<div class="studAnswerContainer">';
 			echo '<p><b>Fragetext:</b><br /><br />'.$question->GetText().'</p>';
 			echo '<p>';
 			if($question->GetType() == FRAGENTYP_MULTIPLE_CHOICE_DB) {
@@ -199,9 +208,12 @@
 				echo GetTextQuestionSolution($question->GetID());
 				echo '</p>';
 			}
+			echo '</div>';
 		}
 
 		mysqli_close($conn);
+
+		echo "<br /><br /><a href='survey_main.php'>Zurück</a><br /><br />";
 	}
 
   printSidebarMenuEnd();
