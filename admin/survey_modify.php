@@ -70,7 +70,8 @@
 		echo'<br /><br /><a href="survey_modify.php">Zurück</a>';
 	} else {
 
-		$surveys = getAllSurveys();
+		// Parameter true -> Nur Fragebögen bearbeitbar, die nicht bereits bearbeitet wurden
+		$surveys = getAllSurveys(true);
 		if(count($surveys) > 0) {
 			echo '<form action="survey_modify.php" method="POST">';
 			echo 'Fragebogen auswählen: ';
@@ -83,7 +84,7 @@
 			echo '<input type="submit" value="Bearbeiten" name="cmdModifySurvey" />';
 			echo '</form>';
 		} else {
-			echo '<p>Keine Fragebögen vorhanden!</p>';
+			echo '<p>Keine Fragebögen vorhanden, die nicht bereits bearbeitet wurden!</p>';
 		}
 	}
 
