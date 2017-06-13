@@ -71,8 +71,8 @@ function addQuestionContainer() {
   echo '<div id="questionMCContainer">
   <p>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" size="80" /><br /><br />
-    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" cols="125" ></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitleMC" id="txtQuestionTitleMC" required="required" size="80" /><br /><br />
+    Fragetext: <br /><textarea rows="5" name="txtQuestionTextMC" id="txtQuestionTextMC" required="required" cols="125" ></textarea>
   </p>
   <p>
     <b>Lösungsmöglichkeiten bearbeiten:</b><br /><br />
@@ -80,7 +80,7 @@ function addQuestionContainer() {
     <br />
     <div id="questionMCAnswerContainer">
     <div>
-      Lösungstext: <input type="text" size="80" name="txtAnswers[]" />
+      Lösungstext: <input type="text" size="80" name="txtAnswers[]" class="txtAnswerMC" required="required" />
       <label><input type="checkbox" name="cbAnswerCorrect[]" onchange="toggleTextBox(this)"/>Antwort korrekt</label>
       <input type="button" name="cmdDeleteAnswer" value="Antwort löschen" onClick="deleteAnswerContainer(this)"/>
       <input class="hid" type="hidden" name="txtTrueFalse[]" value="false" />
@@ -94,9 +94,9 @@ function addQuestionContainer() {
   echo '<div id="questionTextContainer" style="display: none">
   <div>
     <b>Frage bearbeiten:</b><br /><br />
-    Fragetitel:<br /><input type="text" name="txtQuestionTitle" size="80" /><br /><br />
-    Fragetext: <br /><textarea name="txtQuestionText" rows="5" cols="125" ></textarea><br /><br />
-    Musterlösung: <br / /><textarea name="txtAnswer" rows="5" cols="125" ></textarea>
+    Fragetitel:<br /><input type="text" name="txtQuestionTitle" id="txtQuestionTitle" size="80" /><br /><br />
+    Fragetext: <br /><textarea name="txtQuestionText" id="txtQuestionText" rows="5" cols="125" ></textarea><br /><br />
+    Musterlösung: <br / /><textarea name="txtAnswer" id="txtAnswer" rows="5" cols="125" ></textarea>
   </div>
   </div>';
 
