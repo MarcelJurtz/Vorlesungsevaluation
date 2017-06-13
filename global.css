@@ -32,11 +32,6 @@ div.reg {
 	text-align: center;
 }
 
-iframe {
-	border: none;
-	width: 100%;
-}
-
 #cWrapper {
 	height: 100%;
 }
@@ -145,6 +140,13 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
 	background-color: #b80015;
+}
+
+/* Einheitliche Breiten */
+input, select, textarea {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .noSpace {
