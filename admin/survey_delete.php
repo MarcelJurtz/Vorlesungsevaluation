@@ -24,7 +24,8 @@
 		echo'<br /><br /><a href="survey_delete.php">Zurück</a>';
 	} else {
 
-		$surveys = getAllSurveys();
+		// Parameter true -> Nur Fragebögen, die noch nicht bearbeitet wurden
+		$surveys = getAllSurveys(true);
 		if(count($surveys) > 0) {
 			echo '<form action="survey_delete.php" method="POST">';
 			echo 'Fragebogen auswählen: ';
@@ -37,7 +38,7 @@
 			echo '<input type="submit" value="Löschen" name="cmdDeleteSurvey" />';
 			echo '</form>';
 		} else {
-			echo '<p>Keine Einträge vorhanden!</p>';
+			echo '<p>Keine Fragebögen vorhanden, die nicht bereits bearbeitet wurden!</p>';
 		}
 	}
 

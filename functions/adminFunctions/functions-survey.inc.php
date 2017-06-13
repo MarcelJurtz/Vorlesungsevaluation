@@ -79,9 +79,16 @@
     mysqli_close($conn);
   }
 
-  function getAllSurveys() {
+  function getAllSurveys($deletable = false) {
     $conn = getDBConnection();
     $query = "SELECT " . FRAGEBOGEN_FbBezeichnung . " FROM " . FRAGEBOGEN . ";";
+
+    if($deletable) {
+      $query = "SELECT " . FRAGEBOGEN_FbBezeichnung .
+                  " FROM " . FRAGEBOGEN .
+                  " WHERE " . FRAGEBOGEN_FbID . " NOT IN (" .
+                    "SELECT DISTINCT " . BEANTWORTET_FBID . " FROM " . BEANTWORTET .");";
+    }
 
     $surveys = array();
 
