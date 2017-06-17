@@ -55,7 +55,7 @@ function printSidebarMenuBegin($entry) {
     echo'				<li><a href="student.php">Übersicht</a></li>';
     echo'				<li><b>Fragebogen beantworten</b></li>';
   }
-  echo'         <li><a href="../logout.php">Abmelden</a></li>';
+  echo'         <li><a href="../functions/logout.php">Abmelden</a></li>';
   echo'			</ul>';
   echo'		</div>';
   echo'		<div id="cFrame">';

@@ -23,7 +23,7 @@
 
     $settings = '<a href="settings.php">'.MENU_SETTINGS.'</a>';
 
-    $logout = '<a href="../logout.php">'.MENU_LOGOUT.'</a>';
+    $logout = '<a href="../functions/logout.php">'.MENU_LOGOUT.'</a>';
 
     switch($current) {
       case MENU_OVERVIEW:
