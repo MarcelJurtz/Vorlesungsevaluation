@@ -134,10 +134,11 @@ define("COLOR_FALSE_BORDER_B","rgba(204,124,63,0.8)");
 /*                      TOASTS                   */
 /*************************************************/
 
-define("TOAST_DUPLICATE_USER","TOAST_DUPL_USER");
-define("TOAST_ILLEGAL_COURSE","TOAST_ILLGL_COURSE");
-define("TOAST_UNKNOWN_USERNAME","TOAST_UNKN_USER");
-define("TOAST_WRONG_PASSWORD","TOAST_WRONG_PASSWORD");
-define("TOAST_NO_PERMISSION","TOAST_NO_PERMISSION");
+define("TOAST_DUPLICATE_USER","Benutzername wird bereits verwendet!");
+define("TOAST_ILLEGAL_COURSE","Ungültiger Kurs!");
+define("TOAST_UNKNOWN_USERNAME","Benutzername nicht vorhanden!");
+define("TOAST_WRONG_PASSWORD","Ungültiges Kennwort!");
+define("TOAST_NO_PERMISSION","Keine Berechtigung!");
+define("TOAST_SURVEY_SAVED","Fragebogen gespeichert!");
 
 ?>

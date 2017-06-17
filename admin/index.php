@@ -18,10 +18,9 @@
 		<?php
 			include "adminFunctions.inc.php";
 			if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
-				if($_SESSION['toaster'] == TOAST_WRONG_PASSWORD) {
-					wrongPasswordToast();
-				} else if($_SESSION['toaster'] == TOAST_NO_PERMISSION) {
-					noPermissionToast();
+				$toast = $_SESSION['toaster'];
+				if($toast == TOAST_WRONG_PASSWORD || $toast == TOAST_NO_PERMISSION) {
+					makeToast($toast);
 				}
 				session_destroy();
 			}

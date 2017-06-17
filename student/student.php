@@ -6,9 +6,17 @@
 	<meta charset="UTF-8">
 </head>
 <body>
+	<div id="toast">NO CONTENT</div>
 <?php
 
   include "studFunctions.inc.php";
+
+	if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
+		if($_SESSION['toaster'] == TOAST_SURVEY_SAVED) {
+			makeToast($_SESSION['toaster']);
+			$_SESSION['toaster'] = "";
+		}
+	}
 
 
   if(!ValidateUsername(GetSessionUsername())) {

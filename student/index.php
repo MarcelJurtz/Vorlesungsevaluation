@@ -46,7 +46,7 @@
 		Kurs:
 	</td>
 	<td>
-		<input type="text" name="txtStudentClass" class="textbox">
+		<input type="text" name="txtStudentClass" class="textbox" maxlength="5">
 	</td>
 </tr>
 <tr>
@@ -71,12 +71,9 @@
 <?php
 	include "studFunctions.inc.php";
 	if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
-		if($_SESSION['toaster'] == TOAST_DUPLICATE_USER) {
-			duplicateUserToast();
-		} else if($_SESSION['toaster'] == TOAST_ILLEGAL_COURSE) {
-			illegalCourseToast();
-		} else if($_SESSION['toaster'] == TOAST_UNKNOWN_USERNAME) {
-			unknownUserToast();
+		$toast = $_SESSION['toaster'];
+		if($toast == TOAST_DUPLICATE_USER || $toast == TOAST_ILLEGAL_COURSE || $toast == TOAST_UNKNOWN_USERNAME) {
+			makeToast($toast);
 		}
 		session_destroy();
 	}
