@@ -70,7 +70,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```getChapterId($lectureDescription, $chapterDescription)```: Bezug der ID eines Kapitels anhand Vorlesungs- und Kapitelbezeichnung
   * ```getAllChaptersOfLecture($lectureDescription, $deletable = false)```: Bezug aller Kapitel einer Vorlesung anhand deren Bezeichnung
   * ```addLectureChapter($lectureDescription, $chapterDescription)```: Hinzufügen eines Kapitels zu einer Vorlesung
-  * ```getAllChaptersOfLecture($lectureDescription, $deletable = false)```: Löschen eines Kapitels
+  * ```deleteChapter($lecture, $chapter)```: Löschen eines Kapitels
 
 * ./functions/adminFunctions/functions-class.inc.php
   * ```toggleClassRegistration($classID, $regStatus)```: Umschalten der Freigabe eines Kurses zur Registrierung
