@@ -1,7 +1,6 @@
 <?php
 class survey {
   private $fbID;
-  // TODO benötigt? private $kaID;
   private $fbName;
   private $questions;
 
@@ -60,7 +59,7 @@ class question {
   private $text;
   private $type;
 
-  // Textfrage: 1 Element, Multiple Choice mehr TODO: Umsetzung prüfen
+  // Textfrage: 1 Element, Multiple Choice mehr
   private $answers;
 
   public function __construct($name) {

@@ -67,7 +67,6 @@
   }
 
   function GetCompletedSurveys($student) {
-  // TODO: prüfen
     $conn = getDBConnection();
     $student = mysqli_real_escape_string($conn,$student);
 
@@ -99,9 +98,7 @@
   }
 
 
-  // TODO getSurveyID und getSurveyQuestions werden auch von Admin gebraucht -> Zusammenlegen?
-
-  function getSurveyID($surveyName) {
+function getSurveyID($surveyName) {
     $conn = getDBConnection();
     $surveyName = mysqli_real_escape_string($conn,$surveyName);
     $query = "SELECT " . FRAGEBOGEN_FbID . " FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbBezeichnung . " = '$surveyName';";

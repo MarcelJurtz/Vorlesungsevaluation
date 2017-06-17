@@ -4,7 +4,6 @@
 		<meta lang="DE">
 		<meta charset="UTF-8">
 		<title>Login Vorlesungsevaluation</title>
-		<link href="stylesheet.css" type="text/css" rel="stylesheet" />
 		<link href="../global.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>

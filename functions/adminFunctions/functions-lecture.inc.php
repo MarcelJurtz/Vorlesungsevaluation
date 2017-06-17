@@ -30,7 +30,6 @@ function getAllLectures($deletable = false) {
 }
 
 // Vorlesung anlegen
-// TODO: RENAME TO LECTURE
 function createLecture($description) {
   $conn = getDBConnection();
   $description = mysqli_real_escape_string($conn,$description);
@@ -69,13 +68,11 @@ function renameLecture($lectureDescriptionOld, $lectureDescriptionNew) {
     echo "<p>Fehler beim Ändern der Vorlesungsbezeichnung on '$lectureDescriptionOld' zu '$lectureDescriptionNew'!</p>";
   }
 
-  // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?
   mysqli_close($conn);
 }
 
 // Vorlesung anhand des Namens löschen
 function deleteLecture($lectureDescription) {
-  // TODO: Löschen deaktivieren, wenn bereits beantwortet
   $conn = getDBConnection();
   $lectureDescription = mysqli_real_escape_string($conn,$lectureDescription);
   $query = "DELETE FROM " . VORLESUNG . " WHERE " . VORLESUNG_VOBEZEICHNUNG . " = '$lectureDescription';";
@@ -85,7 +82,6 @@ function deleteLecture($lectureDescription) {
     echo "<p>Fehler beim Löschen der Vorlesung '$lectureDescription.'</p>";
   }
 
-  // TODO: Zusammenhängede Datenbankeinträge (Fragebögen) löschen?
   mysqli_close($conn);
 }
 

@@ -55,7 +55,6 @@ define("KURS_KUBEZEICHNUNG","KuBezeichnung");
 define("KURS_KUFREIGESCHALTET","KuFreigeschaltet");
 
 define("STUDENT","student");
-// TODO: Änderung Bez -> Kürzel
 define("STUDENT_KUID","KuBezeichnung");
 define("STUDENT_BENUTZERNAME","StName");
 

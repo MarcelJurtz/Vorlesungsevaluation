@@ -23,7 +23,6 @@
     mysqli_close($conn);
   }
 
-  // TODO: Überarbeiten $fb wird nicht benötigt
   function saveQuestionToFb($fb, $question) {
     // Eintrag für FB erstellen, wenn nicht vorhanden
     $conn = getDBConnection();
@@ -39,7 +38,7 @@
     if(mysqli_query($conn,$query)) {
       echo "<p>Frage '$question' erfolgreich zum Fragebogen hinzugefügt.</p>";
     } else {
-      // TODO
+      /* [...] */
     }
     mysqli_close($conn);
   }
@@ -74,7 +73,7 @@
     if(mysqli_query($conn,$query)) {
       echo "<p>Frage '$question' erfolgreich zum Fragebogen hinzugefügt.</p>";
     } else {
-      // TODO
+      /* [...] */
     }
     mysqli_close($conn);
   }
@@ -125,6 +124,8 @@
 
   function deleteSurvey($surveyName) {
     $conn = getDBConnection();
+    mysqli_autocommit($conn,FALSE);
+
     $id = getSurveyID($surveyName);
     if($id > -1) {
       // -1 ist standardwert, fehler bei DB-Abfrage
@@ -133,13 +134,15 @@
       $queryFb = "DELETE FROM " . FRAGEBOGEN . " WHERE " . FRAGEBOGEN_FbID . " = $id;";
       if(mysqli_query($conn,$queryFr) && mysqli_query($conn,$queryFb)) {
         echo "<p>Fragebogen erfolgreich gelöscht.</p>";
+        mysqli_commit($conn);
       } else {
         echo "<p>Fehler beim Löschen des Fragebogens.</p>";
-        // TODO: Wiederherstellung?
+        mysqli_rollback($conn);
       }
     } else {
       echo "<p>Ungültige Auswahl.</p>";
     }
+    mysqli_close($conn);
   }
 
   function getSurveyID($surveyName) {
