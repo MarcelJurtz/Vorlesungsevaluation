@@ -67,6 +67,7 @@ define("FR_IN_FB_FBID","fbID");
 define("FR_IN_FB_FRBEZ","frBezeichnung");
 
 
+
 /*************************************************/
 /*                  MENÜSTRUKTUR                 */
 /*************************************************/
@@ -88,7 +89,6 @@ define("MENU_LECTURE_MODIFY","Vorlesung bearbeiten");
 define("MENU_STATISTICS","Statistiken");
 define("MENU_SETTINGS","Einstellungen");
 define("MENU_LOGOUT","Abmelden");
-
 
 
 
@@ -115,6 +115,8 @@ define("FRAGENTYP_TEXTFRAGE","text");
 define("FRAGENTYP_MULTIPLE_CHOICE_DB","mchoic");
 define("FRAGENTYP_TEXTFRAGE_DB","text");
 
+
+
 /*************************************************/
 /*                FARBEN STATISTIK               */
 /*************************************************/
@@ -128,6 +130,8 @@ define("COLOR_TRUE_B","rgba(76,141,137,0.4)");
 define("COLOR_TRUE_BORDER_B","rgba(59,128,125,0.8)");
 define("COLOR_FALSE_B","rgba(223,153,94,0.4)");
 define("COLOR_FALSE_BORDER_B","rgba(204,124,63,0.8)");
+
+
 
 /*************************************************/
 /*                      TOASTS                   */

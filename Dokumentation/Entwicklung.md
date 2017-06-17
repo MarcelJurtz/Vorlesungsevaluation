@@ -181,7 +181,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
 
 ## Toasts
 
- Toasts werden verwendet, um dem Anwender Benachrichtungen anzuzeigen, beispielsweise bei Eingabe eines ungültigen Kennworts.Die Methode ```makeToast($text)``` benötigt hierzu ein HTML-Element vom Typ ```div``` mit der ID *toast*. Toasts werden wie folgt verwendet:
+ Toasts werden verwendet, um dem Anwender Benachrichtungen anzuzeigen, beispielsweise bei Eingabe eines ungültigen Kennworts. Die Methode ```makeToast($text)``` benötigt hierzu ein HTML-Element vom Typ ```div``` mit der ID *toast*. Toasts werden wie folgt verwendet:
 
  ```PHP
 <div id="toast">NO CONTENT</div>

@@ -7,6 +7,5 @@ function getDBConnection() {
 	} else {
 		// TODO: Weiterleitung
 	}
-	//return(mysqli_connect("localhost","root","password","veva"));
 }
 ?>
