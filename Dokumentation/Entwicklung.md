@@ -16,7 +16,7 @@ Ordner:
 
 * ```admin```: Enthält alle Seiten des Administrationsbereichs (Funktionen sind ausgelagert)
 * ```student```: Enthält alle Seiten des Anwenderbereichs (Funktionen sind ausgelagert)
-* ```functions```: Enthält die ausgelagerten Funktionsdateien, getrennt für Admin und Student. Funktionen, die von beiden Parteien benötigt werden, befinden sich in der Datei ```mixed.inc.php```. Außerdem: ```logout.inc.php``` zur Ausführung der Abmeldung, ```db.inc.php``` zur Erstellung einer Datenbankverbindung, sowie ```constants.inc.php```, welche Konstanten enthält, um die verwendeten Zeichenketten zu zentralisieren. Dies beinhaltet auch Datenbank- und Tabellenbezeichnungen.
+* ```functions```: Enthält die ausgelagerten Funktionsdateien, getrennt für Admin und Student. Funktionen, die von beiden Parteien benötigt werden, befinden sich in der Datei ```mixed.inc.php```. Außerdem: ```logout.inc.php``` zur Ausführung der Abmeldung, ```db.inc.php``` zur Erstellung einer Datenbankverbindung, sowie ```constants.inc.php```, welche Konstanten enthält, um die verwendeten Zeichenketten zu zentralisieren. Dies beinhaltet auch Datenbank- und Tabellenbezeichnungen. Die Datei ```toaster.inc.php``` erzeugt Benachrichtungen, wie sie beispielsweise von Android bekannt sind.
 
 Dateien im Ordner *admin*:
 
@@ -178,6 +178,24 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```deleteAnswerContainer(item)```: Löschen eines Antwort-Containers für Multiple-Choice-Fragen
   * ```toggleQuestionType(rbutton)```: Umschalten des Fragentyps (Multiple Choice / Textfrage) mittels RadioButton
   * ```toggleTextBox(item)```: Umschalten der RadioButton-Hilfsstruktur zur Übermittlung von Wahrheitswerten
+
+## Toasts
+
+ Toasts werden verwendet, um dem Anwender Benachrichtungen anzuzeigen, beispielsweise bei Eingabe eines ungültigen Kennworts.Die Methode ```makeToast($text)``` benötigt hierzu ein HTML-Element vom Typ ```div``` mit der ID *toast*. Toasts werden wie folgt verwendet:
+
+ ```PHP
+<div id="toast">NO CONTENT</div>
+<?php
+  include "adminFunctions.inc.php";
+  if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
+    $toast = $_SESSION['toaster'];
+    if($toast == TOAST_WRONG_PASSWORD || $toast == TOAST_NO_PERMISSION) {
+      makeToast($toast);
+    }
+    session_destroy();
+  }
+?>
+ ```
 
 ## Notation
 
