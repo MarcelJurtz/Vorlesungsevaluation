@@ -22,7 +22,8 @@
 	// Vorlesung gewählt -> Kapitel wählen
 	if(isset($_POST['cmdSelectLecture'])) {
 
-		$chapters = getAllChaptersOfLecture($_POST['cbLectureQuestionModify']);
+		// Parameter true zur Rückgabe nur von Kapiteln, die nicht bereits in Verwendung sind
+		$chapters = getAllChaptersOfLecture($_POST['cbLectureQuestionModify'], true);
 		$_SESSION['cbLectureQuestionModify'] = $_POST['cbLectureQuestionModify'];
 
 		if(count($chapters) > 0) {
@@ -95,7 +96,7 @@
 					$_SESSION['MODIFY_QUESTION_TYPE'] = FRAGENTYP_TEXTFRAGE_DB;
 					echo "Typ: Textfrage<br/>";
 					$answers = $question->GetQuestionAnswers();
-					echo '<textarea name="txtAnswer0" rows=5 cols=50>' . $answers[0] . '</textarea>';
+					echo '<textarea name="txtAnswer0" rows=5 cols=50>' . $answers[0] . '</textarea><br/>';
 				}
 			echo '<input type="submit" name="cmdSubmitModifications" value="Speichern" />';
 			echo '</form>';
@@ -162,7 +163,7 @@
 		mysqli_close($conn);
 	} else {
 
-		$lectures = getAllLectures();
+		$lectures = getAllLectures(true);
 
 		if(count($lectures) > 0) {
 			// Vorlesung wählen

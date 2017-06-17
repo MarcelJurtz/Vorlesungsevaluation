@@ -128,12 +128,12 @@ h1 {
 	font-weight: bold;
 }
 
-input[type="submit"] {
+input[type="submit"] , input[type="button"] {
 	background-color: #E2001A;
 	color: #FFFFFF;
 	font-weight: bold;
 	border: none;
-	margin: 0 5px 0 5px;
+	margin: 2px 5px 2px 5px;
 	padding: 5px 10px 5px 10px;
 }
 
