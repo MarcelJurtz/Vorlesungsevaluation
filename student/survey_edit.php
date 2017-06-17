@@ -110,6 +110,11 @@
 				}
 			}
 
+			if($_POST['cmdSurveyNewNext'] == 'Speichern') {
+				$_SESSION['toaster'] = TOAST_SURVEY_SAVED;
+				header("Location: ./student.php");
+			}
+
 		// Button "ZURÜCK"
 		} else if(isset($_POST['cmdSurveyNewPrevious'])) {
 			$_SESSION['currentSurveyIndex']--;
