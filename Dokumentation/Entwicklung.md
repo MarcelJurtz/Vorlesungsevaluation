@@ -1,14 +1,16 @@
-# Entwicklung
+# Entwicklungsdokumentation
+
+**Stand: 17.06.2017, Version 1.0.1**
 
 Dieses Dokument beinhaltet sämtliche Informationen, die zur Weiterentwicklung dieses Projekts notwendig sind.
 
-Allgemein baut sich die Struktur folgendermaßen auf: Die Seiten in den Ordnern 'admin' und 'student' stellen die Teilfunktionen dar, welche über die Menüstruktur erreichbar sind. Die Funktionalität der Seiten, beispielsweise das Anlegen eines neuen Kurses gestaltet sich in der Form, dass der Administrator die gewünschten Daten eingibt, und das HTML-Formular auf die aktuelle Seite referenziert.
+Allgemein baut sich die Struktur folgendermaßen auf: Die Seiten in den Ordnern *admin* und *student* stellen die Teilfunktionen dar, welche über die Menüstruktur erreichbar sind. Die Funktionalität der Seiten, beispielsweise das Anlegen eines neuen Kurses gestaltet sich in der Form, dass der Administrator die gewünschten Daten eingibt, und das HTML-Formular auf die aktuelle Seite referenziert.
 Auf der Seite selbst wird der Stand überprüft und entsprechende Steuerelemente ausgegeben.
 Die eigentlichen Funktionen jedoch sind jeweils in den entsprechenden Dateien ausgelagert.
 
 Konstanten sind in der Datei ```functions/constants.inc.php``` aufgeführt.
 
-### Dateien
+## Dateistruktur
 
 Ordner:
 
@@ -148,7 +150,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```GetTextQuestionSolution($questionID)```: Rückgabe der Musterlösung einer Textfrage
   * ```GetMCQuestionAnswer($fbID, $questionID, $answerID)```: Rückgabe der Korrektheit einer Antwort in einer Multiple Choice Frage
 
-* ./functions/studentFunctions/survey.php: Klasse 'survey', 'question' und entsprechende Methoden
+* ./functions/studentFunctions/survey.php: Klassen 'survey', 'question', sowie entsprechende Methoden
   * ```SetSurveyQuestions()```
   * ```GetQuestions()```
   * ```GetQuestionCount()```
@@ -169,6 +171,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
 * ./functions/js/chartFunctions.js:
   * ```DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorderColors)```: Zeichnen der Canvas-Statistik für einen Kurs
   * ```DrawComparisonChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorderColors, remoteLabel)```: Zeichnen der Canvas-Statistik für zwei Kurse zum Vergleich
+  * canvasID bezieht sich auf die ID des HTML-Elements, remoteFields auf die Beschriftungen auf der X-Achse, also hier den Antwortmöglichkeiten der Frage, remoteData auf die jeweilige Anzahl an Beantwortungen, remoteColors und remoteBorderColors auf die Farbgebung der Balken und remoteLabel auf das Kürzel des Kurses zur Differenzierung bei paralleler Anzeige zweier Kurse.
 
 * ./functions/js/question.js:
   * ```addAnswerContainer()```: Hinzufügen eines Antwort-Containers für Multiple-Choice-Fragen
@@ -184,6 +187,19 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
 * Buttons: cmdBezeichnung
 
 Aufgrund fehlender Unterstützung des Datentyps *Boolean* wurde intern mit der Notation *0* für *false* und *1* für *true* gearbeitet. In der Datei ```functions/constants.inc.php``` sind Konstanten hierfür definiert.
+
+## Gestaltung
+
+Die Farbgebung richtet sich nach den Farben der Website der DHBW Ravensburg.
+
+Schrift (grau): #161616  
+Schrift (weiß): #FFFFFF  
+Buttons und Hintergründe (rot): #E2001A  
+
+Die verwendete Schriftart ist Open Sans (In Verwendung: Regular und Bold):  
+https://fonts.google.com/specimen/Open+Sans  
+Open Sans ist unter der Apache License 2.0 verfügbar.
+
 
 ## Dependencies
 
