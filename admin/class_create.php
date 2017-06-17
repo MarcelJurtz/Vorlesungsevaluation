@@ -28,7 +28,7 @@
 							Kürzel:
 						</td>
 						<td>
-							<input type="text" name="txtClassShort" required>
+							<input type="text" name="txtClassShort" required maxlength="5">
 						</td>
 					</tr>
 					<tr>
@@ -52,7 +52,7 @@
 			// fehlende Werte bei der Eingabe
 			echo '<p>Bitte überprüfen Sie Ihre Eingaben: <br />
 					Kürzel: ' . $kShort . ',<br />
-					Beschreibung: ' . $kDescription . '</p>';
+					Beschreibung: ' . $kDescription . '<br />Beachten Sie, dass das Kürzel eine Länge von fünf Zeichen erfordert.</p>';
 		} else {
 			createClass($kDescription, $kShort);
 		}
