@@ -62,6 +62,7 @@ Nach erfolgreicher Anmeldung erhalten Sie eine Menüansicht mit den verschiedene
 * ```Fragen```
   * Anlegen und Löschen von Fragen (Bearbeitungsfunktion wird noch implementiert).
   * Auswahl von Vorlesung und Kapitel, anschließend Anlegen einer Frage. Auswahlmöglichkeit zwischen Textfrage (mit Musterlösung) sowie Multiple-Choice-Fragen mit beliebig vielen (korrekten) Antworten.
+  * Um Fragen übersichtlicher anlegen zu können, besteht die Möglichkeit, HTML-Tags in den Eingabefeldern zu verwenden. Benutzen Sie beispielsweise ```<br />``` für einen Zeilenumbruch, sowie ```<b>``` für **fett** und ```<i>``` für *kursiv* gedruckten Text.
 * ```Fragebögen```
   * Zu jedem Kapitel können mehrere Fragebögen erstellt werden. Diese werden anschließend von den Studenten bearbeitet.
 * ```Vorlesungen```
