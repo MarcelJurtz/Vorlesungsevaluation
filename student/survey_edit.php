@@ -25,12 +25,16 @@
 		$conn = getDBConnection();
 
 		$survey = new survey($_SESSION['currentSurveyName']);
+
+		saveLastQuestion();
+
 		$id = $survey->GetID();
-		$query = "INSERT INTO " . FBABGABE . " VALUES('".GetSessionUsername()."',$id)";
-		if(!mysqli_query($conn,$query)) {
-			echo "<p>Fehler beim Abgeben des Fragebogens.</p>";
+		$submitQuery = "INSERT INTO " . FBABGABE . " VALUES('".GetSessionUsername()."',$id)";
+		if(!mysqli_query($conn,$submitQuery)) {
+			echo "<p>Fehler beim Abgeben des Fragebogens!</p>";
 		} else {
-			echo "<p>Fragebogen erfolgreich abgegeben.</p>";
+			$_SESSION['toaster'] = TOAST_SURVEY_SUBMITTED;
+			header("Location: ./student.php");
 		}
 
 		mysqli_close($conn);
@@ -59,56 +63,7 @@
 				$currentQuestionIsMax = true;
 			}
 
-			// Letzte Frage speichern
-			if($_SESSION['lastQuestionType'] == FRAGENTYP_MULTIPLE_CHOICE_DB) {
-				$id = $_SESSION['lastQuestionID'];
-
-				$stud = GetSessionUsername();
-
-				$conn = getDBConnection();
-
-				$iterator = 0;
-				$query = "SELECT COUNT(".ANTWORT_AwID.") as CT_ANSWERS FROM " . ANTWORT . " WHERE " . ANTWORT_FrID . " = $id";
-
-				$getCount = mysqli_fetch_assoc(mysqli_query($conn,$query));
-				$count = $getCount['CT_ANSWERS'];
-
-				for($i = 0; $i < $count; $i++) {
-					$truth = SHORT_FALSE;
-					if(isset($_POST["chkAnswer$i"]) && $_POST["chkAnswer$i"] == "on") {
-						$truth = SHORT_TRUE;
-					}
-
-					$query = "REPLACE INTO " . BEANTWORTET . " VALUES ('$stud',$id,$i,'$truth', ".$survey->GetID().");";
-
-					if(!mysqli_query($conn,$query)) {
-						echo "<p>Fehler beim Speichern der Antwort.</p><br />";
-					}
-				}
-
-				mysqli_close($conn);
-
-			} else if($_SESSION['lastQuestionType'] == FRAGENTYP_TEXTFRAGE_DB) {
-				$id = $_SESSION['lastQuestionID'];
-
-				$stud = GetSessionUsername();
-				$answer = $_POST['txtAnswerInput'];
-
-				if($answer != null && $answer != "") {
-					$conn = getDBConnection();
-
-					$answer = mysqli_real_escape_string($conn,$answer);
-
-					// awID bei Textfragen immer 0
-					// REPLACE bei mySQL entspricht INSERT OR UPDATE
-					$query = "REPLACE INTO " . BEANTWORTET . " VALUES ('$stud',$id,0,'$answer', ".$survey->GetID().");";
-
-					if(!mysqli_query($conn,$query)) {
-						echo "<p>Fehler beim Speichern der Antwort.</p>";
-					}
-					mysqli_close($conn);
-				}
-			}
+			saveLastQuestion();
 
 			if($_POST['cmdSurveyNewNext'] == 'Speichern') {
 				$_SESSION['toaster'] = TOAST_SURVEY_SAVED;

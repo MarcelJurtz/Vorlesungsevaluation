@@ -12,7 +12,7 @@
   include "studFunctions.inc.php";
 
 	if(isset($_SESSION['toaster']) && $_SESSION['toaster'] != "") {
-		if($_SESSION['toaster'] == TOAST_SURVEY_SAVED) {
+		if($_SESSION['toaster'] == TOAST_SURVEY_SAVED || $_SESSION['toaster'] == TOAST_SURVEY_SUBMITTED) {
 			makeToast($_SESSION['toaster']);
 			$_SESSION['toaster'] = "";
 		}

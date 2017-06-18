@@ -143,5 +143,6 @@ define("TOAST_UNKNOWN_USERNAME","Benutzername nicht vorhanden!");
 define("TOAST_WRONG_PASSWORD","Ungültiges Kennwort!");
 define("TOAST_NO_PERMISSION","Keine Berechtigung!");
 define("TOAST_SURVEY_SAVED","Fragebogen gespeichert!");
+define("TOAST_SURVEY_SUBMITTED","Fragebogen abgegeben!");
 
 ?>
