@@ -10,7 +10,9 @@ Die eigentlichen Funktionen jedoch sind jeweils in den entsprechenden Dateien au
 
 Konstanten sind in der Datei ```functions/constants.inc.php``` aufgeführt.
 
-## Dateistruktur
+<div class="page-break"></div>
+
+## 1 Dateistruktur
 
 Ordner:
 
@@ -55,11 +57,13 @@ Dateien im Ordner *functions/studentFunctions*:
 * ```functions-survey.inc.php``` Enthält Funktionalitäten zur Bearbeitung von Fragebögen
 * ```survey.php``` Klassen ```survey``` und ```question```
 
-## Funktionen
+<div class="page-break"></div>
+
+## 2 Funktionen
 
 Dieses Kapitel liefert einen Überblick über die verschiedenen verfügbaren Funktionen.
 
-### PHP
+### 2.1 PHP
 
 Einige der Funktionen besitzen einen Parameter ```$deletable = false```.
 Dieser kann mit dem Wert ```true``` verwendet werden, um nicht die gesamte Menge der Einträge (beispielsweise Kurse) abzufragen, sondern lediglich diejenigen,
@@ -166,7 +170,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```GetType()```
   * ```GetID()```
 
-### JavaScript
+### 2.2 JavaScript
 
 * ./functions/js/chartFunctions.js:
   * ```DrawChart(canvasID, remoteFields, remoteData, remoteColors, remoteBorderColors)```: Zeichnen der Canvas-Statistik für einen Kurs
@@ -179,7 +183,9 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```toggleQuestionType(rbutton)```: Umschalten des Fragentyps (Multiple Choice / Textfrage) mittels RadioButton
   * ```toggleTextBox(item)```: Umschalten der RadioButton-Hilfsstruktur zur Übermittlung von Wahrheitswerten
 
-## Toasts
+<div class="page-break"></div>
+
+## 3 Toasts
 
  Toasts werden verwendet, um dem Anwender Benachrichtungen anzuzeigen, beispielsweise bei Eingabe eines ungültigen Kennworts. Die Methode ```makeToast($text)``` benötigt hierzu ein HTML-Element vom Typ ```div``` mit der ID *toast*. Toasts werden wie folgt verwendet:
 
@@ -197,7 +203,9 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
 ?>
  ```
 
-## Notation
+<div class="page-break"></div>
+
+## 4 Notation
 
 * Textboxen (auch Textarea): txtBezeichnung
 * Radiobuttons: rbBezeichnung
@@ -206,7 +214,9 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
 
 Aufgrund fehlender Unterstützung des Datentyps *Boolean* wurde intern mit der Notation *0* für *false* und *1* für *true* gearbeitet. In der Datei ```functions/constants.inc.php``` sind Konstanten hierfür definiert.
 
-## Gestaltung
+<div class="page-break"></div>
+
+## 5 Gestaltung
 
 Die Farbgebung richtet sich nach den Farben der Website der DHBW Ravensburg.
 
@@ -218,8 +228,11 @@ Die verwendete Schriftart ist Open Sans (In Verwendung: Regular und Bold):
 https://fonts.google.com/specimen/Open+Sans  
 Open Sans ist unter der Apache License 2.0 verfügbar.
 
+<div class="page-break"></div>
 
-## Dependencies
+## 6 Dependencies
 
 [Chart.js](http://www.chartjs.org/) wird für die Darstellung von Diagrammen zur Auswertung verwendet.  
 Die eingebundene Skript-Datei liegt unter ```functions/js/Chart.bundle.min.js```.
+
+Chart.js ist auf [GitHub](https://github.com/chartjs/Chart.js) unter MIT-Lizenz verfügbar, und kann somit auch für kommerzielle Projekte verwendet werden.
