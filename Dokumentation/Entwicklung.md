@@ -1,6 +1,6 @@
 # Entwicklungsdokumentation
 
-**Stand: 17.06.2017, Version 1.0.1**
+**Stand: 21.06.2017, Version 1.0.2**
 
 Dieses Dokument beinhaltet sämtliche Informationen, die zur Weiterentwicklung dieses Projekts notwendig sind.
 
@@ -153,6 +153,7 @@ die noch keine von Studenten beantwortete Fragen enthalten. Der Parameter findet
   * ```GetOwnSolution($surveyID, $questionID, $studName)```: Rückgabe der Lösung des Studenten
   * ```GetTextQuestionSolution($questionID)```: Rückgabe der Musterlösung einer Textfrage
   * ```GetMCQuestionAnswer($fbID, $questionID, $answerID)```: Rückgabe der Korrektheit einer Antwort in einer Multiple Choice Frage
+  * ```saveLastQuestion()```: Speichern der letzten Frage, wird auf Studentenseite bei Klick auf *Weiter*, *Speichern* und *Fragebogen abgeben* ausgelöst
 
 * ./functions/studentFunctions/survey.php: Klassen 'survey', 'question', sowie entsprechende Methoden
   * ```SetSurveyQuestions()```

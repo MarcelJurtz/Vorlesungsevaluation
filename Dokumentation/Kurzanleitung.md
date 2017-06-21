@@ -1,6 +1,6 @@
 # Benutzerhandbuch Vorlesungsevaluation
 
-**Stand: 17.06.2017, Version 1.0.1**
+**Stand: 21.06.2017, Version 1.0.2**
 
 Diese Dokumentation vermittelt Inhalte zur Installation der Software, sowie zur Inbetriebnahme aus Sicht des Administrators sowie der Studenten als Anwender.
 
